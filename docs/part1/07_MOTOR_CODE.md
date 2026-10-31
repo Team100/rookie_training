@@ -18,14 +18,18 @@ You need:
 Open your study's workspace and find `Robot.java`. For now, everything
 goes in this one file.
 
-## Your reference: `test/single_roller`
+## Working examples to learn from
 
-[`test/single_roller/.../Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java)
-is a small, working robot program that controls one motor. It's always
-kept building. It does more than you need, but when you're stuck,
-**look at how it does things**. Reading working code is a real skill:
-find the part you need and understand it, rather than copying the whole
-thing.
+When you're stuck, **look at how working code does it**. Reading
+working code is a real skill: find the part you need and understand it,
+rather than copying the whole thing. No single example matches this
+chapter exactly, so each step points you at the right one:
+
+| For | Look at | What to ignore |
+| --- | --- | --- |
+| Step 2: the every-cycle calls | [`test/single_roller` `Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java), its `robotPeriodic()` | Everything else. It hides its motor **inside** a `SingleRollerSubsystem`, so you won't find a motor class there. |
+| Step 3: creating a motor | [`studies/music` `Robot.java`](https://github.com/Team100/all26/blob/main/studies/music/src/main/java/frc/robot/Robot.java), the `if (MOTOR)` block in its constructor | The music parts (`Player`, `Play`). It uses `KrakenX44Motor`; yours may be a different class. |
+| Steps 4 to 7 | No example: this is where you figure it out | |
 
 ## The robot lifecycle
 
@@ -153,7 +157,7 @@ carefully.)
 <details>
 <summary>Hint 1: where do the logger and current log come from?</summary>
 
-Look at the first few lines of the constructor in `test/single_roller`.
+Look at the `if (MOTOR)` block in `studies/music`'s constructor.
 Something called `RobotLog` gives you the `TotalCurrentLog`.
 </details>
 
@@ -176,7 +180,7 @@ their constructors and comments. `PIDConstants` has a handy way to say
 * friction: `new Friction(0, 0, 0, 0)`
 * pid: `PIDConstants.zero()`
 
-Also look at what `test/single_roller` calls at the very start of its
+Also look at what `studies/music` calls at the very start of its
 constructor, before anything else.
 </details>
 
@@ -321,7 +325,7 @@ description, say what you tested and what you saw. A mentor will read
 your code, so make sure your comments from Step 2 are in there.
 
 > If the classes or methods named here don't match what you see in
-> `lib`, the library has moved on. Check `test/single_roller`, which is
-> always kept building, and fix this page.
+> `lib`, the library has moved on. Check the examples above, and the
+> motor class itself, and fix this page.
 
 Next: [Use the simulator](08_SIMULATOR.md)
