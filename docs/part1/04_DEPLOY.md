@@ -51,7 +51,7 @@ doesn't have. That's fine, and it's why you'll make your own
 * **Can't find the robot:** check the cable, and wait for the RoboRIO to
   finish booting. Try `ping roboRIO-100-FRC.local` or
   `ping 172.22.11.2` (the RoboRIO's USB address). On a Mac, add `-c 4`
-  (`ping -c 4 172.22.11.2`) so it stops after 4 tries. On a Mac, see
+  (`ping -c 4 172.22.11.2`) so it stops after 4 tries, and see
   [Using a Mac with an Ethernet cable](#using-a-mac-with-an-ethernet-cable).
 * **"Team number not found":** you skipped the **Set Team Number** step.
 * **Deploy works but the code crashes:** read the console from the top.
