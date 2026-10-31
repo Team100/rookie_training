@@ -97,7 +97,38 @@ under `log`. If you also print the speed, divide by the gear ratio to
 get the disc's speed.
 </details>
 
-## Step 5: Hold a speed by itself (feedback)
+## Step 5: The mystery graph
+
+Now use what you learned in the [rag test](09_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
+on a real mechanism. One of you makes things happen to the Discus; the
+other has to work out **what happened, and when, just by looking at
+the graph**.
+
+**Work in pairs** (a mechanical teammate is a great partner for this):
+
+1. **Both:** in Glass, graph the disc's speed, **stator current**,
+   **supply current**, and the battery voltage. Make the plot show about
+   the **last 30 seconds**.
+   > **TODO:** add where Glass's plot time-window setting is.
+1. **Person A (the driver)** writes down a secret plan of 4 to 6 events,
+   for example: "spin up to 15%, hold, slow down, reverse, stop,
+   coast". Then does them, about 5 seconds each, and writes down the
+   order. **Person B** looks away from the Discus.
+1. **Person A** takes a screenshot of the graph right away, and gives
+   it to Person B.
+1. **Person B** annotates the screenshot: mark **when** each thing
+   happened and **what** it was, using only the graph. Explain how you
+   could tell ("the stator current jumped and the speed fell, so it
+   slowed down here").
+1. Compare with Person A's secret plan. Then swap.
+
+**Checkpoint:** post the annotated graph to **`#rookie_training`** as
+proof, with how many events Person B got right.
+
+> **Check yourself:** which events were easy to spot, and which were
+> hard? Which line on the graph gave each one away?
+
+## Step 6: Hold a speed by itself (feedback)
 
 So far *you* control the power. Now make the code **hold a target
 speed**, even if you slow the disc down by hand (gently, with a rag).
@@ -131,7 +162,7 @@ between?
 > **slower** than the target. Why? (What would make `error` exactly
 > zero, and what would the power be then?)
 
-## Step 6 (stretch): Help it with a guess (feedforward)
+## Step 7 (stretch): Help it with a guess (feedforward)
 
 Feedback only reacts *after* there's an error. **Feedforward** is a
 guess at how much power a speed needs, sent **before** anything goes

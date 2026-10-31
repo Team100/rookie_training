@@ -166,11 +166,35 @@ put "in sequence", "in parallel", "until something is true", and
 > **Check yourself:** what happens to the drums' speed at the moment a
 > ball goes through? Look at your Glass graph. Why?
 
-## Step 7: Measure it
+## Step 7: The mystery graph
 
-Do a [power-draw test](09_GLASS_POWER.md#run-a-power-draw-test) on the
-shooter, with a mechanical teammate: spin-up, steady spinning, and the
-moment a ball goes through.
+Same game as on the [Discus](11_DISCUS.md#step-5-the-mystery-graph),
+now with the whole shooter. One of you shoots; the other has to work
+out **what happened, and when, just by looking at the graphs**.
+
+1. **Both:** in Glass, graph both drum **speeds**, the drums' and the
+   indexer's **stator** and **supply** currents, and the battery
+   voltage. Make the plot show about the **last 30 seconds**.
+1. **Person A** (safety glasses on, aimed at a net) secretly does a
+   sequence, and writes it down: for example, spin up, shoot 2 balls,
+   wait, shoot 1 more, stop. **Person B** looks away from the robot.
+1. **Person A** takes a screenshot of the graph right away, and gives
+   it to Person B.
+1. **Person B** annotates it: mark when the drums **started** spinning
+   up, when they were **ready**, every moment a **ball went through**,
+   and when it **stopped**. Explain what gave each one away.
+1. Compare with Person A's list. Then swap.
+
+**Checkpoint:** post the annotated graph to **`#rookie_training`** as
+proof, with how many events Person B got right.
+
+> **Check yourself:**
+> 1. How could you tell exactly when a ball went through? Which lines
+>    moved, and which way?
+> 2. Which drew more current: spinning the drums up, or keeping them
+>    spinning? Why?
+> 3. How long did the drums take to recover after each ball? Could you
+>    shoot faster?
 
 ## Challenge
 

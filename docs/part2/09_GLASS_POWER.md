@@ -2,8 +2,9 @@
 
 **Glass** is a WPILib tool that shows the values your robot code
 publishes, live, and graphs them. In this chapter you'll learn to use it,
-then use it to run a **power-draw test** on a real mechanism, together
-with someone from the mechanical team.
+then run your first **power-draw test**: slow a motor down with a rag,
+and watch what the currents do. Later in Part 2, you'll use the same
+skills on the real robots.
 
 You need:
 
@@ -17,7 +18,7 @@ PHOTO CHECKLIST: save these in docs/img/ and replace each "TODO" note below.
   [ ] glass_nt_settings.png       Glass NetworkTables Settings, client mode
   [ ] glass_log_tree.png          NetworkTables tree open at log/motor/KrakenX60Motor
   [ ] glass_plot_current.png      plot of supply and stator current while the motor runs
-  [ ] power_test_setup.jpg        a mechanism on the bench, ready for a power test
+  [ ] glass_rag_test.png          annotated rag-test graph (zero, soft, hard)
 -->
 
 ## Where the numbers come from
@@ -107,11 +108,6 @@ sure it's `DEBUG` (the default) or `TRACE`, not `COMP`.
 > 📷 **TODO screenshot:** `docs/img/glass_plot_current.png`: supply
 > and stator current while the motor runs.
 
-> **Check yourself:** at a steady speed with nothing touching the motor,
-> which current is bigger? Now grab the wheel with a rag (gently, at low
-> power, with a mentor) so it slows down. What happens to each current,
-> and to the battery voltage? Why?
-
 Glass is also where you **choose which auton runs** on a real robot
 (**SmartDashboard** → **Auton Command**), because the Driver Station
 can't.
@@ -120,65 +116,52 @@ See [Work on auton](../part4/17_AUTON.md#part-6-run-it-on-a-real-robot).
 The WPILib [Glass docs](https://docs.wpilib.org/en/stable/docs/software/dashboards/glass/index.html)
 cover more widgets, like the field view you used in the simulator.
 
-## Run a power-draw test
+## Your first power-draw test: the rag test
 
-A robot has one battery and a main breaker, and every motor shares
-them. The mechanical team needs to know how much current each mechanism
-really takes, so they can pick gear ratios and the electrical team can
-budget the battery and breakers. You measure it.
+Time to see stator and supply current with your own eyes. You'll slow
+the motor down with your hand (through a rag), and watch what the graph
+does.
 
-> **TODO (mentors):** confirm what mechanical wants recorded, and link
-> the sheet where results go.
+> [!WARNING]
+> **Use a rag, never bare fingers**, and keep it low and slow:
+> * the test board motor, at **10% or less**
+> * your **10 A** current limit from
+>   [Control a motor from code](../part1/07_MOTOR_CODE.md) (don't raise it)
+> * a mentor watching, and one person's finger on **Enter** (disable)
+>
+> Wrap the rag around the **shaft** (or the wheel or hub on it) and
+> squeeze. If anything grabs or pulls the rag, let go and disable.
 
-**Work in pairs:** one programmer runs the code and Glass, and one
-person from the **mechanical team** runs the mechanism and watches it.
+1. Graph `velocity (rad_s)`, `stator current (A)`, `supply current (A)`,
+   and `log/Robot/voltage`.
+1. Run the motor at a steady **10%** with the stick.
+1. Then, about **5 seconds** each:
+   1. **Zero:** don't touch it.
+   1. **Soft:** squeeze the shaft gently through the rag, so it slows a
+      little.
+   1. **Hard:** squeeze hard, until it almost stops.
+   1. **Zero** again: let go.
+1. Take a screenshot of the graph right away.
 
-> 📷 **TODO photo:** `docs/img/power_test_setup.jpg`: a mechanism on
-> the bench, ready for a power test.
+> 📷 **TODO screenshot:** `docs/img/glass_rag_test.png`: an annotated
+> rag-test graph (zero, soft, hard).
 
-### Before you start
+**Annotate your screenshot:** mark on it where you were pinching
+**zero**, **soft**, and **hard**. (Your phone's photo editor, or any
+drawing tool, is fine.) Then post it to **`#rookie_training`** in Slack.
 
-* Agree on what you're testing and its **normal job** (for example, "the
-  intake picking up a game piece").
-* Use a **freshly charged battery**, and write down its starting
-  voltage.
-* Start with a **low current limit** in your `CurrentLimit`, and raise
-  it only with a mentor's OK. The mechanism must be able to survive
-  every test you plan.
-* Clear hands, say "Enabling!", and keep a finger on **Enter**.
+> **Check yourself:**
+> 1. When you squeezed **hard**, which current went up more: stator or
+>    supply? Why? (See
+>    [How motors work](../part1/05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).)
+> 2. Did the stator current flatten out at about 10 A when you squeezed
+>    hard? What was doing that?
+> 3. What did the speed do? And the battery voltage?
 
-### Measure
+**Checkpoint:** your annotated graph is in `#rookie_training`, and you
+can answer the three questions.
 
-Graph `supply current (A)`, `stator current (A)`, and
-`log/Robot/voltage` (for several motors, add `total supply current
-(A)`). For each step, hold it steady for a few seconds and read the
-values off the graph:
-
-1. **Free spin:** the mechanism moving with no load, at the speed it
-   uses in a match.
-1. **Normal load:** doing its real job (lifting, shooting, intaking).
-1. **Worst case:** the hardest thing it does, like the start of a lift
-   or a jam. Only with a mentor, only briefly, and only within the
-   current limit.
-
-### Record
-
-| Mechanism | Step | Speed/output | Supply A | Stator A | Battery V | Notes |
-| --- | --- | --- | --- | --- | --- | --- |
-| Intake | Free spin | 0.5 | | | | |
-| Intake | Normal load | 0.5 | | | | |
-| Intake | Worst case | 0.5 | | | | hit the current limit? |
-
-Then, with your mechanical partner:
-
-* Did the current hit the **limit** (it stops rising at the limit
-  value)? Then the mechanism may need more current, or a different gear
-  ratio.
-* Did the battery voltage **sag** a lot? Below about 6.8 V the RoboRIO
-  **browns out**: it turns the motors off to save itself.
-* Is the motor getting hot (`temperature (C)`)?
-
-**Checkpoint:** a filled-in table for one mechanism, which your
-mechanical partner agrees matches what they saw.
+**We'll use this later to measure our real robots**: the
+[Discus](11_DISCUS.md) and the [shooter bot](12_DEMO_BOT.md).
 
 Next: [Connect to the robot and test your code](10_ROBOT_NETWORK.md)
