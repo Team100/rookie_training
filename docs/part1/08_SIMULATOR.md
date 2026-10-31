@@ -67,4 +67,11 @@ For more detail in the logs, set **SmartDashboard → Log Level** to
 
 ![](../img/log_level.png)
 
-That's the end of Part 1. Next: [Part 2: Glass and power-draw tests](../part2/09_GLASS_POWER.md)
+## 🎉 You finished Part 1!
+
+You've set up your laptop, wired and spun a real motor, written code to
+control it, and tested in the simulator. That's a real milestone.
+
+**Post a photo of your group succeeding to `#rookie_training` in Slack!**
+
+Next: [Part 2: Glass and power-draw tests](../part2/09_GLASS_POWER.md)
