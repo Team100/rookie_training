@@ -54,9 +54,16 @@ use.
    > `docs/img/kraken_x60_x44.jpg`, a Kraken X60 and X44 side by side,
    > labeled.
 
-1. Connect the Kraken's **power** wires (red and black) to the power
-   distribution, and its **CAN** wires to the CAN bus. The CAN wires are
-   yellow and green; match them to the labels.
+1. Connect the Kraken's **power** wires (red and black) to a slot on
+   the power distribution panel (PDP), and its **CAN** wires to the CAN
+   bus. The CAN wires are yellow and green; match them to the labels.
+1. **Put a breaker in that PDP slot.** Every motor slot needs its own
+   small snap-in **breaker** (people often call it a **fuse**), usually
+   20 A or 40 A. With no breaker, that slot gets no power, even though
+   everything else on the board lights up.
+
+   > 📷 **TODO photo:** `docs/img/pdp_breaker.jpg`: a breaker in the
+   > Kraken's PDP slot, next to an empty slot.
 
    > 📷 **TODO photo:** `docs/img/kraken_power_can.jpg`: Kraken power
    > wires going to the power distribution, and the CAN wires.
