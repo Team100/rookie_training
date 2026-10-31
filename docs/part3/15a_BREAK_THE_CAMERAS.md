@@ -6,10 +6,23 @@ finds the cause in two minutes keeps playing. The way to get that fast
 is to **break things on purpose now**, on the bench, and learn what
 each problem looks like.
 
+What actually breaks at competitions?
+
+| What goes wrong | Typical symptom |
+| --- | --- |
+| Ethernet or USB cables knocked loose by hits and vibration | Works in the pits, dies mid-match |
+| The Pi browns out when the robot's battery sags | Pi reboots or slows down during hard driving |
+| Lens smudged, covered, or knocked to a new angle | Sees nothing, **or** sees tags but reports the wrong position |
+| Field lights or sun shining into the camera | Tags not detected on one side of the field |
+| Two devices with the same IP address | Things work, then don't, then do |
+| A bad deploy, or someone's test branch left on the robot | The app keeps crashing, or acts strangely |
+| The field network blocks ports that work in the pits | "It worked in the pits!" |
+| A Pi overheating in a closed case | Slows down after a few matches |
+
 This chapter has two labs:
 
-1. **Break it:** cause one failure at a time, and record exactly what it
-   looks like.
+1. **The breaker vs. finder game:** in pairs, one person secretly breaks
+   something, the other has to find out what. Then swap.
 2. **Measure it:** find the limits of AprilTag detection: distance,
    angle, speed, and light.
 
@@ -47,38 +60,65 @@ write down what each of these shows when everything is fine:
 > **TODO (mentors):** add which NetworkTables values in Glass show
 > vision data arriving at the robot.
 
-## Lab 1: Break it
+## Lab 1: The breaker vs. finder game
 
-Do these one at a time. For **each** one:
+At a competition, nobody tells you what broke. You see a symptom ("no
+vision!") and have to work backwards to the cause, fast. This game
+practices exactly that.
 
-1. **Predict** what you'll see in each place in the healthy table.
-1. **Break** it.
-1. **Look** at every place in the table, and write down what changed.
-   Include exact error messages from `app.stderr`.
-1. **Fix** it, and time how long until everything is healthy again. Did
-   it come back **by itself**, or did you have to do something?
+### Roles
 
-| # | Break it | Where it happens on a real robot |
-| --- | --- | --- |
-| 1 | **Unplug the Pi's Ethernet cable** while it's running. Then plug it back in. | Cable knocked loose during a match |
-| 2 | **Stop the app:** `supervisorctl stop app`. Then `supervisorctl start app`. | The vision program crashed |
-| 3 | **Unplug the USB camera** while everything is running. Wait 10 seconds. Plug it back into the **same** port. Check `lsusb` before and after. | Camera cable knocked loose during a match |
-| 3b | Unplug it again, and plug it into a **different** USB port. | Someone "fixed" it by plugging into the nearest port |
-| 3c | Try a **long or cheap USB cable**, or a USB hub, with a mentor. | Bad cable or hub on the robot |
-| 4 | **Cover the lens** with your hand, then shine a flashlight straight into it. | A robot in front of the camera; stadium lights |
-| 5 | **Weak power:** with a mentor, power the Pi from a weak phone charger instead of its proper supply. Check `vcgencmd get_throttled`. | Bad power wiring on the robot |
-| 6 | **Robot side gone:** leave the Pi running, and turn off (or unplug) the RoboRIO or the radio. Then bring it back. | Robot brownout or radio reboot |
+* **Breaker:** picks a card from the
+  [breaker cards](15b_BREAKER_CARDS.md), secretly breaks one thing, and
+  makes sure it's really broken. **Finders: don't read the breaker
+  cards.** It spoils the game, and you won't learn anything.
+* **Finder:** uses the [finder's guide](15c_FINDER_GUIDE.md) to work out
+  **what** broke and **show the evidence**.
 
-> **Check yourself:** in breaks 1, 2, and 6, does the robot **know**
-> vision stopped, or does it keep using the last answer it got? Why does
-> that matter for a robot that's driving?
+### How a round works
 
-**Checkpoint:** a table like this, filled in for all six:
+1. **Both** of you check that everything is healthy (the table above).
+   You can't find "broken" if it was already broken.
+1. The finder **turns around** (or leaves the room) while the breaker
+   breaks something, following the card's instructions.
+1. The breaker writes the card number on a piece of paper and turns it
+   over.
+1. The finder starts a **10-minute** timer and follows the finder's
+   guide. Say out loud what you're checking and why.
+1. The finder names the cause **and shows the evidence** ("`lsusb` has
+   no Arducam line, so the camera isn't connected").
+1. Flip the paper. Then the **breaker** undoes the break, following the
+   card's "undo" steps, and you **both** check everything is healthy
+   again.
+1. Write a row in your symptom → cause table. Swap roles.
 
-| # | What broke | `:9001` | `:1181` | `app.stderr` | Glass | Came back by itself? How long? |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | Ethernet unplugged | | | | | |
-| … | | | | | | |
+### Scoring
+
+* Each card has points: ⭐ easy (1), ⭐⭐ medium (2), ⭐⭐⭐ hard (3).
+* The finder gets the points if they find the cause with evidence
+  within 10 minutes.
+* Stuck? The finder can ask for **one hint**: the breaker says which
+  **layer** of the finder's guide it's in. A hint halves the points.
+* The breaker gets 1 point if the finder runs out of time, **but only if
+  the breaker can then show the evidence themselves.**
+
+> [!IMPORTANT]
+> A mentor approves which cards are in play before you start. Breakers:
+> only use the cards. No "creative" breaks that aren't on a card: some
+> things are hard to undo, and the point is learning, not winning.
+
+### Checkpoint
+
+You've each played both roles at least twice, and you have a symptom →
+cause table like this:
+
+| Card | What broke | First thing that looked wrong | Evidence | Time to find |
+| --- | --- | --- | --- | --- |
+| | | | | |
+
+> **Check yourself:** for each break, did the **robot** know vision
+> stopped, or did it keep using the last answer it got? Why does that
+> matter for a robot that's driving?
 
 ## Lab 2: Measure the limits
 
