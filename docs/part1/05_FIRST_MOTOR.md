@@ -12,6 +12,8 @@ docs/img/ with these names, and replace each "TODO photo" note below.
   [ ] kraken_power_can.jpg        Kraken power wires and CAN wires
   [ ] kraken_can_to_roborio.jpg   CAN from the Kraken into the RoboRIO
   [ ] kraken_led_ok.jpg           Kraken status light, healthy
+  [x] tunerx_team_or_ip.png       Tuner X "Enter a Team # or IP" box (cropped)
+  [x] tunerx_no_diagnostics.png   Tuner X "Failed to connect to diagnostics"
   [ ] tunerx_devices.png          Tuner X device list showing the Kraken
   [ ] tunerx_kraken_config.png    Tuner X device page: CAN ID, firmware
   [ ] tunerx_kraken_plot.png      Tuner X showing supply voltage
@@ -131,6 +133,8 @@ here's the quick version.
    (bottom left). That's the RoboRIO's address over USB. Don't type
    `100` here: that looks for `10.1.0.2`, which is the robot network,
    not your USB cable.
+
+   ![The "Enter a Team # or IP" box, bottom left of Tuner X](../img/tunerx_team_or_ip.png)
 1. Set Tuner X's **SSH login** for a RoboRIO: username **`admin`**,
    **no password**. New versions of Tuner X default to `systemcore`
    (for the new controller), which a RoboRIO doesn't accept.
@@ -145,9 +149,10 @@ here's the quick version.
    DIAGNOSTICS**. It lasts until the RoboRIO reboots, so you'll need to
    click it again after a power cycle.
 
-   > 📷 **TODO screenshot:** `docs/img/tunerx_no_diagnostics.png`:
-   > "Failed to connect to diagnostics" with the RUN TEMPORARY
-   > DIAGNOSTICS button.
+   ![Tuner X: Failed to connect to diagnostics, with the RUN TEMPORARY DIAGNOSTICS button](../img/tunerx_no_diagnostics.png)
+
+   > 📷 **TODO screenshot:** retake this once it's connected to
+   > `172.22.11.2` (this one shows `10.1.0.2`).
 
 1. Your Kraken should now be in the **Devices** list.
 
