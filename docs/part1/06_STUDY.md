@@ -31,6 +31,16 @@ Use the WPILib project wizard, in **2026 WPILib VS Code**:
 
 ## Make sure build and deploy work
 
+> [!IMPORTANT]
+> **Check your study is a 2026 project.** Open your study's
+> `build.gradle` and look near the top. It must say
+> `id "edu.wpi.first.GradleRIO" version "2026.2.1"` (the same as
+> `studies/discus`). If it says **2025**, you made it with the 2025
+> WPILib VS Code: change the version to `2026.2.1`, set
+> `"projectYear": "2026"` in `.wpilib/wpilib_preferences.json`, and from
+> now on only use **2026 WPILib VS Code**. Otherwise deploy fails with
+> "Invalid RoboRIO Image Version".
+
 Build first: `Ctrl+Shift+P` → **WPILib: Build Robot Code**. Then
 [deploy](04_DEPLOY.md) to a RoboRIO test board.
 

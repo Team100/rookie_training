@@ -38,6 +38,18 @@
 
 ## Deploying and running
 
+**Deploy fails: "Invalid RoboRIO Image Version" / "GradleRIO-compatible
+image versions: 2025_v2.\*"**
+: Good news first: the network works (look for `admin @ 10.1.0.2:
+  Connected.`). The problem is that your **project** is a different
+  year from the **RoboRIO**. Our RoboRIOs run the **2026** image, so
+  your project must use GradleRIO **2026**. Open `build.gradle` and set
+  `id "edu.wpi.first.GradleRIO" version "2026.2.1"`, set
+  `"projectYear": "2026"` in `.wpilib/wpilib_preferences.json`, and use
+  **2026 WPILib VS Code** (not 2025). This happens when a study is made
+  with the 2025 project wizard. See
+  [Your first study](../part1/06_STUDY.md#make-sure-build-and-deploy-work).
+
 **Auton is enabled, but the robot doesn't move**
 : Nobody picked an auton, so it's running `NONE`. The Driver Station
   can't choose one. Connect Glass to team 100 and pick it in
