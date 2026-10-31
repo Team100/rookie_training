@@ -125,7 +125,9 @@ The RoboRIO has one CAN bus. The SystemCore has **five CAN ports**,
 1. Phoenix Tuner X only sees the SystemCore's CAN ports while robot code
    that calls
    [`CTREStartup.start()`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/motor/ctre/CTREStartup.java)
-   is running. Point Tuner X at `robot.local` instead of the RoboRIO.
+   is running. Point Tuner X at `robot.local` instead of the RoboRIO, and
+   set its SSH login back to `systemcore` / `systemcore` (you changed it
+   to `admin` for the RoboRIO).
    > **TODO:** check this on a fresh SystemCore. Does Tuner X see the
    > buses without our code running?
 

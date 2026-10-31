@@ -62,7 +62,9 @@
 : Tuner X couldn't log into the RoboRIO to start the temporary
   diagnostic server. Most often it's pointed at the wrong address: over
   USB, type `172.22.11.2` in **Enter a Team # or IP**, not `100` (which
-  means `10.1.0.2`). Then check that `ssh admin@172.22.11.2` (blank
+  means `10.1.0.2`). Also check Tuner X's SSH login: a RoboRIO needs
+  `admin` with no password, but new Tuner X versions default to
+  `systemcore`. Then check that `ssh admin@172.22.11.2` (blank
   password) works from PowerShell. See
   [Your first motor](../part1/05_FIRST_MOTOR.md#find-the-can-id).
 

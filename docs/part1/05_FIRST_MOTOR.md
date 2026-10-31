@@ -131,6 +131,11 @@ here's the quick version.
    (bottom left). That's the RoboRIO's address over USB. Don't type
    `100` here: that looks for `10.1.0.2`, which is the robot network,
    not your USB cable.
+1. Set Tuner X's **SSH login** for a RoboRIO: username **`admin`**,
+   **no password**. New versions of Tuner X default to `systemcore`
+   (for the new controller), which a RoboRIO doesn't accept.
+   > **TODO:** add exactly where this setting is in Tuner X, with a
+   > screenshot (`docs/img/tunerx_ssh_login.png`).
 1. Open **Devices**. The box should say **"Successfully connected to
    172.22.11.2"**. If it says `10.1.0.2`, go back a step.
 1. You'll probably also see **"Failed to connect to diagnostics"**.
@@ -150,6 +155,8 @@ here's the quick version.
    into the RoboRIO with SSH to start the temporary server, and that
    failed.
    1. Check the address is `172.22.11.2`, not `10.1.0.2`.
+   1. Check Tuner X's SSH login is `admin` with no password, not
+      `systemcore`.
    1. Check SSH yourself. In PowerShell, run `ssh admin@172.22.11.2`;
       the password is blank, so just press Enter. If that fails, the
       RoboRIO isn't reachable: try another USB cable, and wait for it to
