@@ -169,8 +169,15 @@ here's the quick version.
 
    > 📷 **TODO screenshot:** retake this with the Kraken in the list too.
 
-   Only the PDP, no Kraken? See
-   "the PDP shows up, but not the Kraken" in
+   > [!WARNING]
+   > **(!!!) Only the PDP, no Kraken? Check the breaker (fuse) first!**
+   > Look at the Kraken's PDP slot. If there's no breaker plugged in,
+   > the Kraken gets **no power** and its light is **off**, even though
+   > the RoboRIO and PDP are on. Turn off the main breaker, plug a
+   > breaker into the slot, turn power back on, and click refresh in
+   > Tuner X. This is exactly what happened on our first day.
+
+   Still missing? See "the PDP shows up, but not the Kraken" in
    [Troubleshooting](../reference/TROUBLESHOOTING.md).
 
    **Got "Error retrieving SSH target platform" instead?** Tuner X logs
