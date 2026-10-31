@@ -370,6 +370,68 @@ graph for **both together** to **`#rookie_training`**.
 
 </details>
 
+## 🏆 The Discus Challenge
+
+Now you know feedforward, feedback, current limits, and how to measure
+energy. Can you **beat the record**?
+
+### The course
+
+Starting with the disc **stopped**, do this **5 times** in a row:
+
+1. Spin up to the **target**: 1 rotation/s (within ±5%).
+1. **Hold** it there for **1 second**.
+1. Bring it back to **stopped** (under 0.05 rotations/s).
+
+The run ends when the disc is stopped after the 5th lap.
+
+### Three leaderboards
+
+| Board | Goal | Rule |
+| --- | --- | --- |
+| ⚡ **Eco** | Use the **least energy** | Must finish within 30 seconds |
+| 🏎️ **Speed** | Finish in the **least time** | Supply current never over 10 A |
+| 🏆 **Overall** | Lowest **time × energy** | Both rules above |
+
+### Rules
+
+* **Your code keeps score.** It must time the run, add up the energy
+  from the battery (`battery voltage × supply current × 0.02`, every
+  cycle), check each lap really reached the target and really stopped,
+  and print the result at the end.
+* **Fair start:** a freshly charged battery (above 12.5 V), the disc
+  stopped, and nobody touches it during the run.
+* **Safety:** stay within your mentor's current limit and duty cycle
+  cap. No exceptions for records.
+* **Proof:** a mentor watches the run. Post your Glass graph and your
+  printed score to **`#rookie_training`**.
+
+<details>
+<summary>💡 Ideas to try (open after your first run)</summary>
+
+* Is it better to push hard and get there fast, or gently?
+* When should you **stop** pushing? Does the disc need power to coast
+  the last bit?
+* What's the cheapest way to **stop**: coast, brake mode, or push
+  backwards? Measure all three.
+* Does feedforward help you hit the target without wasting energy on
+  overshoot?
+* Could you change the target speed's... no wait, that's against the
+  rules. 😉 Read them again: what *are* you allowed to change?
+
+</details>
+
+### Records
+
+Beat a record? Post your proof, then update this table with a pull
+request.
+
+| Board | Record | Who | Date | Slack proof |
+| --- | --- | --- | --- | --- |
+| ⚡ Eco | — J | | | |
+| 🏎️ Speed | — s | | | |
+| 🏆 Overall | — J·s | | | |
+
 ## Send it in
 
 Commit your study, push, and open a PR with your graphs and your
