@@ -93,6 +93,10 @@ tiny "hello?" message and waits for an answer.
    (it may be called **Ethernet**, **USB 10/100/1000 LAN**, or
    **Thunderbolt Ethernet**). It should have a **green dot** and say
    **Connected**.
+
+   > 📷 **TODO screenshot:** `docs/img/mac_network_list.png`: System
+   > Settings → Network, with the Ethernet adapter's green dot and
+   > "Connected" circled, and Wi-Fi off.
 1. The lights next to the RoboRIO's Ethernet port should be on or
    blinking.
 
@@ -107,6 +111,9 @@ Open **Terminal** and run:
 ping roboRIO-100-FRC.local
 ```
 
+> 📷 **TODO screenshot:** `docs/img/mac_ping_ok.png`: Terminal showing
+> `ping` getting `64 bytes from ...` answers.
+
 * **Lines like `64 bytes from 10.1.0.2: ... time=1.2 ms`:** it answers!
   Press `Ctrl+C` to stop. Note the number in that line: that's the
   RoboRIO's IP address. Skip to [Step 5](#step-5-deploy).
@@ -116,7 +123,15 @@ ping roboRIO-100-FRC.local
 ### Step 3: Check your Mac's IP address
 
 In **System Settings → Network → (your Ethernet adapter) → Details →
-TCP/IP**, look at **IP address**. Or, in Terminal:
+TCP/IP**, look at **IP address**.
+
+> 📷 **TODO screenshot:** `docs/img/mac_network_details.png`: the
+> Ethernet adapter's page, with the **Details…** button circled.
+
+> 📷 **TODO screenshot:** `docs/img/mac_tcpip_selfassigned.png`: the
+> TCP/IP tab showing a `169.254.x.x` self-assigned address.
+
+Or, in Terminal:
 
 ```
 ifconfig | grep "inet "
@@ -142,6 +157,10 @@ Mac needs an address on the same network:
 1. **Configure IPv4: Manually.**
 1. **IP address:** `10.1.0.10`. **Subnet mask:** `255.255.255.0`.
    Leave **Router** empty. Click **OK**.
+
+   > 📷 **TODO screenshot:** `docs/img/mac_tcpip_manual.png`: the TCP/IP
+   > tab set to **Manually**, with `10.1.0.10`, `255.255.255.0`, and an
+   > empty Router, each circled.
 1. In Terminal: `ping 10.1.0.2`.
 
 > **TODO:** check which of our RoboRIO test boards use a fixed
