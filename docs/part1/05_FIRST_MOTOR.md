@@ -313,4 +313,4 @@ Not moving?
 Our [test board setup](https://github.com/Team100/all26/blob/main/lib/doc/setup.md)
 has more details.
 
-Next: [Your first study](06_STUDY.md)
+Next: [How motors work](05a_HOW_MOTORS_WORK.md)

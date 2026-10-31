@@ -19,6 +19,7 @@ Guidelines:
   * `docs/part2/`: SystemCore switch, robot network, SSH, Pis, auton,
     identity, for the **SystemCore**: branch `2027`, 2027 WPILib.
   * `docs/reference/`: debugging and troubleshooting.
+  * `docs/advanced/`: experiments that need a mentor's sign-off first.
   * `docs/img/`: images.
 
   The README lists every chapter. If you add, move, or renumber one,

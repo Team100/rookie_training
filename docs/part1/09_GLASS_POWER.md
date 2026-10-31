@@ -51,7 +51,8 @@ And the robot as a whole logs:
 > makes heat and torque. Supply current drains the battery and trips
 > breakers. That's why
 > [`CurrentLimit`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/config/CurrentLimit.java)
-> has a limit for each.
+> has a limit for each. The full story is in
+> [How motors work](05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).
 
 ## Open Glass and connect
 

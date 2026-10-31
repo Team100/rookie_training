@@ -55,6 +55,7 @@ Learn the basics on a RoboRIO test board. Use the **`main`** branch of
 ### Motors
 
 5. **[Your first motor](docs/part1/05_FIRST_MOTOR.md)**: wiring a Kraken, CAN IDs, spinning it with no code
+   * then **[How motors work](docs/part1/05a_HOW_MOTORS_WORK.md)**: electricity, magnets, stator vs. supply current; take apart a Kraken
 1. **[Your first study](docs/part1/06_STUDY.md)**: your own small project that uses `lib`
 1. **[Control a motor from code](docs/part1/07_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller
 1. **[Use the simulator](docs/part1/08_SIMULATOR.md)**: test without a robot
@@ -72,6 +73,11 @@ finished Part 1. Use the **`2027`** branch of `Team100/all26` and
 1. **[SSH into the SystemCore and the Pis](docs/part2/12_SSH_AND_CHECKS.md)**: log in and check that things are healthy
 1. **[Change the Raspberry Pi code](docs/part2/13_PI_CHANGES.md)**: edit, test, deploy, PR
 1. **[Work on auton](docs/part2/14_AUTON.md)**: drive out 2 meters and back; pose, waypoints, trajectories
+
+## Advanced (mentor approval required)
+
+* [Smoke a motor](docs/advanced/SMOKE_A_MOTOR.md): stall a scrap motor
+  until it overheats, and see what the stator limit protects you from
 
 ## Whenever you need them
 

@@ -136,7 +136,7 @@ your job:
 | `CanId canId` | The motor's CAN ID (the one on its masking tape) |
 | `NeutralMode100 neutral` | What the motor does at zero: coast or brake |
 | `MotorPhase phase` | Which way is "forward" |
-| `CurrentLimit limit` | Maximum current, in amps |
+| `CurrentLimit limit` | Maximum current, in amps: a **stator** limit and a **supply** limit ([what's the difference?](05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current)) |
 | `Friction friction` | A model of friction; not used yet |
 | `PIDConstants pid` | Feedback control settings; not used yet |
 
