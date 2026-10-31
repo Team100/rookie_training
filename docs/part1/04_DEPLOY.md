@@ -75,7 +75,7 @@ checks one link in the chain, so you know exactly where it breaks.
 Every device on a network has an **IP address**, like a phone number,
 e.g. `10.1.0.2`. To call each other, two devices must be on the same
 **network**: their numbers have to start the same way (like the same
-area code). `10.1.0.2` and `10.1.0.10` can talk; `10.1.0.2` and
+area code). `10.1.0.2` and `10.1.0.50` can talk; `10.1.0.2` and
 `169.254.3.7` can't.
 
 Devices also have **names**, like `roboRIO-100-FRC.local`, so you don't
