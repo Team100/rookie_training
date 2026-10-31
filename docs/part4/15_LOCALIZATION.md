@@ -8,7 +8,7 @@ two kinds of clues: its **wheels** and its **cameras**.
 
 A robot's **pose** is three numbers: **x** and **y** (where it is on the
 field, in meters) and **θ**, theta (which way it's facing). The
-[auton chapter](17_AUTON.md#pose-where-am-i) explains the field's
+[auton chapter](16_AUTON.md#pose-where-am-i) explains the field's
 coordinates in detail; skim that section now.
 
 ## Clue 1: the wheels (odometry)
@@ -32,7 +32,7 @@ robot is facing.
 
 ## Clue 2: the cameras (vision)
 
-From [How our vision works](../part3/15_VISION.md): when a camera sees
+From [How our vision works](../part3/14_VISION.md): when a camera sees
 an AprilTag, and the robot knows where that tag is on the field, it can
 work out where the robot must be. That doesn't drift, but it's
 **jumpy** (every picture is a little different), **late** (about a tenth
@@ -67,4 +67,4 @@ robot combines its wheels and its cameras, and why.
 > **TODO (mentors):** add an exercise on the demo bot or comp robot
 > that shows the pose jumping when a tag comes into view.
 
-Next: [Work on auton](17_AUTON.md)
+Next: [Work on auton](16_AUTON.md)

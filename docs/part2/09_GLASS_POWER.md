@@ -111,7 +111,7 @@ sure it's `DEBUG` (the default) or `TRACE`, not `COMP`.
 Glass is also where you **choose which auton runs** on a real robot
 (**SmartDashboard** → **Auton Command**), because the Driver Station
 can't.
-See [Work on auton](../part4/17_AUTON.md#part-6-run-it-on-a-real-robot).
+See [Work on auton](../part4/16_AUTON.md#part-6-run-it-on-a-real-robot).
 
 The WPILib [Glass docs](https://docs.wpilib.org/en/stable/docs/software/dashboards/glass/index.html)
 cover more widgets, like the field view you used in the simulator.
@@ -162,6 +162,6 @@ drawing tool, is fine.) Then post it to **`#rookie_training`** in Slack.
 can answer the three questions.
 
 **We'll use this later to measure our real robots**: the
-[Discus](11_DISCUS.md) and the [shooter bot](12_DEMO_BOT.md).
+[Discus](10_DISCUS.md) and the [shooter bot](11_DEMO_BOT.md).
 
-Next: [Connect to the robot and test your code](10_ROBOT_NETWORK.md)
+Next: [Easy mode: the Discus](10_DISCUS.md)

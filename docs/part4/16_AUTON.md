@@ -11,7 +11,7 @@ robot motion: **pose**, **transform**, **heading**, **course**,
 Before you start, you should have finished
 [Setup](../part1/01_SETUP.md), [Fork workflow](../part1/02_FORK_WORKFLOW.md), the
 [simulator chapter](../part1/08_SIMULATOR.md), and
-[Where am I? (localization)](16_LOCALIZATION.md). This chapter uses the
+[Where am I? (localization)](15_LOCALIZATION.md). This chapter uses the
 `main` branch and a RoboRIO robot.
 
 ## Part 1: The ideas
@@ -463,4 +463,4 @@ TrajectorySE2 back(Pose2d p) {
 Before you use this, explain to someone what every line does.
 </details>
 
-Next: [Part 5: Switch to the SystemCore](../part5/18_SYSTEMCORE.md)
+Next: [Part 5: Switch to the SystemCore](../part5/17_SYSTEMCORE.md)

@@ -25,6 +25,11 @@ checkpoint, and hints if you're stuck, just like
 > table. Keep hands, hair, and loose sleeves away from it while the
 > robot is enabled. One person keeps a finger on **Enter** (disable).
 
+> **Connecting:** plug a **USB-B cable** straight from your laptop into
+> the robot's RoboRIO, just like the test board in
+> [Deploy](../part1/04_DEPLOY.md). No radios needed: those come in
+> [Part 5](../part5/18_ROBOT_NETWORK.md), on the real robot.
+
 ## Step 1: Find the motor
 
 **Goal:** you know the Discus motor's CAN ID, and its firmware is ready
@@ -179,4 +184,4 @@ target faster and closer than with feedback alone. Show both graphs.
 Commit your study, push, and open a PR with your graphs and your
 answers to the check-yourself questions.
 
-Next: [Hard mode: the shooter bot](12_DEMO_BOT.md)
+Next: [Hard mode: the shooter bot](11_DEMO_BOT.md)

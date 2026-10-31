@@ -2,7 +2,7 @@
 
 You're the **finder**. Something on the vision system is broken, and
 you don't know what. Your job: find the cause, and **show the evidence**.
-(Rules: [the game](15a_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game).
+(Rules: [the game](14a_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game).
 Don't read the breaker cards!)
 
 This page doesn't tell you the answer. It gives you a **method**: check
@@ -42,7 +42,7 @@ blinking now and then?
 ## Layer 2: Can you reach the Pi?
 
 **Check:** from your laptop (on the robot network,
-[how](13_SSH_AND_CHECKS.md#connect-your-laptop)):
+[how](12_SSH_AND_CHECKS.md#connect-your-laptop)):
 
 ```
 ping 10.1.0.31

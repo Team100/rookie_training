@@ -80,7 +80,7 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
    it up. Wait for its screen to show that it has booted.
 1. Connect your laptop to the SystemCore with a **USB-C** cable.
    * You can also use Ethernet through the radio or a switch; see
-     [SSH and checks](../part3/13_SSH_AND_CHECKS.md#connect-your-laptop).
+     [SSH and checks](../part3/12_SSH_AND_CHECKS.md#connect-your-laptop).
 
    > 📷 **TODO photo:** `docs/img/systemcore_usb_c.jpg`: the SystemCore
    > USB-C port with the cable plugged in.
@@ -102,7 +102,7 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
 
 If it fails: check the cable, wait for the SystemCore to finish booting,
 and try `ping robot.local`. More in
-[SSH and checks](../part3/13_SSH_AND_CHECKS.md#common-problems).
+[SSH and checks](../part3/12_SSH_AND_CHECKS.md#common-problems).
 
 **Checkpoint:** Communications and Robot Code are both green in the
 Driver Station.
@@ -167,7 +167,7 @@ Send it in as a PR against **`2027`**.
 
 ## 6. SSH into the SystemCore
 
-Same idea as [SSH into the RoboRIO](../part3/13_SSH_AND_CHECKS.md), with a
+Same idea as [SSH into the RoboRIO](../part3/12_SSH_AND_CHECKS.md), with a
 different login and different things to check.
 
 ```
@@ -198,19 +198,4 @@ Robot program output (prints, stack traces) is easiest to read in the
 
 Type `exit` to log out.
 
-## 7. Robot network differences
-
-The [robot network](../part2/10_ROBOT_NETWORK.md) works the same way,
-with these changes:
-
-* **Radios:** turn **Enable SystemCore Mode** on, on **both** radios.
-* **Name:** the robot is `robot.local`, not `roboRIO-100-FRC.local`. The
-  address on the robot network is still `10.1.0.2`.
-* **USB-C address** depends on the SystemCore's software version:
-  `172.26.0.1` (Windows) / `172.27.0.1` (Mac/Linux) on newer images, and
-  `172.28.0.1` / `172.29.0.1` on images 9 and earlier. Its screen shows
-  what it's using.
-* **Web dashboard** at http://robot.local (or `http://10.1.0.2/`).
-* Useful ports: 22 (ssh), 80 (web dashboard), 5810 (NetworkTables).
-
-Next: [Robot identity](IDENTITY.md)
+Next: [Connect to the robot (radios)](18_ROBOT_NETWORK.md)

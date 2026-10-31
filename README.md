@@ -74,34 +74,34 @@ guide.
 
 ## Part 2: Real robot work
 
-Real mechanisms, on real robots. Start with **easy mode**, then try
-**hard mode**.
+Real mechanisms, tethered to your laptop with a cable. Start with
+**easy mode**, then try **hard mode**.
 
-9. **[Glass and power-draw tests](docs/part2/09_GLASS_POWER.md)**: graph live values; measure how much current a mechanism draws
-1. **[Connect to the robot and test your code](docs/part2/10_ROBOT_NETWORK.md)**: radios, laptop network, robot etiquette
-1. **Easy mode: [the Discus](docs/part2/11_DISCUS.md)**: write a study that spins a heavy disc, measure it, and make it hold a speed
-1. **Hard mode: [the shooter bot](docs/part2/12_DEMO_BOT.md)**: write a study that spins up the shooter and feeds balls, safely
+9. **[Glass and power-draw tests](docs/part2/09_GLASS_POWER.md)**: graph live values; the rag test
+1. **Easy mode: [the Discus](docs/part2/10_DISCUS.md)**: write a study that spins a heavy disc, measure it, and make it hold a speed
+1. **Hard mode: [the shooter bot](docs/part2/11_DEMO_BOT.md)**: write a study that spins up the shooter and feeds balls, safely
 
 ## Part 3: Raspberry Pis and vision
 
-13. **[SSH into the RoboRIO and the Pis](docs/part3/13_SSH_AND_CHECKS.md)**: log in and check that things are healthy
-1. **[Change the Raspberry Pi code](docs/part3/14_PI_CHANGES.md)**: edit, test, deploy, PR
-1. **[How our vision works](docs/part3/15_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
-   * then **[Break the cameras (on purpose)](docs/part3/15a_BREAK_THE_CAMERAS.md)**: the breaker vs. finder game, and measuring detection limits
-     * [Breaker cards](docs/part3/15b_BREAKER_CARDS.md) (finders: don't peek!) · [Finder's guide](docs/part3/15c_FINDER_GUIDE.md)
+12. **[SSH into the RoboRIO and the Pis](docs/part3/12_SSH_AND_CHECKS.md)**: log in and check that things are healthy
+1. **[Change the Raspberry Pi code](docs/part3/13_PI_CHANGES.md)**: edit, test, deploy, PR
+1. **[How our vision works](docs/part3/14_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
+   * then **[Break the cameras (on purpose)](docs/part3/14a_BREAK_THE_CAMERAS.md)**: the breaker vs. finder game, and measuring detection limits
+     * [Breaker cards](docs/part3/14b_BREAKER_CARDS.md) (finders: don't peek!) · [Finder's guide](docs/part3/14c_FINDER_GUIDE.md)
 
 ## Part 4: Localization and auton
 
-16. **[Where am I?](docs/part4/16_LOCALIZATION.md)**: odometry, vision, and how the robot combines them
-1. **[Work on auton](docs/part4/17_AUTON.md)**: drive out 2 meters and back; pose, waypoints, trajectories
+15. **[Where am I?](docs/part4/15_LOCALIZATION.md)**: odometry, vision, and how the robot combines them
+1. **[Work on auton](docs/part4/16_AUTON.md)**: simulate a circle, then measure real error
 
-## Part 5: SystemCore, all together
+## Part 5: SystemCore, all together, on the real robot
 
 The competition robot runs on the new
 [SystemCore](https://docs.wpilib.org/en/2027/). Part 5 uses the
 **`2027`** branch of `Team100/all26` and **2027 WPILib**.
 
-18. **[Switch to the SystemCore](docs/part5/18_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, SSH, network
+17. **[Switch to the SystemCore](docs/part5/17_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, SSH
+1. **[Connect to the robot (radios)](docs/part5/18_ROBOT_NETWORK.md)**: radios, laptop network, robot etiquette
 1. **[Robot identity](docs/part5/IDENTITY.md)**: how the code knows which robot it's on
 1. **[Put it together on the demo bot](docs/part5/19_DEMO_BOT_SYSTEMCORE.md)**: move your shooter study to the SystemCore and bring up the whole robot
 
@@ -112,7 +112,7 @@ The competition robot runs on the new
 
 ## Whenever you need them
 
-* [RoboRIO → SystemCore cheat sheet](docs/part5/18_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
+* [RoboRIO → SystemCore cheat sheet](docs/part5/17_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
 * [Debugging](docs/reference/DEBUGGING.md): errors, prints, logs, the debugger
 * [Troubleshooting](docs/reference/TROUBLESHOOTING.md): Git, build, deploy, and robot problems
 * [Coding conventions](https://github.com/Team100/all26/blob/2027/lib/doc/getting_started/Conventions.md)

@@ -34,6 +34,14 @@ rule is a top speed of about **20 m/s**, because faster than that, a
 foam ball carries enough energy to injure an eye. Keeping the shooter at
 low power keeps the ball well under that.
 
+> **Connecting:** plug a **USB-B cable** straight from your laptop into
+> the demo bot's RoboRIO, just like the test board in
+> [Deploy](../part1/04_DEPLOY.md). No radios needed: those come in
+> [Part 5](../part5/18_ROBOT_NETWORK.md), on the real robot.
+
+Keep the robot **on blocks** (wheels off the floor) while it's tethered:
+you're testing the shooter, not driving.
+
 ## Step 1: Find the motors (REV Hardware Client)
 
 These motors use **REV SPARK** controllers, so **Phoenix Tuner X can't
@@ -168,7 +176,7 @@ put "in sequence", "in parallel", "until something is true", and
 
 ## Step 7: The mystery graph
 
-Same game as on the [Discus](11_DISCUS.md#step-5-the-mystery-graph),
+Same game as on the [Discus](10_DISCUS.md#step-5-the-mystery-graph),
 now with the whole shooter. One of you shoots; the other has to work
 out **what happened, and when, just by looking at the graphs**.
 
@@ -205,4 +213,4 @@ Pick one, plan it with a mentor, and send it in as a PR:
 * Make the shooter more consistent: does a little **feedback** (from the
   Discus) help the drums recover faster after each ball?
 
-Next: [Part 3: SSH into the RoboRIO and the Pis](../part3/13_SSH_AND_CHECKS.md)
+Next: [Part 3: SSH into the RoboRIO and the Pis](../part3/12_SSH_AND_CHECKS.md)

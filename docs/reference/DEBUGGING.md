@@ -64,4 +64,4 @@ without a robot or the simulator. Look in `lib/src/test` for examples.
 * **Cut the problem in half.** Does it work in sim? With a simpler study?
   With one motor?
 * **Check the hardware too:** CAN ID, wiring, battery, enabled? See
-  [SSH and checks](../part3/13_SSH_AND_CHECKS.md).
+  [SSH and checks](../part3/12_SSH_AND_CHECKS.md).
