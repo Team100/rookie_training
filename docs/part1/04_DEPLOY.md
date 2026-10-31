@@ -50,7 +50,8 @@ doesn't have. That's fine, and it's why you'll make your own
 
 * **Can't find the robot:** check the cable, and wait for the RoboRIO to
   finish booting. Try `ping roboRIO-100-FRC.local` or
-  `ping 172.22.11.2` (the RoboRIO's USB address). On a Mac, see
+  `ping 172.22.11.2` (the RoboRIO's USB address). On a Mac, add `-c 4`
+  (`ping -c 4 172.22.11.2`) so it stops after 4 tries. On a Mac, see
   [Using a Mac with an Ethernet cable](#using-a-mac-with-an-ethernet-cable).
 * **"Team number not found":** you skipped the **Set Team Number** step.
 * **Deploy works but the code crashes:** read the console from the top.
@@ -85,6 +86,11 @@ have to remember numbers. Your Mac looks the name up to find the number
 **`ping`** is how you check whether two devices can talk: it sends a
 tiny "hello?" message and waits for an answer.
 
+> On a Mac, `ping` **never stops by itself**. That's why every `ping`
+> on this page has **`-c 4`**: send 4 tries, then stop. If you forget
+> it, press **`Ctrl+C`** to stop. (On Windows, `ping` stops after 4
+> tries on its own.)
+
 ### Step 1: Is the cable connected?
 
 1. Turn **Wi-Fi off** for now, so the Mac only has one network to think
@@ -108,14 +114,14 @@ sure the RoboRIO is powered and has finished booting (about a minute).
 Open **Terminal** and run:
 
 ```
-ping roboRIO-100-FRC.local
+ping -c 4 roboRIO-100-FRC.local
 ```
 
 > 📷 **TODO screenshot:** `docs/img/mac_ping_ok.png`: Terminal showing
 > `ping` getting `64 bytes from ...` answers.
 
 * **Lines like `64 bytes from 10.1.0.2: ... time=1.2 ms`:** it answers!
-  Press `Ctrl+C` to stop. Note the number in that line: that's the
+  Note the number in that line: that's the
   RoboRIO's IP address. Skip to [Step 5](#step-5-deploy).
 * **`cannot resolve`** or **`Request timeout`:** the Mac can't find it
   by name. Go to Step 3.
@@ -145,7 +151,7 @@ ifconfig | grep "inet "
   Wait a minute after plugging in, and try Step 2 again. Still nothing?
   Go to Step 4.
 * **`10.1.0.something`:** you're on the robot's network. Try
-  `ping 10.1.0.2`.
+  `ping -c 4 10.1.0.2`.
 
 ### Step 4: Give your Mac a fixed address
 
@@ -163,7 +169,7 @@ Mac needs an address on the same network:
    Two Macs on the same robot? Each needs its own number: use
    `10.1.0.50`, `10.1.0.51`, and so on. (Don't use `10.1.0.2`; that's
    the RoboRIO.)
-1. In Terminal: `ping 10.1.0.2`.
+1. In Terminal: `ping -c 4 10.1.0.2`.
 
 > **TODO:** check which of our RoboRIO test boards use a fixed
 > `10.1.0.2` and which use automatic addresses, and write it on each

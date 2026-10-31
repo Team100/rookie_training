@@ -45,6 +45,8 @@ Laptop ──Ethernet──▶ Access point (VH-109, "Access Point Mode", on the
    ping 10.1.0.4
    ping robot.local
    ```
+   * On a Mac, use `ping -c 4 …` so it stops after 4 tries (or press
+     `Ctrl+C`).
    * `ipconfig` should show `10.1.0.x` on the Ethernet adapter.
    * `10.1.0.4` answering means you reached the access point.
    * `robot.local` (or `10.1.0.2`) answering means you reached the robot

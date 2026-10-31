@@ -40,6 +40,10 @@ ping 10.1.0.2
 ping 10.1.0.31
 ```
 
+On a Mac, use `ping -c 4 10.1.0.2`: without `-c 4`, Mac `ping` never
+stops by itself (press `Ctrl+C` to stop it). Windows stops after 4
+tries on its own.
+
 If `ping` fails, `ssh` will fail too. Fix the cable and IP first.
 
 ## SystemCore
