@@ -271,14 +271,37 @@ Tuner X.
 
 ## Run the motor
 
-1. Open the Kraken's **Control** tab. Choose **duty cycle** and set the
-   value to **0.01** (1%).
-1. Clear hands away, enable, and run it.
-   > **TODO:** check whether Tuner X control needs the robot enabled
-   > from the Driver Station, and update this step.
+Tuner X can only spin a motor while the robot is **enabled** in the
+Driver Station, and the Driver Station can only enable when **robot code
+is running**. The temporary diagnostics from above let Tuner X *see* the
+Kraken, but not run it. So first, put some code on the RoboRIO.
 
-   > 📷 **TODO screenshot:** `docs/img/tunerx_kraken_control.png`: the
-   > Tuner X Control tab running the Kraken.
+1. **Deploy robot code that uses a CTRE motor.** Use
+   [`test/single_roller`](https://github.com/Team100/all26/tree/main/test/single_roller):
+   open it in 2026 WPILib VS Code and **Deploy Robot Code**
+   ([how](04_DEPLOY.md)). It doesn't move anything by itself, and it
+   starts the diagnostic server for you.
+1. Open the **FRC Driver Station** (team number **100**). **Communications**
+   and **Robot Code** should both be green. Choose **TeleOperated**.
+1. In Tuner X, click your Kraken's card to open its page, then open the
+   **Control** tab.
+1. Pick a **duty cycle** control (`DutyCycleOut`) and set it to
+   **0.02** (2%).
+1. Clear hands away and say **"Enabling!"**. Click **Enable** in the
+   Driver Station, then click Tuner X's red **DISABLED** button so it
+   says **ENABLED**.
+1. To stop: click Tuner X's button back to disabled, or press **Enter**
+   in the Driver Station.
+
+> 📷 **TODO screenshot:** `docs/img/tunerx_kraken_control.png`: the
+> Tuner X Control tab running the Kraken.
+
+Not moving?
+
+* **Both** have to be enabled: the Driver Station *and* Tuner X's button.
+* At 2% a Kraken may just hum. Try **0.05**.
+* Stay with duty cycle. Position and velocity modes need tuning numbers
+  (gains) first.
 
 **Checkpoint:** the motor turns, slowly.
 
