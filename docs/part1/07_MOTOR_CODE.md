@@ -5,8 +5,8 @@ read its speed, and then drive it with an Xbox controller.
 
 You need:
 
-* a [study](STUDY.md) with `lib` included, that builds and deploys
-* the Kraken from [Your first motor](FIRST_MOTOR.md), and its CAN ID
+* a [study](06_STUDY.md) with `lib` included, that builds and deploys
+* the Kraken from [Your first motor](05_FIRST_MOTOR.md), and its CAN ID
 
 Open your study's workspace and find `Robot.java`. For now, you'll put
 everything in this one file.
@@ -100,7 +100,7 @@ Build and deploy. **Checkpoint:** you see both messages in the Driver
 Station console. They may be mixed in with other output, so look
 carefully.
 
-![](readme_img/motor_log_statements.png)
+![](../img/motor_log_statements.png)
 
 ## Keep the library ticking
 
@@ -213,7 +213,7 @@ some controllers have an X/D switch; try flipping it.
 
 When everything's ready, all the Driver Station lights are green:
 
-![](readme_img/driver_station.png)
+![](../img/driver_station.png)
 
 Enable teleop and push the left stick.
 
@@ -226,7 +226,7 @@ Enable teleop and push the left stick.
 
 ## Send it in
 
-Commit, push, and open a PR ([how](FORK_WORKFLOW.md)). In the
+Commit, push, and open a PR ([how](02_FORK_WORKFLOW.md)). In the
 description, say what you tested and what you saw.
 
-Next: [Use the simulator](SIMULATOR.md)
+Next: [Use the simulator](08_SIMULATOR.md)

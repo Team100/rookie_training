@@ -24,7 +24,7 @@ for the full scheme.
 * **To the whole robot:** plug into the access point's (or robot
   radio's) **DS** port, with Ethernet set to **Automatic (DHCP)**. You
   should get a `10.1.0.x` address. If you get `169.254…`, see
-  [Connect to the robot](ROBOT_NETWORK.md#troubleshooting).
+  [Connect to the robot](11_ROBOT_NETWORK.md#troubleshooting).
 * **To just the SystemCore:** a USB-C cable works without changing any
   settings. The SystemCore is then at `172.26.0.1` (Windows) or
   `172.27.0.1` (Mac/Linux); older SystemCore images use `172.28.0.1` /
@@ -150,10 +150,10 @@ wait for the green LED to stop blinking, then unplug. (Or use the
 * **Look, don't change.** Don't edit files on the SystemCore or a Pi by
   hand. The next deploy overwrites them, and nobody else will know what
   you did. Change the code in your fork and deploy it
-  ([Pi changes](PI_CHANGES.md)).
+  ([Pi changes](13_PI_CHANGES.md)).
 * **Don't `sudo apt upgrade` a robot at an event.** Updates can break
   things right before a match.
 * Tell the drive team before you restart anything on a robot that someone
   else is using.
 
-Next: [Change the Raspberry Pi code and deploy it](PI_CHANGES.md)
+Next: [Change the Raspberry Pi code and deploy it](13_PI_CHANGES.md)

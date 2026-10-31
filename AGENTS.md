@@ -13,11 +13,16 @@ Guidelines:
   programmed. Use plain language, one step at a time, and end each
   chapter with a concrete checkpoint. Define jargon the first time it
   appears.
-* **Two parts.** Part 1 (setup, deploy, motors, simulator, Glass) is for
-  the **RoboRIO**: `all26` branch `main`, 2026 WPILib. Part 2
-  (`SYSTEMCORE.md` onward: robot network, SSH, Pis, auton, identity) is
-  for the **SystemCore**: branch `2027`, 2027 WPILib. See the README for
-  which chapter is in which part.
+* **Layout.** Chapters live in `docs/`, numbered in reading order:
+  * `docs/part1/`: setup, deploy, motors, simulator, Glass, for the
+    **RoboRIO**: `all26` branch `main`, 2026 WPILib.
+  * `docs/part2/`: SystemCore switch, robot network, SSH, Pis, auton,
+    identity, for the **SystemCore**: branch `2027`, 2027 WPILib.
+  * `docs/reference/`: debugging and troubleshooting.
+  * `docs/img/`: images.
+
+  The README lists every chapter. If you add, move, or renumber one,
+  update the README and the "Next:" links around it.
 * **Accuracy:** check claims against the right `Team100/all26` branch
   for that part, and the matching WPILib docs (`en/stable` for 2026,
   `en/2027` for 2027), before writing them. Link to the real file
@@ -29,8 +34,8 @@ Guidelines:
 * **No secrets.** This repo may be public. Don't write radio WPA keys or
   other team passwords here; say "ask a mentor". Vendor-default
   passwords that are already public (SystemCore, Pi) are fine.
-* **Images** go in `readme_img/`. Placeholders for photos still needed
-  look like `> 📷 **TODO photo:** readme_img/name.jpg: what it shows`.
+* **Images** go in `docs/img/`. Placeholders for photos still needed
+  look like `> 📷 **TODO photo:** docs/img/name.jpg: what it shows`.
 * **Teaching style:** chapters that teach coding use "check yourself"
   questions and escalating hints rather than handing over full
   solutions. Keep that pattern.

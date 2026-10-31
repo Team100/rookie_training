@@ -16,7 +16,7 @@ shares code. If VS Code is new to you, do its
 
 Git can be a little hard:
 
-![git-comic](readme_img/git_comic.webp)
+![git-comic](../img/git_comic.webp)
 
 If Git is new to you, read GitHub's
 [getting started with Git](https://docs.github.com/en/get-started/learning-to-code/getting-started-with-git)
@@ -51,7 +51,7 @@ freely.
   "Make a GitHub account".
 * **Your own laptop:** you'll install the tools below. To also work
   from home (Slack, Claude, and so on), see
-  [Work from home on your own laptop](HOME_LAPTOP.md).
+  [Work from home on your own laptop](03_HOME_LAPTOP.md).
 
 ## Install the tools (own laptop only)
 
@@ -60,7 +60,7 @@ freely.
    It installs "2026 WPILib VS Code", Java, and the WPILib tools. Use this
    VS Code for robot code, not a different VS Code you already have.
    (You'll add 2027 WPILib later, when you
-   [switch to the SystemCore](SYSTEMCORE.md).)
+   [switch to the SystemCore](../part2/10_SYSTEMCORE.md).)
 1. **Git.** Windows: install [Git for Windows](https://git-scm.com/download/win)
    and accept the defaults. Mac: run `xcode-select --install`.
 1. **GitHub Desktop** (optional but recommended):
@@ -147,7 +147,7 @@ should show `origin` pointing at **your** fork and `upstream` pointing at
      opens `lib` alongside. When VS Code offers to **Open Workspace**,
      say yes.
 
-     <img src="readme_img/openworkspace.png" width=350/>
+     <img src="../img/openworkspace.png" width=350/>
 1. Turn on **File → Auto Save**.
 1. Wait. The first build downloads a lot and can take many minutes.
 1. Click the WPILib icon (the red "W" in the top right) and choose
@@ -155,7 +155,7 @@ should show `origin` pointing at **your** fork and `upstream` pointing at
 
 **Checkpoint:** the terminal at the bottom ends with `BUILD SUCCESSFUL`.
 
-If it fails, look in [Troubleshooting](TROUBLESHOOTING.md), ask for
+If it fails, look in [Troubleshooting](../reference/TROUBLESHOOTING.md), ask for
 help, and add what you learned to that page.
 
-Next: [Day-to-day workflow with your fork](FORK_WORKFLOW.md)
+Next: [Day-to-day workflow with your fork](02_FORK_WORKFLOW.md)

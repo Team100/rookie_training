@@ -24,9 +24,9 @@ Pick one of these:
   ```
   (Ignore the "RoboRIO serial number:" line; it's blank on SystemCore.)
 
-  ![](readme_img/team_100_logo.png)
+  ![](../img/team_100_logo.png)
 
-* **Over ssh** ([how](SSH_AND_CHECKS.md#systemcore)):
+* **Over ssh** ([how](12_SSH_AND_CHECKS.md#systemcore)):
   ```
   cat /sys/firmware/devicetree/base/serial-number; echo
   ```
@@ -51,4 +51,4 @@ Pick one of these:
 > change so it gets the right motors?
 
 Raspberry Pis have their own identity list for the same reason; see
-[Pi changes](PI_CHANGES.md#2-make-your-change).
+[Pi changes](13_PI_CHANGES.md#2-make-your-change).

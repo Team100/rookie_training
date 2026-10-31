@@ -5,7 +5,7 @@ This chapter covers getting your laptop talking to a **real robot**
 your code on it without causing trouble for anyone else.
 
 Passwords and addresses for the SystemCore and the Pis are in
-[SSH and checks](SSH_AND_CHECKS.md#whos-who-on-the-robot-network).
+[SSH and checks](12_SSH_AND_CHECKS.md#whos-who-on-the-robot-network).
 
 ## How the pieces connect
 
@@ -188,7 +188,7 @@ on it. So:
    *before* you deploy anything. Someone else may be mid-test.
 1. **Know what's on it.** Note which branch/PR is currently deployed, so
    you can put it back.
-1. **Test in the simulator first** ([Simulator](SIMULATOR.md)). The robot
+1. **Test in the simulator first** ([Simulator](../part1/08_SIMULATOR.md)). The robot
    is for things the simulator can't tell you.
 1. **Deploy** from your branch (WPILib → **Deploy Robot Code**, choose
    `comp`).
@@ -202,11 +202,11 @@ on it. So:
    * Say **"Enabling!"** loudly before you enable.
 1. **Check the basics** before you blame your code: Driver Station lights
    green, battery above about 12.5 V, correct auton selected, no errors
-   scrolling in the console. See [SSH and checks](SSH_AND_CHECKS.md).
+   scrolling in the console. See [SSH and checks](12_SSH_AND_CHECKS.md).
 1. **Put it back.** When you're done, redeploy the team's code from the
    `2027` branch (or whatever was on it before), unless the mentor says
    otherwise. The same goes for the Pis if you deployed camera code
-   ([Pi changes](PI_CHANGES.md#4-deploy-to-a-pi)).
+   ([Pi changes](13_PI_CHANGES.md#4-deploy-to-a-pi)).
 1. **Write down what you learned** in your PR description: what you
    tested, on which robot, and what happened.
 
@@ -229,7 +229,7 @@ Work from the laptop outward:
 1. **`robot.local` doesn't resolve, but `10.1.0.2` works:** that's a
    name-lookup problem on the laptop, not the robot. Just use the IP.
 1. **Nothing works:** go back to USB-C straight to the SystemCore
-   ([SSH and checks](SSH_AND_CHECKS.md#connect-your-laptop)).
+   ([SSH and checks](12_SSH_AND_CHECKS.md#connect-your-laptop)).
 
 ## Good to know
 
@@ -244,4 +244,4 @@ Work from the laptop outward:
 * Useful SystemCore ports: 22 (ssh), 80 (web dashboard), 5810
   (NetworkTables).
 
-Next: [SSH and checks](SSH_AND_CHECKS.md)
+Next: [SSH and checks](12_SSH_AND_CHECKS.md)

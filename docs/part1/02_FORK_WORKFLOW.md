@@ -9,7 +9,7 @@ Do this loop for every change, big or small:
 1. Open a pull request
 
 > **Which branch?** In Part 1 of this guide (RoboRIO and motors) you
-> work on **`main`**. Once you [switch to the SystemCore](SYSTEMCORE.md),
+> work on **`main`**. Once you [switch to the SystemCore](../part2/10_SYSTEMCORE.md),
 > use **`2027`** everywhere this page says `main`.
 
 ## 1. Sync your fork
@@ -45,7 +45,7 @@ the team's `main` makes syncing easy.
 Edit the code, then build and test.
 
 * Java: WPILib icon → **Build Robot Code**, or **Test Robot Code**
-* Python (Pi): see [Pi changes](PI_CHANGES.md)
+* Python (Pi): see [Pi changes](../part2/13_PI_CHANGES.md)
 
 ## 4. Commit and push
 
@@ -89,4 +89,4 @@ the branch, sync your fork, and start the next change from step 1.
 * **Merge conflict:** don't panic, and don't delete things to make it go
   away. Ask a mentor; it's a normal part of working on a team.
 
-Next: [Work from home on your own laptop](HOME_LAPTOP.md)
+Next: [Work from home on your own laptop](03_HOME_LAPTOP.md)

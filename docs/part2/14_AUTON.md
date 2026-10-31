@@ -9,9 +9,9 @@ robot motion: **pose**, **transform**, **heading**, **course**,
 **waypoint**, **trajectory**, and **controller**.
 
 Before you start, you should have finished
-[Setup](SETUP.md), [Fork workflow](FORK_WORKFLOW.md), the
-[simulator chapter](SIMULATOR.md), and
-[Switch to the SystemCore](SYSTEMCORE.md). This chapter uses the
+[Setup](../part1/01_SETUP.md), [Fork workflow](../part1/02_FORK_WORKFLOW.md), the
+[simulator chapter](../part1/08_SIMULATOR.md), and
+[Switch to the SystemCore](10_SYSTEMCORE.md). This chapter uses the
 `2027` branch.
 
 ## Part 1: The ideas
@@ -178,7 +178,7 @@ computes `d2`.)
 ## Part 4: Write it
 
 1. Sync your fork and make a branch, e.g. `alice/there-and-back`
-   ([how](FORK_WORKFLOW.md)).
+   ([how](../part1/02_FORK_WORKFLOW.md)).
 1. Open the `comp` folder in VS Code.
 1. In `comp/src/main/java/org/team100/frc2026/auton/`, create
    `ThereAndBack.java`. Start by copying `AheadTwoMeters.java`, and
@@ -201,7 +201,7 @@ Stuck? Use the hints at the bottom. Try each one before opening the next.
 
 1. WPILib → **Simulate Robot Code**, pick `comp`, choose **Sim GUI** only.
 1. Open the field view (see the
-   [simulator chapter](SIMULATOR.md)).
+   [simulator chapter](../part1/08_SIMULATOR.md)).
 1. Find the **Auton Command** chooser (`NetworkTables → SmartDashboard →
    Auton Command`) and pick **There And Back**. While the robot is
    disabled, the field should draw both trajectories.
@@ -230,11 +230,11 @@ Only with a mentor, the first few times.
    1. Open Glass (`Ctrl+Shift+P` → **WPILib: Start Tool** → **Glass**).
    1. Connect: **NetworkTables Settings** → **Client**, **Team** →
       **100**, **Apply**. (More in
-      [Glass](GLASS_POWER.md#open-glass-and-connect).)
+      [Glass](../part1/09_GLASS_POWER.md#open-glass-and-connect).)
    1. Choose: **SmartDashboard** → **Auton Command** → **There And
       Back**.
 
-   > 📷 **TODO screenshot:** `readme_img/glass_auton_chooser.png`: the
+   > 📷 **TODO screenshot:** `docs/img/glass_auton_chooser.png`: the
    > Auton Command chooser in Glass with an auton selected.
 
 1. In the Driver Station, choose **Autonomous**.
@@ -311,4 +311,4 @@ TrajectorySE2 back(Pose2d p) {
 Before you use this, explain to someone what every line does.
 </details>
 
-Next: back to the [guide](README.md).
+Next: back to the [guide](../../README.md).

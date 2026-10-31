@@ -7,12 +7,12 @@ with someone from the mechanical team.
 
 You need:
 
-* the Kraken code from [Control a motor from code](MOTOR_CODE.md),
+* the Kraken code from [Control a motor from code](07_MOTOR_CODE.md),
   deployed and working
 * a laptop connected to the RoboRIO (USB-B is fine)
 
 <!--
-PHOTO CHECKLIST: save these in readme_img/ and replace each "TODO" note below.
+PHOTO CHECKLIST: save these in docs/img/ and replace each "TODO" note below.
   [ ] glass_start_tool.png        VS Code "WPILib: Start Tool" list with Glass
   [ ] glass_nt_settings.png       Glass NetworkTables Settings, client mode
   [ ] glass_log_tree.png          NetworkTables tree open at log/motor/KrakenX60Motor
@@ -57,7 +57,7 @@ And the robot as a whole logs:
 
 1. In VS Code, `Ctrl+Shift+P` → **WPILib: Start Tool** → **Glass**.
 
-   > 📷 **TODO screenshot:** `readme_img/glass_start_tool.png`.
+   > 📷 **TODO screenshot:** `docs/img/glass_start_tool.png`.
 
 1. Connect Glass to the robot:
    1. **NetworkTables Settings** → **Client**
@@ -66,11 +66,11 @@ And the robot as a whole logs:
 
    Glass works out the robot's address for you, whether you're on USB or
    the robot network.
-   * For the [simulator](SIMULATOR.md), type `localhost` instead of 100.
+   * For the [simulator](08_SIMULATOR.md), type `localhost` instead of 100.
    * Still not connecting? Type the robot's address instead: `10.1.0.2`
      on the robot network, or `172.22.11.2` over USB.
 
-   > 📷 **TODO screenshot:** `readme_img/glass_nt_settings.png`: Client
+   > 📷 **TODO screenshot:** `docs/img/glass_nt_settings.png`: Client
    > mode with 100 in Team.
 
 1. The title bar should say it's connected.
@@ -82,13 +82,13 @@ And the robot as a whole logs:
 1. Open `log`, then `motor` (the name you gave in `log.name("motor")`),
    then `KrakenX60Motor`.
 
-   > 📷 **TODO screenshot:** `readme_img/glass_log_tree.png`.
+   > 📷 **TODO screenshot:** `docs/img/glass_log_tree.png`.
 
 Don't see `supply current (A)`? The robot only publishes values at or
 above the **log level**. Open `SmartDashboard` → `Log Level` and make
 sure it's `DEBUG` (the default) or `TRACE`, not `COMP`.
 
-![](readme_img/log_level.png)
+![](../img/log_level.png)
 
 > 📷 **TODO screenshot:** retake the log level picture above in Glass on
 > on the robot, with `DEBUG` selected.
@@ -103,7 +103,7 @@ sure it's `DEBUG` (the default) or `TRACE`, not `COMP`.
    NetworkTables view onto the plot. Add `log/Robot/voltage` too.
 1. Run the motor at a few speeds with the stick.
 
-> 📷 **TODO screenshot:** `readme_img/glass_plot_current.png`: supply
+> 📷 **TODO screenshot:** `docs/img/glass_plot_current.png`: supply
 > and stator current while the motor runs.
 
 > **Check yourself:** at a steady speed with nothing touching the motor,
@@ -114,7 +114,7 @@ sure it's `DEBUG` (the default) or `TRACE`, not `COMP`.
 Glass is also where you **choose which auton runs** on a real robot
 (**SmartDashboard** → **Auton Command**), because the Driver Station
 can't.
-See [Work on auton](AUTON.md#part-6-run-it-on-a-real-robot).
+See [Work on auton](../part2/14_AUTON.md#part-6-run-it-on-a-real-robot).
 
 The WPILib [Glass docs](https://docs.wpilib.org/en/stable/docs/software/dashboards/glass/index.html)
 cover more widgets, like the field view you used in the simulator.
@@ -132,7 +132,7 @@ budget the battery and breakers. You measure it.
 **Work in pairs:** one programmer runs the code and Glass, and one
 person from the **mechanical team** runs the mechanism and watches it.
 
-> 📷 **TODO photo:** `readme_img/power_test_setup.jpg`: a mechanism on
+> 📷 **TODO photo:** `docs/img/power_test_setup.jpg`: a mechanism on
 > the bench, ready for a power test.
 
 ### Before you start
@@ -180,4 +180,4 @@ Then, with your mechanical partner:
 **Checkpoint:** a filled-in table for one mechanism, which your
 mechanical partner agrees matches what they saw.
 
-That's the end of Part 1. Next: [Switch to the SystemCore](SYSTEMCORE.md)
+That's the end of Part 1. Next: [Switch to the SystemCore](../part2/10_SYSTEMCORE.md)

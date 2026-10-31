@@ -16,7 +16,7 @@ The official guide is
 
 You'll get the simulation window:
 
-![Simulation GUI](readme_img/sim_gui.png)
+![Simulation GUI](../img/sim_gui.png)
 
 If it doesn't start, read the terminal for errors, and ask a mentor if
 it's stuck.
@@ -25,7 +25,7 @@ it's stuck.
 
 Open **NetworkTables → Field** if you don't see the field.
 
-![Field View](readme_img/field_view.png)
+![Field View](../img/field_view.png)
 
 If there's no Field option, your robot code probably crashed or hit a
 breakpoint. Check the terminal. More about the field widget is
@@ -35,16 +35,16 @@ breakpoint. Check the terminal. More about the field widget is
 
 1. Drag **Keyboard 0** onto **Joystick[0]**.
 
-   ![Drag Keyboard](readme_img/drag_keyboard.png)
+   ![Drag Keyboard](../img/drag_keyboard.png)
 
 1. Select **Teleoperated** in the Robot State widget.
 
-   <img src="readme_img/teleoperated.png">
+   <img src="../img/teleoperated.png">
 
 1. `W A S D` move the robot (axes 0 and 1). `E R` rotate it (axis 2).
 
 > **Check yourself:** which way does the robot move when you press `W`?
-> Is that +x on the field? (See [Auton](AUTON.md#pose-where-am-i).)
+> Is that +x on the field? (See [Auton](../part2/14_AUTON.md#pose-where-am-i).)
 
 ## Run an auton
 
@@ -53,16 +53,16 @@ breakpoint. Check the terminal. More about the field widget is
 1. Click **Autonomous** in Robot State.
 1. Watch the robot drive the trajectory.
 
-   ![](readme_img/ugly_traj.png)
+   ![](../img/ugly_traj.png)
 
 1. To tidy up the drawing, open the field's menu (top right) →
    **Trajectory** and turn off the arrows.
 
-   ![](readme_img/nice_traj.png)
+   ![](../img/nice_traj.png)
 
 For more detail in the logs, set **SmartDashboard → Log Level** to
 `TRACE`.
 
-![](readme_img/log_level.png)
+![](../img/log_level.png)
 
-Next: [Glass and power-draw tests](GLASS_POWER.md)
+Next: [Glass and power-draw tests](09_GLASS_POWER.md)

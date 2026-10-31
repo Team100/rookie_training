@@ -49,7 +49,7 @@ one for everything from here on.
 ## 2. Get the `2027` branch
 
 If you unchecked **"Copy the `main` branch only"** when you forked (see
-[Setup](SETUP.md#fork-the-team-repository)), your fork already has it.
+[Setup](../part1/01_SETUP.md#fork-the-team-repository)), your fork already has it.
 In GitHub Desktop, switch to the **`2027`** branch. On the command line:
 
 ```
@@ -65,7 +65,7 @@ git checkout -b 2027 upstream/2027
 git push -u origin 2027
 ```
 
-From now on, do the [fork workflow](FORK_WORKFLOW.md) with **`2027`**
+From now on, do the [fork workflow](../part1/02_FORK_WORKFLOW.md) with **`2027`**
 wherever it says `main`: sync `2027`, branch from `2027`, and open PRs
 against `2027`.
 
@@ -79,27 +79,27 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
    it up. Wait for its screen to show that it has booted.
 1. Connect your laptop to the SystemCore with a **USB-C** cable.
    * You can also use Ethernet through the radio or a switch; see
-     [SSH and checks](SSH_AND_CHECKS.md#connect-your-laptop).
+     [SSH and checks](12_SSH_AND_CHECKS.md#connect-your-laptop).
 
-   > 📷 **TODO photo:** `readme_img/systemcore_usb_c.jpg`: the SystemCore
+   > 📷 **TODO photo:** `docs/img/systemcore_usb_c.jpg`: the SystemCore
    > USB-C port with the cable plugged in.
 
 1. `Ctrl+Shift+P` → **WPILib: Set Team Number** → `100`.
 1. `Ctrl+Shift+P` → **WPILib: Deploy Robot Code**.
 
-   ![deploy](readme_img/wpilib_deploy.png)
+   ![deploy](../img/wpilib_deploy.png)
 
 1. Watch the terminal for `BUILD SUCCESSFUL`, then open the Driver
    Station console.
 
-   ![console](readme_img/rio_log.png)
+   ![console](../img/rio_log.png)
 
    > 📷 **TODO screenshot:** replace the RoboRIO console above with the
    > SystemCore one.
 
 If it fails: check the cable, wait for the SystemCore to finish booting,
 and try `ping robot.local`. More in
-[SSH and checks](SSH_AND_CHECKS.md#common-problems).
+[SSH and checks](12_SSH_AND_CHECKS.md#common-problems).
 
 **Checkpoint:** Communications and Robot Code are both green in the
 Driver Station.
@@ -111,13 +111,13 @@ The RoboRIO has one CAN bus. The SystemCore has **five CAN ports**,
 
 1. Plug your Kraken's CAN wires into **`can_s0`**.
 
-   > 📷 **TODO photo:** `readme_img/systemcore_can_ports.jpg`: close-up
+   > 📷 **TODO photo:** `docs/img/systemcore_can_ports.jpg`: close-up
    > of the SystemCore CAN ports, with `can_s0` marked.
 
-   > 📷 **TODO photo:** `readme_img/kraken_can_to_systemcore.jpg`: CAN
+   > 📷 **TODO photo:** `docs/img/kraken_can_to_systemcore.jpg`: CAN
    > from the Kraken going into `can_s0`.
 
-1. [SSH in](SSH_AND_CHECKS.md#systemcore) and check that the SystemCore
+1. [SSH in](12_SSH_AND_CHECKS.md#systemcore) and check that the SystemCore
    sees CAN traffic. Run this twice; **RX packets** should go up:
    ```
    ip -s link show can_s0
@@ -131,13 +131,13 @@ The RoboRIO has one CAN bus. The SystemCore has **five CAN ports**,
 
 ## 5. Move your motor study to the SystemCore
 
-Your study from [Control a motor from code](MOTOR_CODE.md) was built for
+Your study from [Control a motor from code](../part1/07_MOTOR_CODE.md) was built for
 the RoboRIO, on `main`. Rebuild it on `2027`.
 
 1. On a new branch from `2027`, copy
    [`studies/template2027`](https://github.com/Team100/all26/tree/2027/studies/template2027)
    to a new study with your name, and set it up with `lib` the same way
-   as in [Your first study](STUDY.md#include-the-lib-directory). Compare
+   as in [Your first study](../part1/06_STUDY.md#include-the-lib-directory). Compare
    with
    [`test/single_roller`](https://github.com/Team100/all26/tree/2027/test/single_roller),
    which is set up this way on `2027`.
@@ -158,4 +158,4 @@ just like it did on the RoboRIO.
 
 Send it in as a PR against **`2027`**.
 
-Next: [Connect to the robot and test your code](ROBOT_NETWORK.md)
+Next: [Connect to the robot and test your code](11_ROBOT_NETWORK.md)

@@ -8,7 +8,7 @@ Instead, start a *completely new* small project. We call these
 **studies**. A study teaches you the simplest way to control a robot,
 and you build on it from there.
 
-Do this on a branch in your fork ([how](FORK_WORKFLOW.md)), e.g.
+Do this on a branch in your fork ([how](02_FORK_WORKFLOW.md)), e.g.
 `alice/first-study`.
 
 ## Create the study
@@ -26,18 +26,18 @@ Use the WPILib project wizard, in **2026 WPILib VS Code**:
 > **TODO:** check these wizard steps in 2026 WPILib, and add a
 > screenshot.
 
-> 📷 **TODO screenshot:** `readme_img/wpilib_new_project.png`: the
+> 📷 **TODO screenshot:** `docs/img/wpilib_new_project.png`: the
 > wizard filled in.
 
 ## Make sure build and deploy work
 
 Build first: `Ctrl+Shift+P` → **WPILib: Build Robot Code**. Then
-[deploy](DEPLOY.md) to a RoboRIO test board.
+[deploy](04_DEPLOY.md) to a RoboRIO test board.
 
 **Checkpoint:** in the Driver Station, Communications and Robot Code are
 both **green**, and no errors are scrolling in the console.
 
-![](readme_img/test_project_success.png)
+![](../img/test_project_success.png)
 
 ## Include the `lib` directory
 
@@ -117,8 +117,8 @@ this way.
 ## Send a pull request
 
 Commit and push your new study, then open a PR
-([how](FORK_WORKFLOW.md)). This first PR is mostly template code, which
+([how](02_FORK_WORKFLOW.md)). This first PR is mostly template code, which
 is fine. It's quick to review, and your *real* changes come next in
 their own PR, where they're easy to see.
 
-Next: [Control a motor from code](MOTOR_CODE.md)
+Next: [Control a motor from code](07_MOTOR_CODE.md)

@@ -22,7 +22,7 @@
 
 **The PR has lots of changes I didn't make**
 : The base branch is wrong, or your fork is out of date. See
-  [Fork workflow](FORK_WORKFLOW.md#common-problems).
+  [Fork workflow](../part1/02_FORK_WORKFLOW.md#common-problems).
 
 ## Building
 
@@ -34,7 +34,7 @@
   Language Server Workspace**, and restart.
 
 **Can't find `org.team100.lib...`**
-: Your study doesn't include `lib` yet. See [Study](STUDY.md#include-the-lib-directory).
+: Your study doesn't include `lib` yet. See [Study](../part1/06_STUDY.md#include-the-lib-directory).
 
 ## Deploying and running
 
@@ -42,7 +42,7 @@
 : Nobody picked an auton, so it's running `NONE`. The Driver Station
   can't choose one. Connect Glass to team 100 and pick it in
   `SmartDashboard → Auton Command`, then enable from the Driver Station.
-  See [Work on auton](AUTON.md#part-6-run-it-on-a-real-robot).
+  See [Work on auton](../part2/14_AUTON.md#part-6-run-it-on-a-real-robot).
 
 **Driver Station says "Emergency Stopped" and won't enable**
 : The robot is **e-stopped** (emergency stopped). Unlike a normal
@@ -58,9 +58,9 @@
   * TODO: we've seen e-stops we can't explain. If you find out why, add
     it here.
 
-See [Deploy to the RoboRIO](DEPLOY.md#if-the-deploy-fails),
-[Deploy to a SystemCore](SYSTEMCORE.md#3-deploy-to-a-systemcore),
-[SSH and checks](SSH_AND_CHECKS.md#common-problems), and
+See [Deploy to the RoboRIO](../part1/04_DEPLOY.md#if-the-deploy-fails),
+[Deploy to a SystemCore](../part2/10_SYSTEMCORE.md#3-deploy-to-a-systemcore),
+[SSH and checks](../part2/12_SSH_AND_CHECKS.md#common-problems), and
 [Debugging](DEBUGGING.md).
 
 Found a fix that isn't here? Add it!
