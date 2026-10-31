@@ -90,8 +90,8 @@ tiny "hello?" message and waits for an answer.
 1. Turn **Wi-Fi off** for now, so the Mac only has one network to think
    about.
 1. Open **System Settings → Network**. Find your Ethernet adapter
-   (it may be called **Ethernet**, **USB 10/100/1000 LAN**, or
-   **Thunderbolt Ethernet**). It should have a **green dot** and say
+   (it may be called **Ethernet**, **USB 10/100/1000 LAN**,
+   **Thunderbolt Ethernet**, or a chip name like **AX88179A**). It should have a **green dot** and say
    **Connected**.
 
    > 📷 **TODO screenshot:** `docs/img/mac_network_list.png`: System
@@ -155,12 +155,14 @@ Mac needs an address on the same network:
 1. **System Settings → Network → (your Ethernet adapter) → Details →
    TCP/IP.**
 1. **Configure IPv4: Manually.**
-1. **IP address:** `10.1.0.10`. **Subnet mask:** `255.255.255.0`.
+1. **IP address:** `10.1.0.50`. **Subnet mask:** `255.255.0.0`.
    Leave **Router** empty. Click **OK**.
 
-   > 📷 **TODO screenshot:** `docs/img/mac_tcpip_manual.png`: the TCP/IP
-   > tab set to **Manually**, with `10.1.0.10`, `255.255.255.0`, and an
-   > empty Router, each circled.
+   ![Mac TCP/IP settings: Manually, 10.1.0.50, 255.255.0.0, Router empty, OK](../img/mac_tcpip_manual.png)
+
+   Two Macs on the same robot? Each needs its own number: use
+   `10.1.0.50`, `10.1.0.51`, and so on. (Don't use `10.1.0.2`; that's
+   the RoboRIO.)
 1. In Terminal: `ping 10.1.0.2`.
 
 > **TODO:** check which of our RoboRIO test boards use a fixed
