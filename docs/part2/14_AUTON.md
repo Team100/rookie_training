@@ -234,8 +234,7 @@ Only with a mentor, the first few times.
    1. Choose: **SmartDashboard** → **Auton Command** → **There And
       Back**.
 
-   > 📷 **TODO screenshot:** `docs/img/glass_auton_chooser.png`: the
-   > Auton Command chooser in Glass with an auton selected.
+   ![Glass connected to the robot, with the Auton Command chooser open](../img/glass_auton_chooser.jpg)
 
 1. In the Driver Station, choose **Autonomous**.
 1. Everyone stands clear. Say **"Enabling!"** loudly. One person keeps a

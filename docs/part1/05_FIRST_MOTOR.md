@@ -10,6 +10,9 @@ docs/img/ with these names, and replace each "TODO photo" note below.
   [ ] roborio_test_board_labeled.jpg  whole board: battery, breaker, PDP/PDH, RoboRIO, motor
   [ ] kraken_x60_x44.jpg          a Kraken X60 and a Kraken X44 side by side
   [ ] kraken_power_can.jpg        Kraken power wires and CAN wires
+  [x] pdp_can_breaker.jpg         PDP CAN port, a breaker, main breaker (motor shown is a Falcon)
+  [x] pdp_breaker.jpg             PDP slots with and without breakers
+  [x] roborio_can_lights.jpg      RoboRIO CAN port and lights
   [ ] kraken_can_to_roborio.jpg   CAN from the Kraken into the RoboRIO
   [ ] kraken_led_ok.jpg           Kraken status light, healthy
   [x] tunerx_team_or_ip.png       Tuner X "Enter a Team # or IP" box (cropped)
@@ -62,20 +65,22 @@ use.
    20 A or 40 A. With no breaker, that slot gets no power, even though
    everything else on the board lights up.
 
-   > 📷 **TODO photo:** `docs/img/pdp_breaker.jpg`: a breaker in the
-   > Kraken's PDP slot, next to an empty slot.
+   ![PDP slots: three with 40 A breakers (power), the rest empty (no power)](../img/pdp_breaker.jpg)
 
-   > 📷 **TODO photo:** `docs/img/kraken_power_can.jpg`: Kraken power
-   > wires going to the power distribution, and the CAN wires.
+   Here's a close-up of the PDP: its CAN port, a breaker in a slot, and
+   the board's **main breaker** (the big switch that turns the whole
+   board on and off). The motor in this picture is an older Falcon;
+   a Kraken wires up the same way.
+
+   ![PDP close-up: CAN port, a 40 A breaker, and the main breaker](../img/pdp_can_breaker.jpg)
+
+   > 📷 **TODO photo:** `docs/img/kraken_power_can.jpg`: a Kraken's power
+   > wires going to the power distribution, and its CAN wires.
 
 1. Plug the CAN wires into the RoboRIO's **CAN** port. The yellow and
    green slots are labeled.
 
-   ![](../img/spark_max_rio.jpg)
-
-   > 📷 **TODO photo:** replace the SPARK MAX picture above with
-   > `docs/img/kraken_can_to_roborio.jpg`: CAN from the Kraken going
-   > into the RoboRIO.
+   ![RoboRIO: CAN port (yellow/green) and status lights](../img/roborio_can_lights.jpg)
 
 1. Turn on the main breaker. The Kraken's status light should come on,
    and the RoboRIO takes about a minute to boot.
@@ -97,8 +102,8 @@ use.
    | Status | Off (after booting) | On while booting; **blinking** means an error |
    | Comm | Off is fine | Off: no Driver Station. Solid red: Driver Station, but no robot code. Blinking red: e-stopped. Green: Driver Station and robot code |
 
-   > 📷 **TODO photo:** `docs/img/roborio_lights.jpg`: the RoboRIO's
-   > lights, labeled.
+   The picture above shows the lights after booting: **Power** green,
+   **Status** and **Comm** off. That's what you want.
 
 ## Find the CAN ID
 
