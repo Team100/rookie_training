@@ -124,19 +124,41 @@ here's the quick version.
    > Tuner X's start screen.
 
 1. Connect the laptop to the RoboRIO with a **USB-B** cable.
-1. In Tuner X, type **100** in **Enter a Team # or IP** (bottom left)
-   and open **Devices**.
-1. You'll probably see **"Failed to connect to diagnostics"**. That's
-   normal: Tuner X needs a small CTRE program (the *diagnostic server*)
-   running on the RoboRIO, and our robot code is what usually starts it.
-   With no code deployed yet, click **RUN TEMPORARY DIAGNOSTICS**. It
-   lasts until the RoboRIO reboots.
+1. **Use only the USB cable.** Unplug the laptop's Ethernet and turn off
+   its Wi-Fi if it's on a robot network. Otherwise Tuner X may find a
+   different robot instead of yours.
+1. In Tuner X, type **`172.22.11.2`** in **Enter a Team # or IP**
+   (bottom left). That's the RoboRIO's address over USB. Don't type
+   `100` here: that looks for `10.1.0.2`, which is the robot network,
+   not your USB cable.
+1. Open **Devices**. The box should say **"Successfully connected to
+   172.22.11.2"**. If it says `10.1.0.2`, go back a step.
+1. You'll probably also see **"Failed to connect to diagnostics"**.
+   That's normal: Tuner X needs a small CTRE program (the *diagnostic
+   server*) running on the RoboRIO, and our robot code is what usually
+   starts it. With no code deployed yet, click **RUN TEMPORARY
+   DIAGNOSTICS**. It lasts until the RoboRIO reboots, so you'll need to
+   click it again after a power cycle.
 
    > 📷 **TODO screenshot:** `docs/img/tunerx_no_diagnostics.png`:
    > "Failed to connect to diagnostics" with the RUN TEMPORARY
    > DIAGNOSTICS button.
 
 1. Your Kraken should now be in the **Devices** list.
+
+   **Got "Error retrieving SSH target platform" instead?** Tuner X logs
+   into the RoboRIO with SSH to start the temporary server, and that
+   failed.
+   1. Check the address is `172.22.11.2`, not `10.1.0.2`.
+   1. Check SSH yourself. In PowerShell, run `ssh admin@172.22.11.2`;
+      the password is blank, so just press Enter. If that fails, the
+      RoboRIO isn't reachable: try another USB cable, and wait for it to
+      finish booting. If it asks for a password and blank doesn't work,
+      ask a mentor. Type `exit` to log out.
+   1. Still stuck? Skip the temporary server: ask a mentor to deploy
+      [`test/single_roller`](https://github.com/Team100/all26/tree/main/test/single_roller)
+      ([how](04_DEPLOY.md)). Robot code that uses a CTRE motor starts the
+      diagnostic server by itself. Then refresh Tuner X.
 
    ![](../img/rev_hardware_client_working.png)
 
