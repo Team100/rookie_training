@@ -204,13 +204,92 @@ proof, with how many events Person B got right.
 > 3. How long did the drums take to recover after each ball? Could you
 >    shoot faster?
 
-## Challenge
+## Make it better
 
-Pick one, plan it with a mentor, and send it in as a PR:
+Pick one, plan it with a mentor, and send it in as a PR. Each one will
+help you in the challenge below.
 
 * Make the LEDs show when the shooter is **ready**.
 * Add a button that **stops everything** at once.
 * Make the shooter more consistent: does a little **feedback** (from the
   Discus) help the drums recover faster after each ball?
+
+## 🏆 The Shooter Challenge
+
+Get as many balls as possible into a bucket, as fast as possible.
+
+### Setup: just a tape measure
+
+No cameras, no fancy tools. On purpose.
+
+1. Put a **bucket** at the challenge distance from the front of the
+   robot, measured with a tape measure. Start at **10 m**, and the
+   mentor moves it closer if the shooter can't reach.
+   > **TODO (mentors):** set the real distance after the first runs,
+   > and write it here.
+1. Put a **net or wall behind the bucket**, and mark the robot's spot on
+   the floor with tape, so every team starts from the same place.
+1. Aim by eye. You may turn the robot by hand before the run, but not
+   during it.
+1. Load **5 balls**.
+
+> [!CAUTION]
+> Safety glasses for everyone. **Nobody downrange**, including whoever
+> watches the bucket: stand to the side. The **0.2 power cap** stays:
+> if you can't reach the bucket, the bucket moves, not the cap.
+
+### Scoring
+
+* **Your code** times the run (from pressing the button to the 5th ball
+  leaving the robot) and counts the balls it fed. Print both at the end.
+* **A human** counts how many balls landed **in the bucket** (and stayed
+  in).
+
+> **Score = balls in the bucket ÷ seconds**
+
+That's **makes per second**. It rewards both accuracy *and* speed:
+
+* `balls in ÷ balls shot` = your **accuracy**
+* `balls shot ÷ seconds` = your **speed**
+* score = accuracy × speed
+
+All 5 balls must be shot for the run to count. Ties go to the more
+accurate run.
+
+**Example:** 3 balls in, in 6 seconds: score **0.5**. 4 balls in, in 10
+seconds: score **0.4**. The first run wins, even with fewer balls in.
+
+> **Check yourself:** if you shoot as fast as possible and only 1 goes
+> in, in 3 seconds, what's your score? What if you shoot slowly and
+> carefully: 5 in, in 20 seconds? What's the best strategy?
+
+Practice as much as you like. For an **official** run, a mentor watches;
+you get **3 tries**, and your best one counts. Post your score, the
+printed time, and a video to **`#rookie_training`**.
+
+### Records
+
+Beat a record at a distance? Post the proof, then update this table
+with a pull request.
+
+| Distance | Score | Balls in | Seconds | Who | Date | Slack proof |
+| --- | --- | --- | --- | --- | --- | --- |
+| 10 m | — | | | | | |
+
+### After the challenge: what did you have to guess?
+
+Write down every guess you made: the bucket's exact distance, where the
+robot was pointing, the right drum speed, how each ball would fly.
+
+> **Check yourself:**
+> 1. If someone moved the bucket half a meter while you weren't
+>    looking, would your robot know? How could it find out?
+> 2. What if a robot could **see** the bucket and measure the distance
+>    itself? What would it need to know about its own camera to get the
+>    distance right?
+
+Keep your list. In [Part 3](../part3/14_VISION.md), robots use cameras to
+measure where things are, and you'll see why a camera has to be
+**calibrated** before its measurements can be trusted.
 
 Next: [Part 3: SSH into the RoboRIO and the Pis](../part3/12_SSH_AND_CHECKS.md)
