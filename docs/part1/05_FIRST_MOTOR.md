@@ -151,10 +151,20 @@ here's the quick version.
 
    ![Tuner X: Failed to connect to diagnostics, with the RUN TEMPORARY DIAGNOSTICS button](../img/tunerx_no_diagnostics.png)
 
-   > 📷 **TODO screenshot:** retake this once it's connected to
-   > `172.22.11.2` (this one shows `10.1.0.2`).
+   > (This picture shows `10.1.0.2`; yours should say `172.22.11.2`.)
 
-1. Your Kraken should now be in the **Devices** list.
+1. **You're doing well if** the bottom left says **"Connected to
+   server: 172.22.11.2:1250"** and **Devices** lists something. The
+   **PDP** (power distribution panel, ID 0) is on the CAN bus too, so
+   you'll see it. Your **Kraken** should be in the list next to it.
+
+   ![Tuner X connected over USB, showing the PDP on CAN bus rio](../img/tunerx_connected_pdp.png)
+
+   > 📷 **TODO screenshot:** retake this with the Kraken in the list too.
+
+   Only the PDP, no Kraken? See
+   "the PDP shows up, but not the Kraken" in
+   [Troubleshooting](../reference/TROUBLESHOOTING.md).
 
    **Got "Error retrieving SSH target platform" instead?** Tuner X logs
    into the RoboRIO with SSH to start the temporary server, and that

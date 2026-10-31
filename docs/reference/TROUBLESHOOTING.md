@@ -68,6 +68,23 @@
   password) works from PowerShell. See
   [Your first motor](../part1/05_FIRST_MOTOR.md#find-the-can-id).
 
+**Tuner X: the PDP shows up, but not the Kraken**
+: The RoboRIO and the CAN bus work, so look at the Kraken. Check its
+  status light:
+  * **Off:** no power. Check its red/black wires at the PDP, and that
+    its PDP slot has a **breaker** in it.
+  * **Blinking red:** power is fine, but no CAN. CAN is a **chain**, not
+    a hub: the yellow/green wires must run RoboRIO → Kraken → PDP (or
+    RoboRIO → PDP → Kraken), with every joint in line, yellow to yellow
+    and green to green. Tug each wire gently to check it's held.
+  * **Orange or green:** it's on the bus. Click Tuner X's refresh button.
+
+  Have another CTRE motor (like a Falcon)? Swap it in. If it shows up,
+  the problem is the Kraken or its own wires; if not, it's the CAN chain.
+  > **TODO:** check these status light colors against the
+  > [Talon FX status light guide](https://v6.docs.ctr-electronics.com/en/stable/docs/hardware-reference/talonfx/index.html),
+  > and add what fixed it for us.
+
 **Driver Station says "Emergency Stopped" and won't enable**
 : The robot is **e-stopped** (emergency stopped). Unlike a normal
   disable, it stays stopped until the robot code restarts. Either:
