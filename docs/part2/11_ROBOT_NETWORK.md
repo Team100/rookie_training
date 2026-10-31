@@ -192,6 +192,8 @@ on it. So:
    is for things the simulator can't tell you.
 1. **Deploy** from your branch (WPILib → **Deploy Robot Code**, choose
    `comp`).
+
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew deploy` in the `comp` folder ([how](../part1/01_SETUP.md#advanced-run-commands-from-a-terminal)).
 1. **Make it safe to enable.**
    * Robot **on blocks** (wheels off the ground) for anything new,
      especially autons.

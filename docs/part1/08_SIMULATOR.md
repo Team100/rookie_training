@@ -14,6 +14,8 @@ The official guide is
 1. `Ctrl+Shift+P` → **WPILib: Simulate Robot Code**.
 1. Pick **Sim GUI** only, and nothing else.
 
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew simulateJava` in the `comp` folder. It opens the Sim GUI by itself ([how](01_SETUP.md#advanced-run-commands-from-a-terminal)).
+
 You'll get the simulation window:
 
 ![Simulation GUI](../img/sim_gui.png)

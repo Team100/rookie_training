@@ -45,6 +45,7 @@ the team's `main` makes syncing easy.
 Edit the code, then build and test.
 
 * Java: WPILib icon → **Build Robot Code**, or **Test Robot Code**
+  > 🖥️ **Advanced:** in a terminal, run `./gradlew build` ([how](01_SETUP.md#advanced-run-commands-from-a-terminal)).
 * Python (Pi): see [Pi changes](../part2/13_PI_CHANGES.md)
 
 ## 4. Commit and push

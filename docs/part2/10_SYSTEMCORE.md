@@ -89,6 +89,8 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
 
    ![deploy](../img/wpilib_deploy.png)
 
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew deploy` in **2027** WPILib VS Code's terminal ([how](../part1/01_SETUP.md#advanced-run-commands-from-a-terminal)).
+
 1. Watch the terminal for `BUILD SUCCESSFUL`, then open the Driver
    Station console.
 

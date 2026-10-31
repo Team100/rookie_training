@@ -153,9 +153,46 @@ should show `origin` pointing at **your** fork and `upstream` pointing at
 1. Click the WPILib icon (the red "W" in the top right) and choose
    **Build Robot Code**.
 
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew build` ([how](01_SETUP.md#advanced-run-commands-from-a-terminal)).
+
 **Checkpoint:** the terminal at the bottom ends with `BUILD SUCCESSFUL`.
 
 If it fails, look in [Troubleshooting](../reference/TROUBLESHOOTING.md), ask for
 help, and add what you learned to that page.
+
+### Advanced: run commands from a terminal
+
+Every WPILib button (Build, Deploy, Simulate, Test) just runs a
+**Gradle** command for you. You can type the command yourself instead.
+It's the same thing, but when something goes wrong, the terminal shows
+you **everything**, which makes problems much easier to find and to
+paste into Slack. Look for the 🖥️ **Advanced** boxes in this guide.
+
+1. In 2026 WPILib VS Code, open **Terminal → New Terminal**. Use this
+   terminal: it's already set up with WPILib's Java.
+   > **TODO:** check whether a plain Windows/Mac terminal also finds
+   > WPILib's Java, or whether it says `JAVA_HOME` is not set.
+1. Go to your **project folder**, the one with `build.gradle` and
+   `gradlew` in it (e.g. `cd studies/discus`). VS Code's terminal
+   usually starts there already.
+1. Run a command. `./gradlew` works in both PowerShell (Windows) and the
+   Mac terminal.
+
+| WPILib button | Terminal command |
+| --- | --- |
+| Build Robot Code | `./gradlew build` (also runs the unit tests) |
+| Test Robot Code | `./gradlew test` |
+| Deploy Robot Code | `./gradlew deploy` |
+| Simulate Robot Code | `./gradlew simulateJava` |
+| Set Team Number | Open `.wpilib/wpilib_preferences.json` and check `"teamNumber": 100` |
+
+When a command fails:
+
+* Scroll **up** to the **first** line that says `error:` or `FAILED`.
+  That's the one that matters; the rest is usually a result of it.
+* Add `--stacktrace` (e.g. `./gradlew deploy --stacktrace`) for more
+  detail, and paste the output into Slack when you ask for help.
+* `deploy` lists every address it tried to reach the robot. If they
+  all fail, it's a connection problem, not a code problem.
 
 Next: [Day-to-day workflow with your fork](02_FORK_WORKFLOW.md)

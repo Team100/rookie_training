@@ -34,6 +34,8 @@ Use the WPILib project wizard, in **2026 WPILib VS Code**:
 Build first: `Ctrl+Shift+P` → **WPILib: Build Robot Code**. Then
 [deploy](04_DEPLOY.md) to a RoboRIO test board.
 
+> 🖥️ **Advanced:** in a terminal, run `./gradlew build` then `./gradlew deploy` ([how](01_SETUP.md#advanced-run-commands-from-a-terminal)).
+
 **Checkpoint:** in the Driver Station, Communications and Robot Code are
 both **green**, and no errors are scrolling in the console.
 

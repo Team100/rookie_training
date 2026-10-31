@@ -35,7 +35,9 @@ variable. It works best in the [simulator](../part1/08_SIMULATOR.md).
 
 1. Click in the margin to the left of a line number to set a
    **breakpoint** (a red dot). Try the first line of `robotPeriodic()`.
-1. `Ctrl+Shift+P` → **WPILib: Simulate Robot Code**.
+1. `Ctrl+Shift+P` → **WPILib: Simulate Robot Code**. (Use the button
+   here, not `./gradlew simulateJava`: only the button connects the
+   debugger, so the terminal version won't stop at breakpoints.)
 1. The code stops at your breakpoint. Hover over variables to see their
    values, and use the **Step Over** button to go one line at a time.
 

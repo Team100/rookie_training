@@ -88,7 +88,8 @@
 **Driver Station says "Emergency Stopped" and won't enable**
 : The robot is **e-stopped** (emergency stopped). Unlike a normal
   disable, it stays stopped until the robot code restarts. Either:
-  * **redeploy the code** (WPILib → **Deploy Robot Code**), or
+  * **redeploy the code** (WPILib → **Deploy Robot Code**, or
+    `./gradlew deploy`), or
   * press the **reset button** on the RoboRIO. Ask a mentor where it is,
     and keep clear of the robot while it reboots.
     > **TODO:** what's the SystemCore equivalent?

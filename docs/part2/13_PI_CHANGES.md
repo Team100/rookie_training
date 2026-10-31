@@ -68,11 +68,8 @@ tests from the VS Code test pane.
    `ping` it. See [SSH and checks](12_SSH_AND_CHECKS.md#connect-your-laptop).
 1. In VS Code's **Gradle** pane, run
    `raspberry_pi → Tasks → deploy → Deploy Camera Code`.
-   Or from a terminal in `raspberry_pi`:
-   ```
-   gradlew.bat deploy        (Windows)
-   ./gradlew deploy          (Mac/Linux)
-   ```
+
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew deploy` in the `raspberry_pi` folder ([how](../part1/01_SETUP.md#advanced-run-commands-from-a-terminal)).
 1. Read the output. Each Pi it reached prints a green `DEPLOYED`.
    "skipping camera3x" just means that Pi isn't connected, which is fine.
 

@@ -18,10 +18,16 @@ running it there. For now that's a **RoboRIO** test board.
 
 1. Make sure the project knows our team number:
    `Ctrl+Shift+P` → **WPILib: Set Team Number** → `100`.
+
+   > 🖥️ **Advanced:** open `.wpilib/wpilib_preferences.json` in your
+   > project and check it says `"teamNumber": 100`.
+
 1. Click the **W** button in the top right of VS Code (or press
    `Ctrl+Shift+P`) and choose **WPILib: Deploy Robot Code**.
 
    ![deploy](../img/wpilib_deploy.png)
+
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew deploy` ([how](01_SETUP.md#advanced-run-commands-from-a-terminal)).
 
 1. Watch the terminal. You want `BUILD SUCCESSFUL`, and then the robot
    console output.

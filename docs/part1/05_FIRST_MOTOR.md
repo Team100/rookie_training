@@ -283,6 +283,8 @@ Kraken, but not run it. So first, put some code on the RoboRIO.
    open it in 2026 WPILib VS Code and **Deploy Robot Code**
    ([how](04_DEPLOY.md)). It doesn't move anything by itself, and it
    starts the diagnostic server for you.
+
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew deploy` ([how]( in `test/single_roller`01_SETUP.md#advanced-run-commands-from-a-terminal)).
 1. Open the **FRC Driver Station** (team number **100**). **Communications**
    and **Robot Code** should both be green. Choose **TeleOperated**.
 1. In Tuner X, click your Kraken's card to open its page, then open the

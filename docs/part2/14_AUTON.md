@@ -195,11 +195,15 @@ computes `d2`.)
 1. Build (WPILib → **Build Robot Code**). Fix errors until it's
    `BUILD SUCCESSFUL`.
 
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew build` in the `comp` folder ([how](../part1/01_SETUP.md#advanced-run-commands-from-a-terminal)).
+
 Stuck? Use the hints at the bottom. Try each one before opening the next.
 
 ## Part 5: Test in the simulator
 
 1. WPILib → **Simulate Robot Code**, pick `comp`, choose **Sim GUI** only.
+
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew simulateJava` in the `comp` folder ([how](../part1/01_SETUP.md#advanced-run-commands-from-a-terminal)).
 1. Open the field view (see the
    [simulator chapter](../part1/08_SIMULATOR.md)).
 1. Find the **Auton Command** chooser (`NetworkTables → SmartDashboard →
@@ -224,6 +228,8 @@ Only with a mentor, the first few times.
 1. Find **at least 3 meters of clear floor** in front of the robot, and
    a little behind it.
 1. Deploy (WPILib → **Deploy Robot Code**).
+
+   > 🖥️ **Advanced:** in a terminal, run `./gradlew deploy` in the `comp` folder ([how](../part1/01_SETUP.md#advanced-run-commands-from-a-terminal)).
 1. **Pick the auton in Glass.** The Driver Station can't choose which
    auton runs. If nobody picks one, the robot runs `NONE` and just sits
    there when you enable.
