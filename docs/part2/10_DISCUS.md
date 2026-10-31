@@ -133,7 +133,100 @@ proof, with how many events Person B got right.
 > **Check yourself:** which events were easy to spot, and which were
 > hard? Which line on the graph gave each one away?
 
-## Step 6: Hold a speed by itself (feedback)
+## Step 6: Speed vs. power
+
+How **fast** can you spin the disc up? And what does that **cost** in
+current? Real robots face this all the time: a shooter that spins up
+faster draws more from the battery.
+
+> [!WARNING]
+> A mentor picks the **highest current limit** you may use. Keep the
+> Discus clamped.
+
+### Get ready
+
+1. Pick a **target speed** that even 5% duty can reach (look at your
+   Step 4 results). About **1 rotation per second** of the disc is a
+   good start.
+1. Change your study so a button starts the disc **from a stop** at a
+   set duty cycle. Every run must start from a stop.
+1. In Glass, graph: disc speed, stator current, supply current, battery
+   voltage.
+
+### How to measure one run
+
+![How to read time to target from your Glass graph](../img/discus_how_to_measure.png)
+
+For every run, write down: **time to target**, **highest stator
+current**, **highest supply current**, **lowest battery voltage**.
+
+### Experiment A: push harder
+
+Keep the current limit the same (your mentor's number). Change only the
+**duty cycle**: 5%, 10%, 15%, 20%. Do each one **3 times**.
+
+Make this graph, one point per run:
+
+![Template: duty cycle vs. time to target](../img/discus_template_a.png)
+
+### Experiment B: change the current limit
+
+Keep the duty cycle at **20%**. Change only the **stator current
+limit**: 5, 10, 20, 30 A (or your mentor's numbers). Do each one
+**3 times**.
+
+Make this graph, one point per run:
+
+![Template: stator current limit vs. time to target](../img/discus_template_b.png)
+
+> **Look closely:** in Experiment B, what **shape** is the speed line in
+> Glass while the disc speeds up? Is it the same shape as in
+> Experiment A? Why might that be?
+
+### Put it together: the tradeoff
+
+Put **every** run from A and B on one graph:
+
+![Template: time to target vs. peak supply current](../img/discus_template_tradeoff.png)
+
+> **Check yourself:**
+> 1. Which runs are fast **and** easy on the battery?
+> 2. Is there a point where a lot more current only makes it a little
+>    faster?
+> 3. Which knob gave you more control: duty cycle or current limit?
+
+### Design challenge
+
+Your mentor gives you a budget, like: *"reach the target in under
+**X** seconds, and never go over **Y** amps of supply current."* Pick a
+duty cycle and current limit that meet it, and **prove it** with a
+graph.
+
+**Checkpoint:** post your three graphs and your design-challenge proof
+to **`#rookie_training`**.
+
+<details>
+<summary>⭐ Stretch: energy and efficiency</summary>
+
+How much of the battery's energy actually ends up in the spinning disc?
+
+* **Energy from the battery** (in joules): every 20 ms, add up
+  `battery voltage × supply current × 0.02`, from enable until the disc
+  reaches the target.
+* **Energy stored in the disc:** `½ × I × ω²`, where `ω` is the disc's
+  speed in radians per second (`rotations/s × 2π`), and `I = ½ × mass ×
+  radius²` (in kg and meters). Weigh and measure the disc!
+* **Efficiency** = stored ÷ from the battery × 100.
+
+![Template: time to target vs. efficiency](../img/discus_template_energy.png)
+
+Where did the rest of the energy go? (Think about
+[heat](../part1/05a_HOW_MOTORS_WORK.md#heat), friction, and the
+gearbox.) Are the fastest runs the most efficient, or the least?
+
+</details>
+
+## Step 7: Hold a speed by itself (feedback)
 
 So far *you* control the power. Now make the code **hold a target
 speed**, even if you slow the disc down by hand (gently, with a rag).
@@ -167,7 +260,7 @@ between?
 > **slower** than the target. Why? (What would make `error` exactly
 > zero, and what would the power be then?)
 
-## Step 7 (stretch): Help it with a guess (feedforward)
+## Step 8 (stretch): Help it with a guess (feedforward)
 
 Feedback only reacts *after* there's an error. **Feedforward** is a
 guess at how much power a speed needs, sent **before** anything goes
