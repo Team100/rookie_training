@@ -87,6 +87,7 @@ Real mechanisms, on real robots. Start with **easy mode**, then try
 13. **[SSH into the RoboRIO and the Pis](docs/part3/13_SSH_AND_CHECKS.md)**: log in and check that things are healthy
 1. **[Change the Raspberry Pi code](docs/part3/14_PI_CHANGES.md)**: edit, test, deploy, PR
 1. **[How our vision works](docs/part3/15_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
+   * then **[Break the cameras (on purpose)](docs/part3/15a_BREAK_THE_CAMERAS.md)**: cause real failures, record what they look like, and measure detection limits
 
 ## Part 4: Localization and auton
 
