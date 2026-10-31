@@ -20,7 +20,7 @@ docs/img/ with these names, and replace each "TODO photo" note below.
   [ ] tunerx_devices.png          Tuner X device list showing the Kraken
   [ ] tunerx_kraken_config.png    Tuner X device page: CAN ID, firmware
   [ ] tunerx_kraken_plot.png      Tuner X showing supply voltage
-  [ ] tunerx_kraken_control.png   Tuner X Control tab running the motor
+  [x] tunerx_kraken_control.png   Tuner X Control tab, labeled steps
 -->
 
 ## The test board
@@ -161,6 +161,8 @@ here's the quick version.
    server: 172.22.11.2:1250"** and **Devices** lists something. The
    **PDP** (power distribution panel, ID 0) is on the CAN bus too, so
    you'll see it. Your **Kraken** should be in the list next to it.
+   It may have an old name from a past robot (ours said "Algae Grip");
+   that's fine. Look for the **ID**.
 
    ![Tuner X connected over USB, showing the PDP on CAN bus rio](../img/tunerx_connected_pdp.png)
 
@@ -285,16 +287,17 @@ Kraken, but not run it. So first, put some code on the RoboRIO.
    and **Robot Code** should both be green. Choose **TeleOperated**.
 1. In Tuner X, click your Kraken's card to open its page, then open the
    **Control** tab.
-1. Pick a **duty cycle** control (`DutyCycleOut`) and set it to
-   **0.02** (2%).
+1. Set **Control Mode** to plain **DutyCycle** (`DutyCycleOut`). It
+   may start on something else, like `DifferentialDutyCycle`; the
+   **Differential** modes are for two motors working as a pair, so
+   don't use them. Then set the output to **0.02** (2%).
 1. Clear hands away and say **"Enabling!"**. Click **Enable** in the
    Driver Station, then click Tuner X's red **DISABLED** button so it
    says **ENABLED**.
 1. To stop: click Tuner X's button back to disabled, or press **Enter**
    in the Driver Station.
 
-> 📷 **TODO screenshot:** `docs/img/tunerx_kraken_control.png`: the
-> Tuner X Control tab running the Kraken.
+![Tuner X Control tab: pick DutyCycle, set 0.02, then enable](../img/tunerx_kraken_control.png)
 
 Not moving?
 
