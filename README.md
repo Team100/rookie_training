@@ -60,6 +60,18 @@ Learn the basics on a RoboRIO test board. Parts 1 to 4 use the
 1. **[Control a motor from code](docs/part1/07_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller
 1. **[Use the simulator](docs/part1/08_SIMULATOR.md)**: test without a robot
 
+### 🎉 Finished Part 1?
+
+**Post a photo of your group succeeding to `#rookie_training` in
+Slack!** Here's the
+[latest group to finish](https://team100robotics.slack.com/archives/C07JCSXEMU3/p1793483605772369)
+(team Slack only).
+
+When your group finishes, post your photo, then **update this link** to
+point at it: copy the link to your Slack message (**⋮ → Copy link**),
+edit this README, and send a pull request. It's a great first PR to this
+guide.
+
 ## Part 2: Real robot work
 
 Real mechanisms, on real robots. Start with **easy mode**, then try
