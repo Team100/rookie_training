@@ -251,14 +251,46 @@ small number you choose. Start very small.
 <details>
 <summary>Hint 2</summary>
 
-Try a few values of `k`. Too small: the disc never quite gets there.
-Too big: it overshoots and wobbles back and forth. What happens in
-between?
+Try a few very different values of `k`: tiny, medium, and big. Graph
+each one. What's different about how the disc gets to the target?
 </details>
 
-> **Check yourself:** with only feedback, the disc always ends up a bit
-> **slower** than the target. Why? (What would make `error` exactly
-> zero, and what would the power be then?)
+> **Check yourself:** does the disc end up **exactly** at the target?
+> If not, which way is it off, and why? (What would make `error`
+> exactly zero, and what would the power be then?)
+
+### Disturb it: watch the motor fight back
+
+Now the fun part. While your code holds the speed, **push on the disc
+with a rag** (gently at first; same safety as the
+[rag test](09_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)).
+Your code doesn't know you're there. Can it keep the speed anyway?
+
+1. Make Glass graph these four things, stacked like the template below.
+   Your motor already logs its **output** and **stator current**. Log
+   your **target** and **error** too, so they show up in Glass (ask a
+   mentor how, or look at how your motor's values got there).
+1. Hold **A** until the disc is steady at the target.
+1. Press the rag on the disc for about **5 seconds**, then let go.
+1. Screenshot right away, and mark when the rag went **on** and **off**.
+
+![Template: speed, error, output, and current, with rag on/off marked](../img/discus_template_hold.png)
+
+**Find these on your graph**, and circle each one:
+
+* 🔍 The moment the rag goes on. Which line moves **first**?
+* 🔍 A time when the **speed** looks almost normal, but the **output**
+  and **current** say the motor is working much harder. That's
+  feedback doing its job.
+* 🔍 The moment you let go. What does the speed do right then? Why?
+* 🔍 While the rag is on: is the error zero, or not quite? Compare it
+  with when the rag is off.
+
+Then try it again with a **bigger** `k`, and with a **smaller** one.
+How does each one handle the rag?
+
+**Checkpoint:** post your annotated graph to **`#rookie_training`**,
+with your four 🔍 spots circled and one sentence about each.
 
 ## Step 8 (stretch): Help it with a guess (feedforward)
 
