@@ -416,8 +416,8 @@ The run ends when the disc is stopped after the 5th lap.
   backwards? Measure all three.
 * Does feedforward help you hit the target without wasting energy on
   overshoot?
-* Could you change the target speed's... no wait, that's against the
-  rules. 😉 Read them again: what *are* you allowed to change?
+* Read the rules again: what **are** you allowed to change? Make a list,
+  and try each one.
 
 </details>
 
