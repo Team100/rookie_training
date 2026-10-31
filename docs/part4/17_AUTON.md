@@ -247,21 +247,124 @@ Only with a mentor, the first few times.
    finger on **Enter** (disable) the whole time.
 1. Enable.
 
-Measure where the robot ends up compared to a tape mark at the start.
-How far off is it? That number is a great conversation starter about
-odometry and the controller tolerances in `Autons.java`.
+**Checkpoint:** the robot drives out, stops, and comes back. Now
+measure **how well** it did, in Part 7.
 
-## Part 7: Send it in
+## Part 7: Measure it like an engineer
+
+"It looked about right" isn't an answer. Real control work is about
+**measuring error**: how far off the robot was, why, and whether a
+change made it better or worse. For every experiment in this part,
+measure the same way.
+
+### How to measure
+
+1. **Mark the start.** Put tape along two edges of the robot's frame at
+   one corner (an "L"), and a line along one side. Now you can put the
+   robot back in **exactly** the same spot every time, and see its
+   heading.
+1. **Mark the plan.** With a tape measure, put a small tape mark where
+   the plan says the robot should **stop** (e.g., the turnaround point
+   2 m out) and where it should **return**.
+1. **Watch the turnaround.** Film from the side with a phone, with a
+   tape measure on the floor in view, to see exactly where the robot
+   stopped before coming back. **Never stand in the robot's path to mark
+   it.**
+1. **Measure the return.** When the robot stops, measure from the start
+   corner to the same corner of the robot:
+   * **x error** (forward/back) and **y error** (left/right), in cm
+   * **heading error**, in degrees: how far the robot is turned from the
+     start line
+1. **Read what the robot *thinks*.** Before you move it, look at its pose
+   in Glass (or the field view): where does the robot **believe** it is?
+
+### Work out the error
+
+* **Position error** = √(x error² + y error²), in cm.
+* **Percent error** = position error ÷ total planned path length × 100.
+  Out 2 m and back is 400 cm of path, so a 12 cm error is 3%.
+  Percent error lets you compare a short drive with a long one.
+* **Heading error**, in degrees.
+
+There are really **three** different errors, and they have different
+causes:
+
+| Error | Compares | Mostly caused by |
+| --- | --- | --- |
+| **Tracking error** | the plan vs. where the robot **thinks** it is | the **controller**: how hard it pushes back toward the path, its tolerances |
+| **Localization error** | where it **thinks** it is vs. where it **really** is | **odometry**: wheel slip, wheel size, the gyro |
+| **Total error** | the plan vs. where it **really** is | both together |
+
+### Do it five times
+
+Run each experiment **5 times**, putting the robot back on the tape
+each time. Fill in a table like this:
+
+| Run | Stop x (cm) | Return x (cm) | Return y (cm) | Heading (°) | Position error (cm) | % error | Robot thinks it's at |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | | | | | | | |
+| 2 | | | | | | | |
+| … | | | | | | | |
+| **Average** | | | | | | | |
+
+Then look at two things:
+
+* **Average error**: is the robot off the **same way** every time (say,
+  always 8 cm short)? That's a **systematic** error, or **bias**. It has
+  one cause you can find and fix, like a wrong wheel diameter in the
+  code.
+* **Spread** (biggest minus smallest): does it land somewhere different
+  every time? That's **random** error, or noise. Slippery floor, battery
+  level, and how the robot starts all add noise.
+
+A robot can be **precise** (small spread) but not **accurate** (big
+bias), or the other way around. You want both.
+
+### The experiments
+
+For each one, **predict** the error before you run it, then measure.
+
+| Experiment | What it tests |
+| --- | --- |
+| **There and Back** (this chapter) | your baseline |
+| **There and Back, faster**: raise the max speed or acceleration | does speed make the error worse? Why? |
+| **A square**: four trajectories, back to the start | do errors add up around corners? |
+| **A circle**: drive a circle about 1 m across and come back to the start, facing the same way | how well the robot follows a **curve**, not just straight lines |
+| **Your choice**: change one thing (a tolerance, a controller setting, the floor), with a mentor | can you make the error smaller? |
+
+<details>
+<summary>Hint: how do I make a circle?</summary>
+
+A trajectory goes through **waypoints**, and each waypoint has a
+**course** (the direction of travel there). Put a few waypoints around
+the circle, and make each course point along the circle, like a car
+driving around a roundabout. Look at how `UTurnWithRotation` makes a
+curve.
+</details>
+
+> **Check yourself:**
+> 1. Your robot is always about 10 cm short, and Glass says it thinks it
+>    went the full distance. Is that a tracking error or a localization
+>    error? What would you check first?
+> 2. Glass says the robot is 10 cm short of the plan, and it really is.
+>    Which error is it now? What part of the code would you look at?
+> 3. Why compare **percent** error, instead of just cm, between the
+>    straight drive and the circle?
+
+**Checkpoint:** a filled-in table for **There and Back** and **at least
+one** other experiment, with averages, spreads, and one sentence each on
+what you think caused the error.
+
+## Part 8: Send it in
 
 Commit, push to your fork, and open a PR against `Team100/all26`,
-branch `main`. Say in the description what you tested (sim? which robot?)
-and how far from the start mark it stopped.
+branch `main`. In the description, say what you tested (sim? which
+robot?), and paste your **error tables** and what you learned from them.
 
 ## Going further
 
 * **Turn around on the way out** so the robot faces home, and drive back
   forward. (Compare `AheadTwoMetersWithRotation`.)
-* **A square:** four trajectories, ending at the start.
 * **Absolute poses:** start from one of the
   [`StartingPositions`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/auton/StartingPositions.java)
   and drive to a fixed spot on the field, like `LeftSequenceExample` does.
