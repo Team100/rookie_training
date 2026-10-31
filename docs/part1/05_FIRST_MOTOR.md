@@ -51,11 +51,8 @@ use.
 
 1. Ask a mentor for a Kraken X60 or X44 and its wiring.
 
-   ![](../img/neo_motor.jpg)
-
-   > 📷 **TODO photo:** replace the NEO picture above with
-   > `docs/img/kraken_x60_x44.jpg`, a Kraken X60 and X44 side by side,
-   > labeled.
+   > 📷 **TODO photo:** `docs/img/kraken_x60_x44.jpg`: a Kraken X60 and
+   > X44 side by side, labeled.
 
 1. Connect the Kraken's **power** wires (red and black) to a slot on
    the power distribution panel (PDP), and its **CAN** wires to the CAN
@@ -132,11 +129,6 @@ here's the quick version.
    > **TODO:** check whether the Android (Google Play) version is free
    > and can connect to the RoboRIO.
 
-   ![](../img/rev_hardware_client.png)
-
-   > 📷 **TODO screenshot:** replace the REV client picture above with
-   > Tuner X's start screen.
-
 1. Connect the laptop to the RoboRIO with a **USB-B** cable.
 1. **Use only the USB cable.** Unplug the laptop's Ethernet and turn off
    its Wi-Fi if it's on a robot network. Otherwise Tuner X may find a
@@ -201,29 +193,20 @@ here's the quick version.
       ([how](04_DEPLOY.md)). Robot code that uses a CTRE motor starts the
       diagnostic server by itself. Then refresh Tuner X.
 
-   ![](../img/rev_hardware_client_working.png)
-
-   > 📷 **TODO screenshot:** replace the REV client picture above with
-   > `docs/img/tunerx_devices.png`, the Tuner X device list showing
-   > the Kraken.
+   > 📷 **TODO screenshot:** `docs/img/tunerx_devices.png`: the Tuner X
+   > device list showing the Kraken next to the PDP.
 
 1. **Check the CAN bus.** The Kraken shows up, and its status isn't an
    error. If you have two devices, click **Blink** on one to see which
    motor is which.
 
-   ![](../img/can_bus_flowing.png)
-
-   > 📷 **TODO screenshot:** replace the REV CAN screenshot above with
-   > what "OK" looks like in Tuner X.
+   > 📷 **TODO screenshot:** what a healthy Kraken looks like in Tuner X.
 
 1. **Check the power.** Open the Kraken's page. Its supply voltage
    should be about 12 V.
 
-   ![](../img/spark_controller_voltage.png)
-
-   > 📷 **TODO screenshot:** replace the SPARK MAX voltage picture above
-   > with `docs/img/tunerx_kraken_plot.png`, Tuner X showing the
-   > Kraken's supply voltage.
+   > 📷 **TODO screenshot:** `docs/img/tunerx_kraken_plot.png`: Tuner X
+   > showing the Kraken's supply voltage.
 
 1. **Write down the CAN ID.** You can change it here if it clashes with
    another device. Also write it on masking tape on the motor.
@@ -294,10 +277,8 @@ Tuner X.
    > **TODO:** check whether Tuner X control needs the robot enabled
    > from the Driver Station, and update this step.
 
-   ![](../img/run_motor.png)
-
-   > 📷 **TODO screenshot:** replace the REV "Run Motor" picture above
-   > with `docs/img/tunerx_kraken_control.png`.
+   > 📷 **TODO screenshot:** `docs/img/tunerx_kraken_control.png`: the
+   > Tuner X Control tab running the Kraken.
 
 **Checkpoint:** the motor turns, slowly.
 
