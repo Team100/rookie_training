@@ -20,9 +20,6 @@ use.
 > **Do this on a bench Pi or a test robot, with a mentor. Never on the
 > competition robot at an event.**
 >
-> * **Power the Pi off before touching the camera ribbon cable.** Every
->   time. Plugging or unplugging it while powered can kill the camera
->   or the Pi.
 > * Shut the Pi down properly (`sudo shutdown -h now`, wait for the
 >   green LED to stop) before pulling power. Pulling power while it's
 >   running can corrupt the SD card.
@@ -65,7 +62,9 @@ Do these one at a time. For **each** one:
 | --- | --- | --- |
 | 1 | **Unplug the Pi's Ethernet cable** while it's running. Then plug it back in. | Cable knocked loose during a match |
 | 2 | **Stop the app:** `supervisorctl stop app`. Then `supervisorctl start app`. | The vision program crashed |
-| 3 | **No camera:** shut down, **power off**, unplug the camera ribbon, then power on. (Then shut down, power off, plug it back, power on.) | Ribbon cable came loose |
+| 3 | **Unplug the USB camera** while everything is running. Wait 10 seconds. Plug it back into the **same** port. Check `lsusb` before and after. | Camera cable knocked loose during a match |
+| 3b | Unplug it again, and plug it into a **different** USB port. | Someone "fixed" it by plugging into the nearest port |
+| 3c | Try a **long or cheap USB cable**, or a USB hub, with a mentor. | Bad cable or hub on the robot |
 | 4 | **Cover the lens** with your hand, then shine a flashlight straight into it. | A robot in front of the camera; stadium lights |
 | 5 | **Weak power:** with a mentor, power the Pi from a weak phone charger instead of its proper supply. Check `vcgencmd get_throttled`. | Bad power wiring on the robot |
 | 6 | **Robot side gone:** leave the Pi running, and turn off (or unplug) the RoboRIO or the radio. Then bring it back. | Robot brownout or radio reboot |
@@ -91,6 +90,10 @@ phone's level app).
 
 For each test, use the `:1181` view to see whether the tag is detected.
 Do each one **three times** and write down the results.
+
+Our USB cameras are **Arducam OV9782**s. They have a **global shutter**:
+the whole picture is taken at once, instead of line by line, which helps
+with fast motion. Keep that in mind for the speed test.
 
 | Test | How | Measure |
 | --- | --- | --- |

@@ -103,8 +103,20 @@ You can also see the app status and logs in a browser at
 
 #### Is a camera attached?
 
-The camera can only be used by one program at a time, so stop our app
-first, check, then start it again:
+Our cameras plug into the Pi with **USB**. First, check the Pi sees a
+USB camera at all:
+
+```
+lsusb
+```
+
+Look for a line with the camera's maker (ours are **Arducam**). No line
+means the Pi doesn't see the camera: check the USB cable at both ends,
+try another USB port, or another cable.
+
+Then check our camera library can use it. The camera can only be used
+by one program at a time, so stop our app first, check, then start it
+again:
 
 ```
 supervisorctl stop app
@@ -118,8 +130,9 @@ If `rpicam-hello` isn't installed, use Python instead:
 python3 -c "from picamera2 import Picamera2; print(Picamera2.global_camera_info())"
 ```
 
-An empty list (`[]`) or "No cameras available" means the ribbon cable
-is loose or in backwards. **Power off before touching the cable.**
+An empty list (`[]`) or "No cameras available", while `lsusb` *does*
+show the camera, means the camera is plugged in but something else is
+wrong. Restart the app, or reboot the Pi (`sudo reboot`).
 
 ### Turning a Pi off
 
