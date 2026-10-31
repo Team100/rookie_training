@@ -150,6 +150,58 @@ here's the quick version.
 
 1. **Update the firmware** if Tuner X says it's out of date.
 
+### Advanced mode: find the ID with code
+
+No Tuner X? You can write robot code that **scans** the CAN bus: try
+every possible ID and print the ones that answer. Come back to this
+after [Your first study](STUDY.md), once you can build and deploy a
+study.
+
+The idea:
+
+* A Kraken's ID is a number from **0 to 62**.
+* CTRE's library has a
+  [`TalonFX`](https://api.ctr-electronics.com/phoenix6/stable/java/com/ctre/phoenix6/hardware/TalonFX.html)
+  class for talking to a Kraken. `new TalonFX(7)` means "the Kraken with
+  ID 7", even if there isn't one.
+* `isConnected()` tells you whether that ID has actually sent anything
+  lately.
+
+So: make a `TalonFX` for every ID, wait a moment, and print every ID
+where `isConnected()` is true.
+
+<details>
+<summary>Hint 1: where does the code go?</summary>
+
+Make the 63 `TalonFX` objects **once**, in the `Robot` constructor, and
+keep them in an array field. Check them later, not straight away.
+</details>
+
+<details>
+<summary>Hint 2: why wait?</summary>
+
+Right after you create a `TalonFX`, it hasn't heard from the motor yet,
+so `isConnected()` is false for every ID. Give it a second or two. One
+way: check in `disabledPeriodic()`, which runs every 20 ms while the
+robot is disabled. How many calls is one second?
+</details>
+
+<details>
+<summary>Hint 3: don't flood the console</summary>
+
+`disabledPeriodic()` runs 50 times a second. Print the list once (keep a
+`boolean` field that remembers you already printed), or only every few
+seconds.
+</details>
+
+> **Check yourself:** your scan prints **nothing**. List three different
+> things that could be wrong, and how you'd check each one. (Think about
+> wiring, power, and your code.)
+
+**Checkpoint:** your scan prints the same ID that's written on the
+motor's masking tape. Changing an ID or updating firmware still needs
+Tuner X.
+
 ## Run the motor
 
 1. Open the Kraken's **Control** tab. Choose **duty cycle** and set the
