@@ -90,8 +90,20 @@ instructions are in the
 [Tuner X docs](https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/index.html);
 here's the quick version.
 
-1. Find Phoenix Tuner X on the laptop (Windows key, type "Tuner"). If
-   it's not there, install it from the Microsoft Store.
+1. Find Phoenix Tuner X on the laptop (Windows key, type "Tuner").
+   **Team laptops already have it, so use one.** If you need to install
+   it, here's where it's free:
+   * **Windows:** free from the
+     [Microsoft Store](https://apps.microsoft.com/search?query=phoenix+tuner+x),
+     or with CTRE's
+     [Phoenix offline installer](https://github.com/CrossTheRoadElec/Phoenix-Releases/releases).
+   * **Mac:** the Mac App Store charges for it (about $4). Don't buy it;
+     use a team Windows laptop instead.
+   * You can ignore anything about **Phoenix Pro** licenses. We don't
+     need them to find or set a CAN ID or update firmware.
+
+   > **TODO:** check whether the Android (Google Play) version is free
+   > and can connect to the RoboRIO.
 
    ![](readme_img/rev_hardware_client.png)
 

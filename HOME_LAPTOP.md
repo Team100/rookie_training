@@ -60,7 +60,8 @@ Java), **Git**, and your Git name and email.
 * For [Pi code](PI_CHANGES.md), you'll also want Python and its VS Code
   extensions.
 * **Phoenix Tuner X** (for Krakens) is only useful in the shop, next to
-  the hardware. Skip it at home.
+  the hardware. Skip it at home. (It's free on Windows, but the Mac App
+  Store charges for it, so don't buy it.)
 
 ## 4. Claude
 
