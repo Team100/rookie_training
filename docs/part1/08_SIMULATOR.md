@@ -46,7 +46,7 @@ breakpoint. Check the terminal. More about the field widget is
 1. `W A S D` move the robot (axes 0 and 1). `E R` rotate it (axis 2).
 
 > **Check yourself:** which way does the robot move when you press `W`?
-> Is that +x on the field? (See [Auton](../part2/14_AUTON.md#pose-where-am-i).)
+> Is that +x on the field? (See [Auton](../part4/17_AUTON.md#pose-where-am-i).)
 
 ## Run an auton
 
@@ -67,4 +67,4 @@ For more detail in the logs, set **SmartDashboard → Log Level** to
 
 ![](../img/log_level.png)
 
-Next: [Glass and power-draw tests](09_GLASS_POWER.md)
+That's the end of Part 1. Next: [Part 2: Glass and power-draw tests](../part2/09_GLASS_POWER.md)

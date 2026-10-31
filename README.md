@@ -26,8 +26,8 @@ What's new compared to the 2025 guide:
 * **Forks, not branches on the team repo.** You never push to
   `Team100/all26` directly. You push to your own copy (your *fork*) and
   open a pull request.
-* **Two parts.** You learn the basics on a **RoboRIO**, then switch to
-  the new **SystemCore** controller for the real robot.
+* **Five parts.** Basics, real robots, vision, and auton on a
+  **RoboRIO**; then the new **SystemCore** controller in Part 5.
 * **Krakens only.** The competition robot uses Kraken X60 and X44
   motors, so that's what this guide uses.
 * **Raspberry Pi 5 cameras** run our own Python vision code, and you can
@@ -40,10 +40,10 @@ What's new compared to the 2025 guide:
 * **Software engineering:** Git, testing, debugging
 * **Teamwork:** pull requests, code review, documentation
 
-## Part 1: RoboRIO and motors
+## Part 1: The basics
 
-Learn the basics on a RoboRIO test board. Use the **`main`** branch of
-`Team100/all26` and **2026 WPILib**.
+Learn the basics on a RoboRIO test board. Parts 1 to 4 use the
+**`main`** branch of `Team100/all26` and **2026 WPILib**.
 
 ### Getting started
 
@@ -59,20 +59,37 @@ Learn the basics on a RoboRIO test board. Use the **`main`** branch of
 1. **[Your first study](docs/part1/06_STUDY.md)**: your own small project that uses `lib`
 1. **[Control a motor from code](docs/part1/07_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller
 1. **[Use the simulator](docs/part1/08_SIMULATOR.md)**: test without a robot
-1. **[Glass and power-draw tests](docs/part1/09_GLASS_POWER.md)**: graph live values; measure how much current a mechanism draws
 
-## Part 2: SystemCore and the real robot
+## Part 2: Real robot work
 
-The competition robot runs on the
-[SystemCore](https://docs.wpilib.org/en/2027/). Start here once you've
-finished Part 1. Use the **`2027`** branch of `Team100/all26` and
-**2027 WPILib**.
+Real mechanisms, on real robots. Start with **easy mode**, then try
+**hard mode**.
 
-10. **[Switch to the SystemCore](docs/part2/10_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, move your study over
-1. **[Connect to the robot and test your code](docs/part2/11_ROBOT_NETWORK.md)**: radios, laptop network, competition-robot etiquette
-1. **[SSH into the SystemCore and the Pis](docs/part2/12_SSH_AND_CHECKS.md)**: log in and check that things are healthy
-1. **[Change the Raspberry Pi code](docs/part2/13_PI_CHANGES.md)**: edit, test, deploy, PR
-1. **[Work on auton](docs/part2/14_AUTON.md)**: drive out 2 meters and back; pose, waypoints, trajectories
+9. **[Glass and power-draw tests](docs/part2/09_GLASS_POWER.md)**: graph live values; measure how much current a mechanism draws
+1. **[Connect to the robot and test your code](docs/part2/10_ROBOT_NETWORK.md)**: radios, laptop network, robot etiquette
+1. **Easy mode: [the Discus](docs/part2/11_DISCUS.md)**: write a study that spins a heavy disc, measure it, and make it hold a speed
+1. **Hard mode: [the shooter bot](docs/part2/12_DEMO_BOT.md)**: write a study that spins up the shooter and feeds balls, safely
+
+## Part 3: Raspberry Pis and vision
+
+13. **[SSH into the RoboRIO and the Pis](docs/part3/13_SSH_AND_CHECKS.md)**: log in and check that things are healthy
+1. **[Change the Raspberry Pi code](docs/part3/14_PI_CHANGES.md)**: edit, test, deploy, PR
+1. **[How our vision works](docs/part3/15_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
+
+## Part 4: Localization and auton
+
+16. **[Where am I?](docs/part4/16_LOCALIZATION.md)**: odometry, vision, and how the robot combines them
+1. **[Work on auton](docs/part4/17_AUTON.md)**: drive out 2 meters and back; pose, waypoints, trajectories
+
+## Part 5: SystemCore, all together
+
+The competition robot runs on the new
+[SystemCore](https://docs.wpilib.org/en/2027/). Part 5 uses the
+**`2027`** branch of `Team100/all26` and **2027 WPILib**.
+
+18. **[Switch to the SystemCore](docs/part5/18_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, SSH, network
+1. **[Robot identity](docs/part5/IDENTITY.md)**: how the code knows which robot it's on
+1. **[Put it together on the demo bot](docs/part5/19_DEMO_BOT_SYSTEMCORE.md)**: move your shooter study to the SystemCore and bring up the whole robot
 
 ## Advanced (mentor approval required)
 
@@ -81,8 +98,7 @@ finished Part 1. Use the **`2027`** branch of `Team100/all26` and
 
 ## Whenever you need them
 
-* [Robot identity](docs/part2/IDENTITY.md): how the code knows which robot it's on (SystemCore)
-* [RoboRIO → SystemCore cheat sheet](docs/part2/10_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
+* [RoboRIO → SystemCore cheat sheet](docs/part5/18_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
 * [Debugging](docs/reference/DEBUGGING.md): errors, prints, logs, the debugger
 * [Troubleshooting](docs/reference/TROUBLESHOOTING.md): Git, build, deploy, and robot problems
 * [Coding conventions](https://github.com/Team100/all26/blob/2027/lib/doc/getting_started/Conventions.md)

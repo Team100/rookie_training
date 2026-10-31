@@ -14,13 +14,17 @@ Guidelines:
   chapter with a concrete checkpoint. Define jargon the first time it
   appears.
 * **Layout.** Chapters live in `docs/`, numbered in reading order:
-  * `docs/part1/`: setup, deploy, motors, simulator, Glass, for the
-    **RoboRIO**: `all26` branch `main`, 2026 WPILib.
-  * `docs/part2/`: SystemCore switch, robot network, SSH, Pis, auton,
-    identity, for the **SystemCore**: branch `2027`, 2027 WPILib.
+  * `docs/part1/` (basics), `docs/part2/` (real robots: Discus, shooter
+    bot), `docs/part3/` (Pis and vision), `docs/part4/` (localization
+    and auton): all for the **RoboRIO**, `all26` branch `main`, 2026
+    WPILib.
+  * `docs/part5/`: the **SystemCore**, branch `2027`, 2027 WPILib.
   * `docs/reference/`: debugging and troubleshooting.
   * `docs/advanced/`: experiments that need a mentor's sign-off first.
   * `docs/img/`: images.
+  * Part 2 deliberately has **no robot code and no pointers to existing
+    robot code**: students build their own studies from goals, hints,
+    and checkpoints.
 
   The README lists every chapter. If you add, move, or renumber one,
   update the README and the "Next:" links around it.
@@ -30,8 +34,8 @@ Guidelines:
   instead of copying code that may change. Mark anything unverified
   with `TODO`.
 * **Links** into the robot code use full GitHub URLs
-  (`https://github.com/Team100/all26/blob/main/...` in Part 1,
-  `.../blob/2027/...` in Part 2), since this is a separate repo.
+  (`https://github.com/Team100/all26/blob/main/...` in Parts 1 to 4,
+  `.../blob/2027/...` in Part 5), since this is a separate repo.
 * **No secrets.** This repo may be public. Don't write radio WPA keys or
   other team passwords here; say "ask a mentor". Vendor-default
   passwords that are already public (SystemCore, Pi) are fine.

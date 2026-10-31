@@ -11,8 +11,8 @@ robot motion: **pose**, **transform**, **heading**, **course**,
 Before you start, you should have finished
 [Setup](../part1/01_SETUP.md), [Fork workflow](../part1/02_FORK_WORKFLOW.md), the
 [simulator chapter](../part1/08_SIMULATOR.md), and
-[Switch to the SystemCore](10_SYSTEMCORE.md). This chapter uses the
-`2027` branch.
+[Where am I? (localization)](16_LOCALIZATION.md). This chapter uses the
+`main` branch and a RoboRIO robot.
 
 ## Part 1: The ideas
 
@@ -73,14 +73,14 @@ When you drive forward, heading and course are the same. When you drive
 course points the opposite way. This matters for the return trip.
 
 In our library, a course is a
-[`DirectionSE2`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/geometry/se2/DirectionSE2.java).
+[`DirectionSE2`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/geometry/se2/DirectionSE2.java).
 The easy one to use is `DirectionSE2.irrotational(angle)`, which means
 "travel toward `angle` without spinning."
 
 ### Waypoint: a place to pass through
 
 A **waypoint**
-([`WaypointSE2`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/geometry/se2/WaypointSE2.java))
+([`WaypointSE2`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/geometry/se2/WaypointSE2.java))
 is a pose plus the course the robot should have there, plus a "scale":
 
 ```java
@@ -91,7 +91,7 @@ new WaypointSE2(pose, course, 1)
 * `course`: which way to be travelling at that moment
 * `scale`: how strongly the course bends the path. Use `1` for now. Bigger
   numbers make wider curves, as in
-  [`UTurnWithRotation`](https://github.com/Team100/all26/blob/2027/comp/src/main/java/org/team100/frc2026/auton/UTurnWithRotation.java).
+  [`UTurnWithRotation`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/auton/UTurnWithRotation.java).
 
 ### Trajectory: the path plus a schedule
 
@@ -105,7 +105,7 @@ TrajectorySE2 t = planner.restToRest(waypoints);
 ```
 
 `restToRest` means the robot is stopped at the start and the end.
-Read the [trajectory README](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/trajectory/README.md)
+Read the [trajectory README](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/trajectory/README.md)
 for how it works inside.
 
 ### Controller: stay on the trajectory
@@ -113,7 +113,7 @@ for how it works inside.
 Wheels slip and batteries sag, so the robot never follows the plan
 perfectly. A **controller** compares where the robot *is* to where the
 trajectory says it *should be*, and corrects. It is set up for you in
-[`Autons.java`](https://github.com/Team100/all26/blob/2027/comp/src/main/java/org/team100/frc2026/auton/Autons.java)
+[`Autons.java`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/auton/Autons.java)
 (look for `FullStateControllerSE2`). Read the comments on each number.
 You don't need to change them yet.
 
@@ -131,13 +131,13 @@ Read [WPILib command compositions](https://docs.wpilib.org/en/stable/docs/softwa
 ## Part 2: Read the example
 
 Open
-[`comp/.../auton/AheadTwoMeters.java`](https://github.com/Team100/all26/blob/2027/comp/src/main/java/org/team100/frc2026/auton/AheadTwoMeters.java).
+[`comp/.../auton/AheadTwoMeters.java`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/auton/AheadTwoMeters.java).
 It already does the first half of your job. Read it slowly and answer
 these questions (write the answers down, or tell a mentor):
 
 1. In `t1`, what is `p1`? Where does it come from? (Hint: look at
    `initialize()` in
-   [`DriveWithTrajectoryFunction`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/subsystems/se2/commands/DriveWithTrajectoryFunction.java).)
+   [`DriveWithTrajectoryFunction`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/subsystems/se2/commands/DriveWithTrajectoryFunction.java).)
 1. What does `DirectionSE2.irrotational(p1.getRotation())` mean in words?
 1. Why is the course the same at both waypoints?
 1. What would change if the `Transform2d` were `(0, 2, Rotation2d.kZero)`?
@@ -147,7 +147,7 @@ these questions (write the answers down, or tell a mentor):
    auton?
 
 Then look at
-[`LeftSequenceExample.java`](https://github.com/Team100/all26/blob/2027/comp/src/main/java/org/team100/frc2026/auton/LeftSequenceExample.java),
+[`LeftSequenceExample.java`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/auton/LeftSequenceExample.java),
 which runs **two** trajectories in a row. That's the shape you need.
 
 ## Part 3: Plan "There and Back"
@@ -236,7 +236,7 @@ Only with a mentor, the first few times.
    1. Open Glass (`Ctrl+Shift+P` → **WPILib: Start Tool** → **Glass**).
    1. Connect: **NetworkTables Settings** → **Client**, **Team** →
       **100**, **Apply**. (More in
-      [Glass](../part1/09_GLASS_POWER.md#open-glass-and-connect).)
+      [Glass](../part2/09_GLASS_POWER.md#open-glass-and-connect).)
    1. Choose: **SmartDashboard** → **Auton Command** → **There And
       Back**.
 
@@ -254,7 +254,7 @@ odometry and the controller tolerances in `Autons.java`.
 ## Part 7: Send it in
 
 Commit, push to your fork, and open a PR against `Team100/all26`,
-branch `2027`. Say in the description what you tested (sim? which robot?)
+branch `main`. Say in the description what you tested (sim? which robot?)
 and how far from the start mark it stopped.
 
 ## Going further
@@ -263,7 +263,7 @@ and how far from the start mark it stopped.
   forward. (Compare `AheadTwoMetersWithRotation`.)
 * **A square:** four trajectories, ending at the start.
 * **Absolute poses:** start from one of the
-  [`StartingPositions`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/frc2026/auton/StartingPositions.java)
+  [`StartingPositions`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/auton/StartingPositions.java)
   and drive to a fixed spot on the field, like `LeftSequenceExample` does.
   When is absolute better than relative?
 
@@ -288,7 +288,7 @@ command = sequence(
         backStep.until(backStep::isDone));
 ```
 
-You'll need `import static org.wpilib.command2.Commands.sequence;`
+You'll need `import static edu.wpi.first.wpilibj2.command.Commands.sequence;`
 (copy the import from `LeftSequenceExample`).
 </details>
 
@@ -316,4 +316,4 @@ TrajectorySE2 back(Pose2d p) {
 Before you use this, explain to someone what every line does.
 </details>
 
-Next: back to the [guide](../../README.md).
+Next: [Part 5: Switch to the SystemCore](../part5/18_SYSTEMCORE.md)

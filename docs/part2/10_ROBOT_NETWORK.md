@@ -1,11 +1,13 @@
 # Connect to the robot and test your code
 
 This chapter covers getting your laptop talking to a **real robot**
-(including the competition robot), setting up the radios, and testing
-your code on it without causing trouble for anyone else.
+(like the demo bot), setting up the radios, and testing your code on it
+without causing trouble for anyone else. In Part 2 our robots use a
+**RoboRIO**; the SystemCore differences are in
+[Part 5](../part5/18_SYSTEMCORE.md).
 
-Passwords and addresses for the SystemCore and the Pis are in
-[SSH and checks](12_SSH_AND_CHECKS.md#whos-who-on-the-robot-network).
+Addresses for the RoboRIO and the Pis are in
+[SSH and checks](../part3/13_SSH_AND_CHECKS.md#whos-who-on-the-robot-network).
 
 ## How the pieces connect
 
@@ -13,12 +15,12 @@ Passwords and addresses for the SystemCore and the Pis are in
 Laptop ──Ethernet──▶ Access point (VH-109, "Access Point Mode", on the table)
                          ⋯ 6 GHz wireless ⋯
                      Robot radio (VH-109, "Robot Radio Mode", ON the robot)
-                         ──Ethernet──▶ SystemCore, Pi cameras (via a switch)
+                         ──Ethernet──▶ RoboRIO, Pi cameras (via a switch)
 ```
 
 * There are **two radios**, and they look identical. The **robot radio**
   is mounted on the robot. The **access point** sits near the laptop.
-  The robot radio is *not* the SystemCore.
+  The robot radio is *not* the RoboRIO.
 * The robot radio hands out addresses (`10.1.0.x`) to everything on the
   network, including your laptop.
 * At competitions, the field replaces our access point. Our robot radio
@@ -27,7 +29,7 @@ Laptop ──Ethernet──▶ Access point (VH-109, "Access Point Mode", on the
 | Device | Address |
 | --- | --- |
 | Robot radio | `10.1.0.1` |
-| SystemCore | `10.1.0.2` / `robot.local` |
+| RoboRIO | `10.1.0.2` / `roboRIO-100-FRC.local` |
 | Access point | `10.1.0.4` |
 | Pi cameras | `10.1.0.30` – `10.1.0.36` |
 | Your laptop | `10.1.0.x`, given out automatically |
@@ -43,22 +45,22 @@ Laptop ──Ethernet──▶ Access point (VH-109, "Access Point Mode", on the
    ```
    ipconfig
    ping 10.1.0.4
-   ping robot.local
+   ping roboRIO-100-FRC.local
    ```
    * On a Mac, use `ping -c 4 …` so it stops after 4 tries (or press
      `Ctrl+C`).
    * `ipconfig` should show `10.1.0.x` on the Ethernet adapter.
    * `10.1.0.4` answering means you reached the access point.
-   * `robot.local` (or `10.1.0.2`) answering means you reached the robot
+   * `roboRIO-100-FRC.local` (or `10.1.0.2`) answering means you reached the robot
      across the wireless link.
 1. Open the **FRC Driver Station** (Windows only), with team number
    `100`. **Communications** should go green.
 
 If any step fails, go to [Troubleshooting](#troubleshooting) below.
 
-**No radios at all?** Plug a USB-C cable from the laptop into the
-SystemCore. That's enough to deploy and drive, as long as the robot is
-on blocks or tethered.
+**No radios at all?** Plug a USB-B cable from the laptop into the
+RoboRIO (see [Deploy](../part1/04_DEPLOY.md)). That's enough to deploy
+and drive, as long as the robot is on blocks or tethered.
 
 ## Laptop network settings
 
@@ -142,12 +144,15 @@ exactly matching settings.
 | Team Number | `100` |
 | SSID Suffix | the robot's name, e.g. `compbotA` (**case-sensitive**) |
 | WPA Key for 6 GHz | the team key (**ask a mentor**; don't write it in this repo) |
-| Enable SystemCore Mode | ✅ |
+| Enable SystemCore Mode | ❌ **off** for a RoboRIO robot (✅ on for a SystemCore robot, [Part 5](../part5/18_SYSTEMCORE.md)) |
 | 2.4 GHz | optional. Gives a backup Wi-Fi network for testing |
 
 Click **Configure** and wait for "success". **Don't unplug it while it
 saves.** If you don't see **Enable SystemCore Mode**, the radio needs a
 firmware update. Ours are on 2.0.1.
+
+> **TODO (mentors):** confirm SystemCore Mode must be off for our
+> RoboRIO robots.
 
 ### 3. Access point settings
 
@@ -158,7 +163,7 @@ config page the same way.
 | --- | --- |
 | Mode | **Access Point Mode** |
 | Team Number, SSID Suffix, 6 GHz key | **exactly the same** as the robot radio |
-| Enable SystemCore Mode | ✅ |
+| Enable SystemCore Mode | **the same** as the robot radio |
 | Channel | leave the default |
 
 Power the access point from its **VH-117 PoE adapter**. A weaker power
@@ -206,11 +211,11 @@ on it. So:
    * Say **"Enabling!"** loudly before you enable.
 1. **Check the basics** before you blame your code: Driver Station lights
    green, battery above about 12.5 V, correct auton selected, no errors
-   scrolling in the console. See [SSH and checks](12_SSH_AND_CHECKS.md).
+   scrolling in the console. See [SSH and checks](../part3/13_SSH_AND_CHECKS.md).
 1. **Put it back.** When you're done, redeploy the team's code from the
-   `2027` branch (or whatever was on it before), unless the mentor says
+   `main` branch (or whatever was on it before), unless the mentor says
    otherwise. The same goes for the Pis if you deployed camera code
-   ([Pi changes](13_PI_CHANGES.md#4-deploy-to-a-pi)).
+   ([Pi changes](../part3/14_PI_CHANGES.md#4-deploy-to-a-pi)).
 1. **Write down what you learned** in your PR description: what you
    tested, on which robot, and what happened.
 
@@ -225,27 +230,23 @@ Work from the laptop outward:
 1. **Cable:** use the **DS** port, not PoE. Try the cable and port that
    work for someone else.
 1. **Robot radio by itself:** plug the laptop straight into the **robot
-   radio's** DS port. Get `10.1.0.x` and `ping robot.local` replies?
+   radio's** DS port. Get `10.1.0.x` and `ping 10.1.0.2` replies?
    Then the robot side is fine, and the problem is the wireless link.
 1. **Wireless link:** both radios must have the same team number, SSID
    suffix (case-sensitive), and 6 GHz key; one in Access Point Mode, one
-   in Robot Radio Mode; SystemCore Mode on both. Then power-cycle both.
-1. **`robot.local` doesn't resolve, but `10.1.0.2` works:** that's a
+   in Robot Radio Mode; SystemCore Mode the same on both. Then
+   power-cycle both.
+1. **`roboRIO-100-FRC.local` doesn't resolve, but `10.1.0.2` works:** that's a
    name-lookup problem on the laptop, not the robot. Just use the IP.
-1. **Nothing works:** go back to USB-C straight to the SystemCore
-   ([SSH and checks](12_SSH_AND_CHECKS.md#connect-your-laptop)).
+1. **Nothing works:** go back to a USB-B cable straight to the RoboRIO
+   ([Deploy](../part1/04_DEPLOY.md)).
 
 ## Good to know
 
 * The **FRC Driver Station** only runs on **Windows**. On a Mac you can
   still view NetworkTables with **OutlineViewer**, **Glass**,
-  **AdvantageScope**, or **Elastic** (connect to `10.1.0.2`), and use the
-  SystemCore web dashboard at `http://10.1.0.2/`.
-* The SystemCore's USB address depends on its software version:
-  `172.26.0.1` (Windows) / `172.27.0.1` (Mac/Linux) on newer images, and
-  `172.28.0.1` / `172.29.0.1` on images 9 and earlier. Its screen shows
-  what it's using.
-* Useful SystemCore ports: 22 (ssh), 80 (web dashboard), 5810
-  (NetworkTables).
+  **AdvantageScope**, or **Elastic** (connect to `10.1.0.2`). To deploy
+  from a Mac, see
+  [Using a Mac with an Ethernet cable](../part1/04_DEPLOY.md#using-a-mac-with-an-ethernet-cable).
 
-Next: [SSH and checks](12_SSH_AND_CHECKS.md)
+Next: [Discus (easy mode)](11_DISCUS.md)

@@ -20,7 +20,7 @@ You need to have finished:
 * [How motors work](../part1/05a_HOW_MOTORS_WORK.md)
 * [Control a motor from code](../part1/07_MOTOR_CODE.md): a study that
   sets a duty cycle and a `CurrentLimit`
-* [Glass and power-draw tests](../part1/09_GLASS_POWER.md): graphing
+* [Glass and power-draw tests](../part2/09_GLASS_POWER.md): graphing
   supply current, stator current, and temperature
 
 And you need a motor that a mentor has declared **scrap**. Write
@@ -86,7 +86,7 @@ Start from your study from [Control a motor from code](../part1/07_MOTOR_CODE.md
    10 A, supply 40 A).
 1. In Glass, graph **stator current**, **supply current**,
    **temperature (C)**, and the battery **voltage** (see
-   [Glass](../part1/09_GLASS_POWER.md#make-a-graph)).
+   [Glass](../part2/09_GLASS_POWER.md#make-a-graph)).
 
 **Checkpoint:** a mentor has read your code, and the graphs show live
 values with the motor disabled.

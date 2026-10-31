@@ -1,11 +1,12 @@
 # Switch to the SystemCore
 
-You've learned motors, studies, the simulator, and Glass on a
-**RoboRIO**. The real robot runs on the new
-[SystemCore](https://docs.wpilib.org/en/2027/) controller, so everything
-from here on uses it. Most of what you know carries over. This page
-covers what's different, gets your laptop and fork ready, and moves your
-motor study to the SystemCore.
+In Parts 1 to 4 you learned motors, real robots, vision, and auton on a
+**RoboRIO**. The competition robot runs on the new
+[SystemCore](https://docs.wpilib.org/en/2027/) controller, so Part 5
+moves everything over to it. Most of what you know carries over. This
+page covers what's different, gets your laptop and fork ready, and moves
+your motor study to the SystemCore. Then you'll
+[put it all together on the demo bot](19_DEMO_BOT_SYSTEMCORE.md).
 
 ## What changes
 
@@ -79,7 +80,7 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
    it up. Wait for its screen to show that it has booted.
 1. Connect your laptop to the SystemCore with a **USB-C** cable.
    * You can also use Ethernet through the radio or a switch; see
-     [SSH and checks](12_SSH_AND_CHECKS.md#connect-your-laptop).
+     [SSH and checks](../part3/13_SSH_AND_CHECKS.md#connect-your-laptop).
 
    > 📷 **TODO photo:** `docs/img/systemcore_usb_c.jpg`: the SystemCore
    > USB-C port with the cable plugged in.
@@ -101,7 +102,7 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
 
 If it fails: check the cable, wait for the SystemCore to finish booting,
 and try `ping robot.local`. More in
-[SSH and checks](12_SSH_AND_CHECKS.md#common-problems).
+[SSH and checks](../part3/13_SSH_AND_CHECKS.md#common-problems).
 
 **Checkpoint:** Communications and Robot Code are both green in the
 Driver Station.
@@ -119,7 +120,7 @@ The RoboRIO has one CAN bus. The SystemCore has **five CAN ports**,
    > 📷 **TODO photo:** `docs/img/kraken_can_to_systemcore.jpg`: CAN
    > from the Kraken going into `can_s0`.
 
-1. [SSH in](12_SSH_AND_CHECKS.md#systemcore) and check that the SystemCore
+1. [SSH in](#6-ssh-into-the-systemcore) and check that the SystemCore
    sees CAN traffic. Run this twice; **RX packets** should go up:
    ```
    ip -s link show can_s0
@@ -164,4 +165,52 @@ just like it did on the RoboRIO.
 
 Send it in as a PR against **`2027`**.
 
-Next: [Connect to the robot and test your code](11_ROBOT_NETWORK.md)
+## 6. SSH into the SystemCore
+
+Same idea as [SSH into the RoboRIO](../part3/13_SSH_AND_CHECKS.md), with a
+different login and different things to check.
+
+```
+ssh systemcore@robot.local
+```
+
+(or `ssh systemcore@10.1.0.2`, or the USB address). The first time, type
+`yes` to trust the host. The password is `systemcore`. **Never change
+it,** because deploys from VS Code stop working if you do.
+
+### Things to check
+
+| Question | Command | Good answer |
+| --- | --- | --- |
+| Which SystemCore is this? | `cat /sys/firmware/devicetree/base/serial-number; echo` | A serial that matches an entry in [Identity.java](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/config/Identity.java) |
+| What are its addresses? | `ip -brief addr` | `10.1.0.2` on the Ethernet interface |
+| Can it see the radio? | `ping -c 3 10.1.0.1` | 3 replies |
+| Can it see the cameras? | `ping -c 3 10.1.0.31` (each Pi) | 3 replies |
+| Are the CAN buses up? | `ip -brief link \| grep can` | `can_s0` … `can_s4` say `UP` |
+| Is CAN traffic flowing? | `ip -s link show can_s0` | RX packets going up when run twice; few errors |
+| Is our code deployed? | `ls -l /home/systemcore/deploy` | Files with a recent date |
+| Is the disk full? | `df -h /` | `Use%` well under 90% |
+| How long since reboot? | `uptime` | Rebooting by itself means a power problem |
+| USB drive plugged in? | `ls /U` | Your files (USB drives mount at `/U`, `/V`, …) |
+
+Robot program output (prints, stack traces) is easiest to read in the
+**Driver Station console** or the **web dashboard** at http://robot.local.
+
+Type `exit` to log out.
+
+## 7. Robot network differences
+
+The [robot network](../part2/10_ROBOT_NETWORK.md) works the same way,
+with these changes:
+
+* **Radios:** turn **Enable SystemCore Mode** on, on **both** radios.
+* **Name:** the robot is `robot.local`, not `roboRIO-100-FRC.local`. The
+  address on the robot network is still `10.1.0.2`.
+* **USB-C address** depends on the SystemCore's software version:
+  `172.26.0.1` (Windows) / `172.27.0.1` (Mac/Linux) on newer images, and
+  `172.28.0.1` / `172.29.0.1` on images 9 and earlier. Its screen shows
+  what it's using.
+* **Web dashboard** at http://robot.local (or `http://10.1.0.2/`).
+* Useful ports: 22 (ssh), 80 (web dashboard), 5810 (NetworkTables).
+
+Next: [Robot identity](IDENTITY.md)

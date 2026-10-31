@@ -7,7 +7,7 @@ with someone from the mechanical team.
 
 You need:
 
-* the Kraken code from [Control a motor from code](07_MOTOR_CODE.md),
+* the Kraken code from [Control a motor from code](../part1/07_MOTOR_CODE.md),
   deployed and working
 * a laptop connected to the RoboRIO (USB-B is fine)
 
@@ -52,7 +52,7 @@ And the robot as a whole logs:
 > breakers. That's why
 > [`CurrentLimit`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/config/CurrentLimit.java)
 > has a limit for each. The full story is in
-> [How motors work](05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).
+> [How motors work](../part1/05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).
 
 ## Open Glass and connect
 
@@ -67,7 +67,7 @@ And the robot as a whole logs:
 
    Glass works out the robot's address for you, whether you're on USB or
    the robot network.
-   * For the [simulator](08_SIMULATOR.md), type `localhost` instead of 100.
+   * For the [simulator](../part1/08_SIMULATOR.md), type `localhost` instead of 100.
    * Still not connecting? Type the robot's address instead: `10.1.0.2`
      on the robot network, or `172.22.11.2` over USB.
 
@@ -115,7 +115,7 @@ sure it's `DEBUG` (the default) or `TRACE`, not `COMP`.
 Glass is also where you **choose which auton runs** on a real robot
 (**SmartDashboard** → **Auton Command**), because the Driver Station
 can't.
-See [Work on auton](../part2/14_AUTON.md#part-6-run-it-on-a-real-robot).
+See [Work on auton](../part4/17_AUTON.md#part-6-run-it-on-a-real-robot).
 
 The WPILib [Glass docs](https://docs.wpilib.org/en/stable/docs/software/dashboards/glass/index.html)
 cover more widgets, like the field view you used in the simulator.
@@ -181,4 +181,4 @@ Then, with your mechanical partner:
 **Checkpoint:** a filled-in table for one mechanism, which your
 mechanical partner agrees matches what they saw.
 
-That's the end of Part 1. Next: [Switch to the SystemCore](../part2/10_SYSTEMCORE.md)
+Next: [Connect to the robot and test your code](10_ROBOT_NETWORK.md)

@@ -54,7 +54,7 @@ image versions: 2025_v2.\*"**
 : Nobody picked an auton, so it's running `NONE`. The Driver Station
   can't choose one. Connect Glass to team 100 and pick it in
   `SmartDashboard → Auton Command`, then enable from the Driver Station.
-  See [Work on auton](../part2/14_AUTON.md#part-6-run-it-on-a-real-robot).
+  See [Work on auton](../part4/17_AUTON.md#part-6-run-it-on-a-real-robot).
 
 **RoboRIO's Comm light is off**
 : That's normal without the Driver Station. Comm means "talking to the
@@ -113,8 +113,8 @@ image versions: 2025_v2.\*"**
     it here.
 
 See [Deploy to the RoboRIO](../part1/04_DEPLOY.md#if-the-deploy-fails),
-[Deploy to a SystemCore](../part2/10_SYSTEMCORE.md#3-deploy-to-a-systemcore),
-[SSH and checks](../part2/12_SSH_AND_CHECKS.md#common-problems), and
+[Deploy to a SystemCore](../part5/18_SYSTEMCORE.md#3-deploy-to-a-systemcore),
+[SSH and checks](../part3/13_SSH_AND_CHECKS.md#common-problems), and
 [Debugging](DEBUGGING.md).
 
 Found a fix that isn't here? Add it!
