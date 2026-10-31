@@ -44,6 +44,20 @@
   `SmartDashboard → Auton Command`, then enable from the Driver Station.
   See [Work on auton](../part2/14_AUTON.md#part-6-run-it-on-a-real-robot).
 
+**RoboRIO's Comm light is off**
+: That's normal without the Driver Station. Comm means "talking to the
+  Driver Station", not "the USB cable is plugged in". Open the FRC
+  Driver Station (team number **100**) and it turns red (no robot code)
+  or green (code running). See the light table in
+  [Your first motor](../part1/05_FIRST_MOTOR.md#connect-the-motor).
+
+**Tuner X: "Failed to connect to diagnostics" / "No devices detected"**
+: Tuner X reached the RoboRIO, but CTRE's diagnostic server isn't
+  running on it. Our robot code normally starts it. Either click **RUN
+  TEMPORARY DIAGNOSTICS** in Tuner X (lasts until the RoboRIO reboots),
+  or deploy robot code that uses a CTRE motor. If it still finds no
+  devices, check the CAN wiring and the motor's power.
+
 **Driver Station says "Emergency Stopped" and won't enable**
 : The robot is **e-stopped** (emergency stopped). Unlike a normal
   disable, it stays stopped until the robot code restarts. Either:

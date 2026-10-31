@@ -78,6 +78,19 @@ use.
    look it up in the
    [Talon FX status light guide](https://v6.docs.ctr-electronics.com/en/stable/docs/hardware-reference/talonfx/index.html).
 
+1. Check the RoboRIO's lights. **Don't worry if Comm is off.** Comm
+   means "talking to the **Driver Station**", not "the USB cable is
+   plugged in", and you don't need the Driver Station for this chapter.
+
+   | Light | What you want now | Meaning |
+   | --- | --- | --- |
+   | Power | Green | It has power |
+   | Status | Off (after booting) | On while booting; **blinking** means an error |
+   | Comm | Off is fine | Off: no Driver Station. Solid red: Driver Station, but no robot code. Blinking red: e-stopped. Green: Driver Station and robot code |
+
+   > 📷 **TODO photo:** `docs/img/roborio_lights.jpg`: the RoboRIO's
+   > lights, labeled.
+
 ## Find the CAN ID
 
 Every device on a CAN bus has an **ID number**, like a house number on a
@@ -111,11 +124,19 @@ here's the quick version.
    > Tuner X's start screen.
 
 1. Connect the laptop to the RoboRIO with a **USB-B** cable.
-1. In Tuner X, set the robot address to team **100** (or `172.22.11.2`
-   over USB) and open **Devices**. Your Kraken should be in the list.
-   * If Tuner X says there's no diagnostic server, it can install a
-     temporary one on the RoboRIO for you. Say yes.
-     > **TODO:** check the exact Tuner X prompt on our RoboRIO boards.
+1. In Tuner X, type **100** in **Enter a Team # or IP** (bottom left)
+   and open **Devices**.
+1. You'll probably see **"Failed to connect to diagnostics"**. That's
+   normal: Tuner X needs a small CTRE program (the *diagnostic server*)
+   running on the RoboRIO, and our robot code is what usually starts it.
+   With no code deployed yet, click **RUN TEMPORARY DIAGNOSTICS**. It
+   lasts until the RoboRIO reboots.
+
+   > 📷 **TODO screenshot:** `docs/img/tunerx_no_diagnostics.png`:
+   > "Failed to connect to diagnostics" with the RUN TEMPORARY
+   > DIAGNOSTICS button.
+
+1. Your Kraken should now be in the **Devices** list.
 
    ![](../img/rev_hardware_client_working.png)
 
