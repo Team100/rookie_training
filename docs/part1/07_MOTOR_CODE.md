@@ -46,22 +46,26 @@ VS Code can add imports for you: hover over the red squiggle and choose
 ## Create the motor
 
 Our motor classes are in [`lib/.../motor`](https://github.com/Team100/all26/tree/main/lib/src/main/java/org/team100/lib/motor).
-Krakens are in the `ctre` folder:
+CTRE motors are in the `ctre` folder, **one class for each kind of
+motor**:
 
 * Kraken X60: [`KrakenX60Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java)
 * Kraken X44: [`KrakenX44Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX44Motor.java)
+* Falcon 500: [`Falcon500Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/Falcon500Motor.java)
 
-Use the one that matches your motor. This page uses the X60; for an X44,
-just change the class name.
+**Use the class that represents the motor you actually have**, or, if
+yours isn't listed, look in the `ctre` folder for the class that matches
+it. The classes differ in the motor's physics (how strong and how fast
+it is), so the wrong one gives you wrong numbers. This page uses
+`KrakenX60Motor`; for any other motor, just change the class name.
 
 > [!NOTE]
 > **Using a Falcon 500 instead?** It has the same controller inside (a
 > Talon FX), so almost everything on this page is the same. Two
 > differences:
 >
-> 1. **Class:** use
->    [`Falcon500Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/Falcon500Motor.java)
->    instead of `KrakenX60Motor`. It takes exactly the same arguments.
+> 1. **Class:** use `Falcon500Motor` instead of `KrakenX60Motor`. It
+>    takes exactly the same arguments.
 > 2. **Firmware:** older Falcons may still have **Phoenix 5** firmware,
 >    but our code uses **Phoenix 6**. Look at the Falcon's card in
 >    Tuner X: if it says Phoenix 5, update it to Phoenix 6 firmware
@@ -86,7 +90,7 @@ Open it and read the constructor. It needs a lot of arguments:
 Put the setup in the constructor:
 
 ```java
-private final KrakenX60Motor m_motor;
+private final KrakenX60Motor m_motor; // or the class for YOUR motor
 
 public Robot() {
     Startup.start();
@@ -95,7 +99,7 @@ public Robot() {
     TotalCurrentLog currentLog = robotLog.totalCurrentLog();
 
     System.out.println("Initializing motor");
-    m_motor = new KrakenX60Motor(
+    m_motor = new KrakenX60Motor( // or the class for YOUR motor
             log.name("motor"),
             currentLog,
             new CanId(7), // YOUR CAN ID, not 7!

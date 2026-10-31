@@ -147,9 +147,11 @@ the RoboRIO, on `main`. Rebuild it on `2027`.
    * Imports: `edu.wpi.first.…` becomes `org.wpilib.…`. Delete the red
      imports and let VS Code's **Quick Fix** add the new ones.
    * Call `CTREStartup.start();` right after `Startup.start();`.
-   * `KrakenX60Motor` takes one more argument, the CAN port:
-     `new CanBusId(0)`, right after the `CanId`. Open
-     [`KrakenX60Motor`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java)
+   * Your motor class (`KrakenX60Motor`, `KrakenX44Motor`,
+     `Falcon500Motor`, or whichever one represents your motor) takes one
+     more argument, the CAN port: `new CanBusId(0)`, right after the
+     `CanId`. Open your class in
+     [`lib/.../motor/ctre`](https://github.com/Team100/all26/tree/2027/lib/src/main/java/org/team100/lib/motor/ctre)
      on `2027` to see where it goes.
 
 > **Check yourself:** why does the SystemCore need a `CanBusId` when the
