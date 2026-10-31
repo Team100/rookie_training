@@ -292,17 +292,83 @@ How does each one handle the rag?
 **Checkpoint:** post your annotated graph to **`#rookie_training`**,
 with your four 🔍 spots circled and one sentence about each.
 
-## Step 8 (stretch): Help it with a guess (feedforward)
+## Step 8: Help it with a guess (feedforward)
 
-Feedback only reacts *after* there's an error. **Feedforward** is a
-guess at how much power a speed needs, sent **before** anything goes
-wrong.
+In Step 7, feedback only reacted **after** something went wrong: no
+error, no push. **Feedforward** is the opposite: a **guess** at how much
+power a speed needs, sent **before** anything goes wrong. Good robots
+use both.
 
-**Goal:** measure what duty cycle gives each speed (from Step 4), and
-use that as your starting guess. Then add your feedback on top.
+Remember the `Friction` argument you set to zeros back in
+[Control a motor from code](../part1/07_MOTOR_CODE.md#step-3-create-the-motor)?
+By the end of this step, you'll know what it's for.
 
-**Checkpoint:** with feedforward plus feedback, the disc reaches the
-target faster and closer than with feedback alone. Show both graphs.
+### 8a: Build a recipe
+
+A **recipe** says "for this speed, use this much duty cycle". You'll
+measure it.
+
+1. Run the disc at a **fixed** duty cycle: 2%, then 4%, 6%, and so on
+   up to 20%.
+1. For each one, wait until the speed **stops changing**, then write
+   down the steady speed.
+1. Put one point per run on this graph, then draw the **best straight
+   line** you can through your points.
+
+![Template: steady speed vs. duty cycle](../img/discus_template_feedforward.png)
+
+> **Check yourself:**
+> 1. Does a straight line fit your points well?
+> 2. Does your line go through **zero** (0 speed at 0% duty)? If not,
+>    what does the gap at the bottom mean? (Try it: what's the smallest
+>    duty cycle that makes the disc turn at all? You found this in
+>    Step 3.)
+> 3. Write your line as a rule: `duty = a + b × speed`. What are your
+>    `a` and `b`?
+
+### 8b: Feedforward alone
+
+Now use **only** your recipe, with **no** feedback: when you hold **A**,
+set the duty cycle to `a + b × target`.
+
+1. Hold **A**. Does it reach the target? How close?
+1. Do the **rag test** from Step 7, with the same four-panel graph.
+   What happens to the speed this time? Does the output change at all?
+
+> **Check yourself:** why can't feedforward alone fight back against
+> the rag?
+
+### 8c: Both together
+
+Now combine them: `duty = (a + b × target) + k × error`.
+
+Run the **same three tests** for each version, and fill in this table:
+
+| Version | Time to target (Step 6 method) | Error when steady | Error with the rag on |
+| --- | --- | --- | --- |
+| Feedback only (Step 7) | | | |
+| Feedforward only (8b) | | | |
+| **Both** | | | |
+
+> **Check yourself:** which version wins each column? Why do you think
+> real robots use both?
+
+**Checkpoint:** post your recipe graph, your table, and the rag-test
+graph for **both together** to **`#rookie_training`**.
+
+<details>
+<summary>⭐ Stretch: does your recipe always work?</summary>
+
+* Try **three different targets** (say 0.5, 1, and 2 rotations/s). Is
+  your recipe still a good guess at each one?
+* Do 8a again with a **half-charged battery**. Does the recipe change?
+  Why? Our motor classes can also set a **voltage** instead of a duty
+  cycle: why might a recipe in volts work better than one in duty
+  cycle?
+* Now look at the comments on the `Friction` class in `lib`. Which of
+  its numbers is like your `a`?
+
+</details>
 
 ## Send it in
 
