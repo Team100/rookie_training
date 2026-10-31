@@ -1,20 +1,31 @@
 # Control a motor from code
 
-Now for real control code. You'll make the motor spin from your study,
-read its speed, and then drive it with an Xbox controller.
+Now you'll write real control code: make the motor spin from your study,
+read its speed, ramp it up gently, and then drive it with an Xbox
+controller.
+
+This chapter doesn't hand you the code. Each step says **what to
+build** and **where to look**, then has a **checkpoint**. If you're
+stuck, open the hints **one at a time**, and really try before opening
+the next one. Figuring it out is the point. It's also how you'll work
+on the real robot code, where nobody has written the answer down.
 
 You need:
 
 * a [study](06_STUDY.md) with `lib` included, that builds and deploys
-* the Kraken from [Your first motor](05_FIRST_MOTOR.md), and its CAN ID
+* the motor from [Your first motor](05_FIRST_MOTOR.md), and its CAN ID
 
-Open your study's workspace and find `Robot.java`. For now, you'll put
-everything in this one file.
+Open your study's workspace and find `Robot.java`. For now, everything
+goes in this one file.
 
-> If the class names below don't match what you see in `lib`, the
-> library has moved on. Compare with
-> [`test/single_roller/.../Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java),
-> which is always kept building, and fix this page.
+## Your reference: `test/single_roller`
+
+[`test/single_roller/.../Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java)
+is a small, working robot program that controls one motor. It's always
+kept building. It does more than you need, but when you're stuck,
+**look at how it does things**. Reading working code is a real skill:
+find the part you need and understand it, rather than copying the whole
+thing.
 
 ## The robot lifecycle
 
@@ -28,22 +39,63 @@ WPILib calls methods in your `Robot` class at certain times:
 | `teleopPeriodic()` | Every 20 ms while teleop is enabled |
 
 Read [WPILib: What is "TimedRobot"?](https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html)
-to learn more.
+to learn more. You'll use this table in almost every step.
 
-## Use the Team 100 robot base
+## Step 1: Use the Team 100 robot base
 
-Change your class to extend our version of `TimedRobot`, which adds
-better logging:
+**Goal:** your `Robot` class extends our version of `TimedRobot`, which
+adds better logging.
 
-```java
-public class Robot extends TimedRobot100 {
-```
+**Look in:** `lib/.../framework`.
 
-You'll need `import org.team100.lib.framework.TimedRobot100;`.
-VS Code can add imports for you: hover over the red squiggle and choose
-**Quick Fix**.
+**Checkpoint:** it builds.
 
-## Create the motor
+<details>
+<summary>Hint 1</summary>
+
+Our classes often have `100` in the name.
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+It's `TimedRobot100`. Change what your class `extends`. When VS Code
+underlines it in red, hover over it and choose **Quick Fix** to add the
+`import`.
+</details>
+
+## Step 2: Keep the library ticking
+
+Our library needs a few calls **every cycle** to work: one moves our
+clock forward, one clears old sensor readings, one runs commands, and
+one sends logs to the dashboard.
+
+**Goal:** your `robotPeriodic()` makes those four calls.
+
+**Look in:** the `robotPeriodic()` of `test/single_roller`. Find the
+four lines that do this. (It has a few extra lines you don't need yet.)
+
+**Checkpoint:** it builds, and you've written a short comment above each
+line saying what it does, in your own words. Open each class (`Takt`,
+`Cache`, `CommandScheduler`, `LogPoller`) and read its comments to find
+out.
+
+<details>
+<summary>Hint 1</summary>
+
+Two of the class names are `Takt` and `Cache`.
+</details>
+
+<details>
+<summary>Hint 2: what's a cache?</summary>
+
+Asking a motor for data is slow, so we **cache** each value: we read it
+once per cycle and reuse it. Then we throw the cache away every cycle,
+or we'd see the same old value forever. Read about
+[caching](https://en.wikipedia.org/wiki/Cache_(computing)).
+</details>
+
+## Step 3: Create the motor
 
 Our motor classes are in [`lib/.../motor`](https://github.com/Team100/all26/tree/main/lib/src/main/java/org/team100/lib/motor).
 CTRE motors are in the `ctre` folder, **one class for each kind of
@@ -56,197 +108,220 @@ motor**:
 **Use the class that represents the motor you actually have**, or, if
 yours isn't listed, look in the `ctre` folder for the class that matches
 it. The classes differ in the motor's physics (how strong and how fast
-it is), so the wrong one gives you wrong numbers. This page uses
-`KrakenX60Motor`; for any other motor, just change the class name.
+it is), so the wrong one gives you wrong numbers.
 
 > [!NOTE]
-> **Using a Falcon 500 instead?** It has the same controller inside (a
-> Talon FX), so almost everything on this page is the same. Two
-> differences:
+> **Using a Falcon 500?** It has the same controller inside (a Talon FX)
+> as a Kraken, so this chapter works the same; just use
+> `Falcon500Motor`. One catch: older Falcons may still have **Phoenix 5**
+> firmware, but our code uses **Phoenix 6**. Look at the Falcon's card
+> in Tuner X: if it says Phoenix 5, update it to Phoenix 6 firmware
+> there first (it's free). Otherwise your code builds and deploys, but
+> the motor never moves.
 >
-> 1. **Class:** use `Falcon500Motor` instead of `KrakenX60Motor`. It
->    takes exactly the same arguments.
-> 2. **Firmware:** older Falcons may still have **Phoenix 5** firmware,
->    but our code uses **Phoenix 6**. Look at the Falcon's card in
->    Tuner X: if it says Phoenix 5, update it to Phoenix 6 firmware
->    there first (it's free). Otherwise your code builds and deploys,
->    but the motor never moves.
->    > **TODO:** add the exact Tuner X steps for switching a Falcon to
->    > Phoenix 6 firmware.
+> **TODO:** add the exact Tuner X steps for switching a Falcon to
+> Phoenix 6 firmware.
 
-Open it and read the constructor. It needs a lot of arguments:
+**Goal:** your `Robot` has a motor **field**, created in the
+constructor. Print a message just before and just after you create it.
 
-| Argument | What it is | Use |
-| --- | --- | --- |
-| `LoggerFactory parent` | Where this motor's logs go | `log.name("motor")` |
-| `TotalCurrentLog currentLog` | Adds up the current used by every motor | from `RobotLog` (below) |
-| `CanId canId` | The CAN ID you wrote down | `new CanId(7)`, **with your ID** |
-| `NeutralMode100 neutral` | What the motor does at zero: coast or brake | `NeutralMode100.COAST` |
-| `MotorPhase motorPhase` | Which way is "forward" | `MotorPhase.FORWARD` |
-| `CurrentLimit limit` | Maximum current in amps (stator, supply). Low is safe | `new CurrentLimit(10, 10)` |
-| `Friction friction` | Feedforward model; not used for duty cycle | `new Friction(0, 0, 0, 0)` |
-| `PIDConstants pid` | Feedback control; not used for duty cycle | `PIDConstants.zero()` |
+**Look in:** your motor class's **constructor**. It needs a lot of
+arguments. Here's what each one means; working out *what to pass* is
+your job:
 
-Put the setup in the constructor:
+| Argument | What it is |
+| --- | --- |
+| `LoggerFactory parent` | Where this motor's logs go |
+| `TotalCurrentLog currentLog` | Adds up the current used by every motor |
+| `CanId canId` | The motor's CAN ID (the one on its masking tape) |
+| `NeutralMode100 neutral` | What the motor does at zero: coast or brake |
+| `MotorPhase phase` | Which way is "forward" |
+| `CurrentLimit limit` | Maximum current, in amps |
+| `Friction friction` | A model of friction; not used yet |
+| `PIDConstants pid` | Feedback control settings; not used yet |
 
-```java
-private final KrakenX60Motor m_motor; // or the class for YOUR motor
+Use **safe** values on a test board: a **low current limit** (about 10
+amps), and **coast**, so the motor spins down freely.
 
-public Robot() {
-    Startup.start();
-    LoggerFactory log = Logging.root();
-    RobotLog robotLog = new RobotLog(log);
-    TotalCurrentLog currentLog = robotLog.totalCurrentLog();
-
-    System.out.println("Initializing motor");
-    m_motor = new KrakenX60Motor( // or the class for YOUR motor
-            log.name("motor"),
-            currentLog,
-            new CanId(7), // YOUR CAN ID, not 7!
-            NeutralMode100.COAST,
-            MotorPhase.FORWARD,
-            new CurrentLimit(10, 10),
-            new Friction(0, 0, 0, 0),
-            PIDConstants.zero());
-    System.out.println("Motor initialized");
-}
-```
-
-Before you build: **you must be able to say what every argument does.**
-Open `CurrentLimit`, `Friction`, and `PIDConstants` in `lib/config` and
-read their comments.
-
-Build and deploy. **Checkpoint:** you see both messages in the Driver
-Station console. They may be mixed in with other output, so look
-carefully.
+**Checkpoint:** before you build, you can say what every argument does.
+Then build and deploy, and you see both of your messages in the Driver
+Station console. (They may be mixed in with other output, so look
+carefully.)
 
 ![](../img/motor_log_statements.png)
 
-## Keep the library ticking
+<details>
+<summary>Hint 1: where do the logger and current log come from?</summary>
 
-Add this `robotPeriodic`:
+Look at the first few lines of the constructor in `test/single_roller`.
+Something called `RobotLog` gives you the `TotalCurrentLog`.
+</details>
 
-```java
-@Override
-public void robotPeriodic() {
-    Takt.update();
-    Cache.refresh();
-    CommandScheduler.getInstance().run();
-    LogPoller.log();
-}
-```
+<details>
+<summary>Hint 2: how do I make a CanId or a CurrentLimit?</summary>
 
-* `Takt.update()` moves our clock forward one step.
-* `Cache.refresh()` clears saved sensor readings. Asking a motor for
-  data is slow, so we **cache** each value: we read it once and reuse it.
-  Then we throw the cache away every cycle, or we'd see the same old
-  value forever. Read about [caching](https://en.wikipedia.org/wiki/Cache_(computing)).
-* `CommandScheduler…run()` runs commands (you'll use these later).
-* `LogPoller.log()` sends logs to the dashboard.
+Open `CanId`, `CurrentLimit`, `Friction`, and `PIDConstants` and read
+their constructors and comments. `PIDConstants` has a handy way to say
+"all zero"; can you find it?
+</details>
 
-## Turn the motor
+<details>
+<summary>Hint 3: the values</summary>
 
-`setDutyCycle` takes a number from **−1** (full reverse) to **1** (full
-forward). Put it in `teleopPeriodic`:
+* logs: `log.name("motor")`
+* CAN ID: `new CanId(…)` with **your** number
+* neutral: `NeutralMode100.COAST`
+* phase: `MotorPhase.FORWARD`
+* limit: `new CurrentLimit(10, 10)` (stator, supply)
+* friction: `new Friction(0, 0, 0, 0)`
+* pid: `PIDConstants.zero()`
 
-```java
-@Override
-public void teleopPeriodic() {
-    m_motor.setDutyCycle(0.1);
-}
-```
+Also look at what `test/single_roller` calls at the very start of its
+constructor, before anything else.
+</details>
 
-Deploy and select **TeleOperated** in the Driver Station. Does the motor
-turn?
+## Step 4: Turn the motor
 
-It doesn't, because the robot is **disabled**. Disabled robots never move.
-That's a safety rule. Say "Enabling!", keep a finger on **Enter**
-(disable), and click **Enable**.
+**Goal:** the motor spins at **10%** while teleop is enabled.
 
-**Checkpoint:** the motor spins at 10%.
+**Look in:**
+[`Motor.java`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/Motor.java),
+the interface every motor class follows. Find a method that takes a
+number from **−1** (full reverse) to **1** (full forward). Then use the
+lifecycle table: which method runs over and over during teleop?
 
-## Read the speed
+Deploy, and choose **TeleOperated** in the Driver Station. Does the
+motor turn? It shouldn't yet: the robot is **disabled**, and disabled
+robots never move. That's a safety rule. Say **"Enabling!"**, keep a
+finger on **Enter** (disable), and click **Enable**.
 
-```java
-double speed = m_motor.encoder().getVelocityRad_S();
-System.out.printf("speed %.2f rad/s%n", speed);
-```
+**Checkpoint:** the motor spins slowly, and stops when you disable.
 
-Put this in `teleopPeriodic`. What units is the speed in? Use 
-[rad/s](https://en.wikipedia.org/wiki/Radian_per_second) to work out
-the speed in rotations per second.
+<details>
+<summary>Hint 1</summary>
 
-> **Experiment:** comment out `Cache.refresh()`, deploy, and watch the
-> printed speed. What happens? Why? Then put it back.
+"Duty cycle" means the fraction of full power, from −1 to 1.
+</details>
 
-## Speed up slowly
+<details>
+<summary>Hint 2</summary>
 
-Add a field and ramp up a little every cycle, up to a limit:
+Call `setDutyCycle(0.1)` on your motor, in `teleopPeriodic()`.
+</details>
 
-```java
-private double m_dutyCycle = 0.0;
-```
+## Step 5: Read the speed
 
-```java
-// in teleopPeriodic
-m_dutyCycle = Math.min(m_dutyCycle + 0.001, 0.3);
-m_motor.setDutyCycle(m_dutyCycle);
-```
+**Goal:** print the motor's speed while it spins.
 
-> **Check yourself:** how many seconds does it take to reach 0.3?
-> (Hint: how often does `teleopPeriodic` run?)
+**Look in:** your motor has an `encoder()` method. Open the type it
+returns and find a method for **velocity**. What units does it use?
 
-Where should you reset `m_dutyCycle` to 0, so it starts slow every time
-you enable? (Hint: look at the lifecycle table.)
+**Checkpoint:** you see the speed printed, and you can say how many
+**rotations per second** that is.
 
-## Drive it with an Xbox controller
+> **Experiment:** comment out the `Cache` line from Step 2, deploy, and
+> watch the printed speed. What happens? Why? Then put it back.
 
-Running at a fixed speed is boring. Let's steer with a joystick.
+<details>
+<summary>Hint 1</summary>
 
-Our controller wrapper is
+The method name ends with its units. Read about
+[rad/s](https://en.wikipedia.org/wiki/Radian_per_second). How many
+radians are in one rotation?
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+`m_motor.encoder().getVelocityRad_S()`. To print a number with two
+decimals: `System.out.printf("speed %.2f%n", speed);`
+</details>
+
+## Step 6: Speed up slowly
+
+Jumping straight to full speed is hard on the hardware.
+
+**Goal:** when you enable, the motor starts at 0 and speeds up a little
+every cycle, until it reaches **0.3** (30%), then stays there. Every
+time you enable, it starts slow again.
+
+**Checkpoint:** you can see and hear it ramp up, and disabling then
+re-enabling ramps up again from zero.
+
+> **Check yourself:** if you add 0.001 each cycle, how many seconds does
+> it take to reach 0.3? (How often does `teleopPeriodic` run?)
+
+<details>
+<summary>Hint 1</summary>
+
+You need to *remember* the current duty cycle from one cycle to the
+next. Local variables are forgotten when the method ends. What isn't?
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+Make a field, like `private double m_dutyCycle`. Each cycle, add a
+small amount to it, and use it. To stop at a limit, look up `Math.min`.
+</details>
+
+<details>
+<summary>Hint 3</summary>
+
+To start slow *every time you enable*, reset the field to zero in the
+method that runs once when teleop starts. Check the lifecycle table.
+</details>
+
+## Step 7: Drive it with an Xbox controller
+
+Running at a fixed speed is boring. Steer with a joystick.
+
+**Goal:** the motor follows the controller's **left stick**, at no more
+than **10%** power (so it can't go crazy on a test board).
+
+**Look in:** our controller class,
 [`DriverXboxControl`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/hid/DriverXboxControl.java).
-Add a field and create it in the constructor:
-
-```java
-private final DriverXboxControl m_control;
-// in the constructor:
-m_control = new DriverXboxControl(log, 0);
-```
-
-`0` is the controller's slot in the Driver Station's USB tab.
-
-Replace your `teleopPeriodic`:
-
-```java
-@Override
-public void teleopPeriodic() {
-    // Divide by 10 so the motor can't go crazy on a test board.
-    double stick = m_control.leftY() / 10;
-    System.out.printf("stick %.2f%n", stick);
-    m_motor.setDutyCycle(stick);
-}
-```
+What does its constructor need? Which method reads the left stick's
+up/down?
 
 Plug the controller into the **laptop** with USB. In the Driver Station,
 the USB tab should show it in slot 0. If it says the HID isn't found,
-some controllers have an X/D switch; try flipping it.
-
-When everything's ready, all the Driver Station lights are green:
+some controllers have an X/D switch; try flipping it. When everything's
+ready, all the Driver Station lights are green:
 
 ![](../img/driver_station.png)
 
-Enable teleop and push the left stick.
+**Checkpoint:** enable teleop, push the left stick, and the motor
+follows it.
 
-**Checkpoint:** the motor follows the stick.
+> **Check yourself:** print the stick value and push the stick **up**.
+> Does the number go up or down? Look up `getLeftY` in the
+> [WPILib docs](https://docs.wpilib.org/en/stable/) to find out why.
+> How would you make "up" mean "forward"?
 
-> **Check yourself:** push the stick **up**. Does the printed number go
-> up or down? Look up `getLeftY` in the
-> [WPILib docs](https://docs.wpilib.org/en/stable/) to find out why. How
-> would you make "up" mean "forward"?
+<details>
+<summary>Hint 1</summary>
+
+Create the controller once (where?) and keep it in a field. The `0` in
+the Driver Station's USB tab is the controller's **port**.
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+`new DriverXboxControl(log, 0)` in the constructor. In `teleopPeriodic`,
+read `leftY()`, make it smaller so it's never more than 0.1, and send it
+to the motor. This replaces your ramp from Step 6.
+</details>
 
 ## Send it in
 
 Commit, push, and open a PR ([how](02_FORK_WORKFLOW.md)). In the
-description, say what you tested and what you saw.
+description, say what you tested and what you saw. A mentor will read
+your code, so make sure your comments from Step 2 are in there.
+
+> If the classes or methods named here don't match what you see in
+> `lib`, the library has moved on. Check `test/single_roller`, which is
+> always kept building, and fix this page.
 
 Next: [Use the simulator](08_SIMULATOR.md)
