@@ -54,6 +54,22 @@ Krakens are in the `ctre` folder:
 Use the one that matches your motor. This page uses the X60; for an X44,
 just change the class name.
 
+> [!NOTE]
+> **Using a Falcon 500 instead?** It has the same controller inside (a
+> Talon FX), so almost everything on this page is the same. Two
+> differences:
+>
+> 1. **Class:** use
+>    [`Falcon500Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/Falcon500Motor.java)
+>    instead of `KrakenX60Motor`. It takes exactly the same arguments.
+> 2. **Firmware:** older Falcons may still have **Phoenix 5** firmware,
+>    but our code uses **Phoenix 6**. Look at the Falcon's card in
+>    Tuner X: if it says Phoenix 5, update it to Phoenix 6 firmware
+>    there first (it's free). Otherwise your code builds and deploys,
+>    but the motor never moves.
+>    > **TODO:** add the exact Tuner X steps for switching a Falcon to
+>    > Phoenix 6 firmware.
+
 Open it and read the constructor. It needs a lot of arguments:
 
 | Argument | What it is | Use |
