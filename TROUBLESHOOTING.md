@@ -38,7 +38,28 @@
 
 ## Deploying and running
 
-See [Deploy](DEPLOY.md#if-the-deploy-fails),
+**Auton is enabled, but the robot doesn't move**
+: Nobody picked an auton, so it's running `NONE`. The Driver Station
+  can't choose one. Connect Glass to team 100 and pick it in
+  `SmartDashboard → Auton Command`, then enable from the Driver Station.
+  See [Work on auton](AUTON.md#part-6-run-it-on-a-real-robot).
+
+**Driver Station says "Emergency Stopped" and won't enable**
+: The robot is **e-stopped** (emergency stopped). Unlike a normal
+  disable, it stays stopped until the robot code restarts. Either:
+  * **redeploy the code** (WPILib → **Deploy Robot Code**), or
+  * press the **reset button** on the RoboRIO. Ask a mentor where it is,
+    and keep clear of the robot while it reboots.
+    > **TODO:** what's the SystemCore equivalent?
+
+  Common causes:
+  * Someone pressed the **space bar** in the Driver Station. **Space is
+    e-stop, Enter is disable.** Keep your finger on Enter.
+  * TODO: we've seen e-stops we can't explain. If you find out why, add
+    it here.
+
+See [Deploy to the RoboRIO](DEPLOY.md#if-the-deploy-fails),
+[Deploy to a SystemCore](SYSTEMCORE.md#3-deploy-to-a-systemcore),
 [SSH and checks](SSH_AND_CHECKS.md#common-problems), and
 [Debugging](DEBUGGING.md).
 

@@ -6,15 +6,14 @@ read its speed, and then drive it with an Xbox controller.
 You need:
 
 * a [study](STUDY.md) with `lib` included, that builds and deploys
-* the NEO + SPARK MAX from [Your first motor](FIRST_MOTOR.md), and its
-  CAN ID
+* the Kraken from [Your first motor](FIRST_MOTOR.md), and its CAN ID
 
 Open your study's workspace and find `Robot.java`. For now, you'll put
 everything in this one file.
 
 > If the class names below don't match what you see in `lib`, the
 > library has moved on. Compare with
-> [`test/single_roller/.../Robot.java`](https://github.com/Team100/all26/blob/2027/test/single_roller/src/main/java/first/robot/Robot.java),
+> [`test/single_roller/.../Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java),
 > which is always kept building, and fix this page.
 
 ## The robot lifecycle
@@ -28,7 +27,7 @@ WPILib calls methods in your `Robot` class at certain times:
 | `teleopInit()` | Once, when teleop is enabled |
 | `teleopPeriodic()` | Every 20 ms while teleop is enabled |
 
-Read [WPILib: What is "TimedRobot"?](https://docs.wpilib.org/en/2027/docs/software/vscode-overview/creating-robot-program.html)
+Read [WPILib: What is "TimedRobot"?](https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html)
 to learn more.
 
 ## Use the Team 100 robot base
@@ -46,9 +45,15 @@ VS Code can add imports for you: hover over the red squiggle and choose
 
 ## Create the motor
 
-Our motor classes are in [`lib/.../motor`](https://github.com/Team100/all26/tree/2027/lib/src/main/java/org/team100/lib/motor).
-For a NEO on a SPARK MAX, use
-[`NeoCANSparkMotor`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/motor/rev/NeoCANSparkMotor.java).
+Our motor classes are in [`lib/.../motor`](https://github.com/Team100/all26/tree/main/lib/src/main/java/org/team100/lib/motor).
+Krakens are in the `ctre` folder:
+
+* Kraken X60: [`KrakenX60Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java)
+* Kraken X44: [`KrakenX44Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX44Motor.java)
+
+Use the one that matches your motor. This page uses the X60; for an X44,
+just change the class name.
+
 Open it and read the constructor. It needs a lot of arguments:
 
 | Argument | What it is | Use |
@@ -56,18 +61,16 @@ Open it and read the constructor. It needs a lot of arguments:
 | `LoggerFactory parent` | Where this motor's logs go | `log.name("motor")` |
 | `TotalCurrentLog currentLog` | Adds up the current used by every motor | from `RobotLog` (below) |
 | `CanId canId` | The CAN ID you wrote down | `new CanId(7)`, **with your ID** |
-| `CanBusId busId` | Which SystemCore CAN port | `new CanBusId(0)` |
 | `NeutralMode100 neutral` | What the motor does at zero: coast or brake | `NeutralMode100.COAST` |
 | `MotorPhase motorPhase` | Which way is "forward" | `MotorPhase.FORWARD` |
 | `CurrentLimit limit` | Maximum current in amps (stator, supply). Low is safe | `new CurrentLimit(10, 10)` |
 | `Friction friction` | Feedforward model; not used for duty cycle | `new Friction(0, 0, 0, 0)` |
 | `PIDConstants pid` | Feedback control; not used for duty cycle | `PIDConstants.zero()` |
-| `int averageDepth`, `int measurementPeriod` | Encoder filtering | `0`, `0` (defaults) |
 
 Put the setup in the constructor:
 
 ```java
-private final NeoCANSparkMotor m_motor;
+private final KrakenX60Motor m_motor;
 
 public Robot() {
     Startup.start();
@@ -76,18 +79,15 @@ public Robot() {
     TotalCurrentLog currentLog = robotLog.totalCurrentLog();
 
     System.out.println("Initializing motor");
-    m_motor = new NeoCANSparkMotor(
+    m_motor = new KrakenX60Motor(
             log.name("motor"),
             currentLog,
             new CanId(7), // YOUR CAN ID, not 7!
-            new CanBusId(0),
             NeutralMode100.COAST,
             MotorPhase.FORWARD,
             new CurrentLimit(10, 10),
             new Friction(0, 0, 0, 0),
-            PIDConstants.zero(),
-            0,
-            0);
+            PIDConstants.zero());
     System.out.println("Motor initialized");
 }
 ```
@@ -184,7 +184,7 @@ you enable? (Hint: look at the lifecycle table.)
 Running at a fixed speed is boring. Let's steer with a joystick.
 
 Our controller wrapper is
-[`DriverXboxControl`](https://github.com/Team100/all26/blob/2027/lib/src/main/java/org/team100/lib/hid/DriverXboxControl.java).
+[`DriverXboxControl`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/hid/DriverXboxControl.java).
 Add a field and create it in the constructor:
 
 ```java
@@ -221,7 +221,7 @@ Enable teleop and push the left stick.
 
 > **Check yourself:** push the stick **up**. Does the printed number go
 > up or down? Look up `getLeftY` in the
-> [WPILib docs](https://docs.wpilib.org/en/2027/) to find out why. How
+> [WPILib docs](https://docs.wpilib.org/en/stable/) to find out why. How
 > would you make "up" mean "forward"?
 
 ## Send it in

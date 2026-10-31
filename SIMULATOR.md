@@ -6,7 +6,7 @@ you can try auton paths, check your logic, and find crashes before you
 touch hardware.
 
 The official guide is
-[here](https://docs.wpilib.org/en/2027/docs/software/wpilib-tools/robot-simulation/simulation-gui.html).
+[here](https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/simulation-gui.html).
 
 ## Start the simulator
 
@@ -18,8 +18,8 @@ You'll get the simulation window:
 
 ![Simulation GUI](readme_img/sim_gui.png)
 
-If it doesn't start, read the terminal for errors. Simulation is new on
-2027 too, so ask a mentor if it's stuck.
+If it doesn't start, read the terminal for errors, and ask a mentor if
+it's stuck.
 
 ## The field view
 
@@ -29,7 +29,7 @@ Open **NetworkTables → Field** if you don't see the field.
 
 If there's no Field option, your robot code probably crashed or hit a
 breakpoint. Check the terminal. More about the field widget is
-[here](https://docs.wpilib.org/en/2027/docs/software/dashboards/glass/field2d-widget.html).
+[here](https://docs.wpilib.org/en/stable/docs/software/dashboards/glass/field2d-widget.html).
 
 ## Drive with the keyboard
 
@@ -65,4 +65,4 @@ For more detail in the logs, set **SmartDashboard → Log Level** to
 
 ![](readme_img/log_level.png)
 
-Next: [Connect to the robot and test your code](ROBOT_NETWORK.md)
+Next: [Glass and power-draw tests](GLASS_POWER.md)

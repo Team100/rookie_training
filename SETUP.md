@@ -49,14 +49,18 @@ freely.
   and plug it in. The password is written on it. These already have
   WPILib, GitHub Desktop and Git installed, so skip to
   "Make a GitHub account".
-* **Your own laptop:** you'll install the tools below.
+* **Your own laptop:** you'll install the tools below. To also work
+  from home (Slack, Claude, and so on), see
+  [Work from home on your own laptop](HOME_LAPTOP.md).
 
 ## Install the tools (own laptop only)
 
-1. **WPILib 2027.** Follow the
-   [WPILib installation guide](https://docs.wpilib.org/en/2027/docs/zero-to-robot/step-2/wpilib-setup.html).
-   It installs "2027 WPILib VS Code", Java, and the WPILib tools. Use this
+1. **WPILib 2026.** Follow the
+   [WPILib installation guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html).
+   It installs "2026 WPILib VS Code", Java, and the WPILib tools. Use this
    VS Code for robot code, not a different VS Code you already have.
+   (You'll add 2027 WPILib later, when you
+   [switch to the SystemCore](SYSTEMCORE.md).)
 1. **Git.** Windows: install [Git for Windows](https://git-scm.com/download/win)
    and accept the defaults. Mac: run `xcode-select --install`.
 1. **GitHub Desktop** (optional but recommended):
@@ -77,7 +81,8 @@ to see on every PR.
 
 1. Sign in to GitHub and go to https://github.com/Team100/all26
 1. Click **Fork** (upper right).
-1. **Uncheck "Copy the `main` branch only".** We need the `2027` branch.
+1. **Uncheck "Copy the `main` branch only".** You'll start on `main`,
+   but you'll need the `2027` branch later for the SystemCore.
 1. Click **Create fork**.
 
 You now have `https://github.com/<you>/all26`.
@@ -99,7 +104,7 @@ every time you push.
    `Desktop\alice\all26`), so nobody else uses it by mistake.
 1. When it asks "How are you planning to use this fork?", choose
    **To contribute to the parent project**. This sets up `upstream` for you.
-1. In the branch menu at the top, switch to **`2027`**.
+1. Check that the branch menu at the top says **`main`**.
 
 ### Or with the command line
 
@@ -107,7 +112,6 @@ every time you push.
 git clone https://github.com/<you>/all26.git
 cd all26
 git remote add upstream https://github.com/Team100/all26.git
-git checkout 2027
 ```
 
 ### Check
@@ -134,7 +138,7 @@ should show `origin` pointing at **your** fork and `upstream` pointing at
 
 ## First build
 
-1. Start **2027 WPILib VS Code** (from the desktop icon, not Windows search).
+1. Start **2026 WPILib VS Code** (from the desktop icon, not Windows search).
 1. **File → Open Folder…** and open `all26/studies/discus`, a good first
    project.
    * Open a single project folder, not the whole `all26` folder. Each

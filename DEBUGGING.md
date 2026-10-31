@@ -23,7 +23,8 @@ only while you're debugging, and take it out afterwards.
 ## 3. Log and graph
 
 Our loggers (`LoggerFactory`) send values to NetworkTables. Look at them
-live in **Glass** or **AdvantageScope**, and graph them over time. A
+live in **Glass** ([how to connect](GLASS_POWER.md#open-glass-and-connect))
+or **AdvantageScope**, and graph them over time. A
 graph of "what I asked for" next to "what happened" answers most
 questions about motors and controllers.
 

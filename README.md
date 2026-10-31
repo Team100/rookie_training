@@ -26,14 +26,12 @@ What's new compared to the 2025 guide:
 * **Forks, not branches on the team repo.** You never push to
   `Team100/all26` directly. You push to your own copy (your *fork*) and
   open a pull request.
-* **SystemCore, not RoboRIO.** The 2027 robot controller is the
-  [SystemCore](https://docs.wpilib.org/en/2027/). You can `ssh` into it
-  just like a Raspberry Pi.
+* **Two parts.** You learn the basics on a **RoboRIO**, then switch to
+  the new **SystemCore** controller for the real robot.
+* **Krakens only.** The competition robot uses Kraken X60 and X44
+  motors, so that's what this guide uses.
 * **Raspberry Pi 5 cameras** run our own Python vision code, and you can
   change and deploy it yourself.
-
-The SystemCore code lives on the **`2027` branch** of `Team100/all26`.
-Everything in this guide uses that branch.
 
 ## What you'll learn
 
@@ -42,69 +40,60 @@ Everything in this guide uses that branch.
 * **Software engineering:** Git, testing, debugging
 * **Teamwork:** pull requests, code review, documentation
 
-## Learning path
+## Part 1: RoboRIO and motors
+
+Learn the basics on a RoboRIO test board. Use the **`main`** branch of
+`Team100/all26` and **2026 WPILib**.
 
 ### Getting started
 
 1. **[Set up your laptop and your fork](SETUP.md)**: GitHub, Git, WPILib, first build
 1. **[Day-to-day workflow with your fork](FORK_WORKFLOW.md)**: sync, branch, commit, push, pull request
-1. **[Deploy to the SystemCore](DEPLOY.md)**: put code on a real controller
+1. **[Work from home on your own laptop](HOME_LAPTOP.md)**: Slack, GitHub, VS Code, Claude
+1. **[Deploy to the RoboRIO](DEPLOY.md)**: put code on a real controller
 
 ### Motors
 
-4. **[Your first motor](FIRST_MOTOR.md)**: wiring, CAN IDs, spinning a motor with no code
+5. **[Your first motor](FIRST_MOTOR.md)**: wiring a Kraken, CAN IDs, spinning it with no code
 1. **[Your first study](STUDY.md)**: your own small project that uses `lib`
 1. **[Control a motor from code](MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller
 1. **[Use the simulator](SIMULATOR.md)**: test without a robot
+1. **[Glass and power-draw tests](GLASS_POWER.md)**: graph live values; measure how much current a mechanism draws
 
-### The whole robot
+## Part 2: SystemCore and the real robot
 
-8. **[Connect to the robot and test your code](ROBOT_NETWORK.md)**: radios, laptop network, competition-robot etiquette
+The competition robot runs on the
+[SystemCore](https://docs.wpilib.org/en/2027/). Start here once you've
+finished Part 1. Use the **`2027`** branch of `Team100/all26` and
+**2027 WPILib**.
+
+10. **[Switch to the SystemCore](SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, move your study over
+1. **[Connect to the robot and test your code](ROBOT_NETWORK.md)**: radios, laptop network, competition-robot etiquette
 1. **[SSH into the SystemCore and the Pis](SSH_AND_CHECKS.md)**: log in and check that things are healthy
 1. **[Change the Raspberry Pi code](PI_CHANGES.md)**: edit, test, deploy, PR
 1. **[Work on auton](AUTON.md)**: drive out 2 meters and back; pose, waypoints, trajectories
 
-### Whenever you need them
+## Whenever you need them
 
-* [Robot identity](IDENTITY.md): how the code knows which robot it's on
-* [First motor on a RoboRIO (2025)](ROBORIO_NEO_FIRST_MOTOR.md): for older test boards
+* [Robot identity](IDENTITY.md): how the code knows which robot it's on (SystemCore)
+* [RoboRIO → SystemCore cheat sheet](SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
 * [Debugging](DEBUGGING.md): errors, prints, logs, the debugger
-* [Troubleshooting](TROUBLESHOOTING.md): Git, build, and deploy problems
+* [Troubleshooting](TROUBLESHOOTING.md): Git, build, deploy, and robot problems
 * [Coding conventions](https://github.com/Team100/all26/blob/2027/lib/doc/getting_started/Conventions.md)
-
-## RoboRIO → SystemCore cheat sheet
-
-Older docs, forum posts, and videos talk about the RoboRIO. Translate like
-this:
-
-| RoboRIO (old) | SystemCore (new) |
-| --- | --- |
-| USB-B cable to the RoboRIO | USB-C cable to the SystemCore |
-| USB address `172.22.11.2` | `172.26.0.1` (Windows), `172.27.0.1` (Mac/Linux) |
-| `roboRIO-100-FRC.local` | `robot.local` |
-| Robot address `10.1.0.2` | Still `10.1.0.2` on the robot network |
-| ssh user `lvuser` / `admin` | ssh user `systemcore`, password `systemcore` |
-| Deploy folder `/home/lvuser/deploy` | `/home/systemcore/deploy` |
-| Serial number in the console | See [Robot identity](IDENTITY.md) |
-| CAN bus | Five CAN ports, `can_s0` … `can_s4`; in code, `new CanBusId(0)` … |
-| `edu.wpi.first.…` packages | `org.wpilib.…` packages |
-| "2026 WPILib VS Code" | "2027 WPILib VS Code" |
-
-The SystemCore also has a web dashboard at http://robot.local, and its
-screen shows its current IP address.
 
 ## Reference
 
 * [Network addresses](https://github.com/Team100/all26/blob/2027/lib/doc/network.md)
-* [Test board setup (Kraken, Vortex, gyro)](https://github.com/Team100/all26/blob/2027/lib/doc/setup.md)
+* [Test board setup (Kraken, Vortex, gyro)](https://github.com/Team100/all26/blob/main/lib/doc/setup.md)
 * [Library tutorial](https://github.com/Team100/all26/blob/2027/lib/doc/README.md)
 * [Raspberry Pi docs](https://github.com/Team100/all26/blob/2027/raspberry_pi/doc/README.md)
-* [WPILib 2027 docs](https://docs.wpilib.org/en/2027/)
+* WPILib docs: [2026, for the RoboRIO](https://docs.wpilib.org/en/stable/) and
+  [2027, for the SystemCore](https://docs.wpilib.org/en/2027/)
 
 ## Help improve this guide
 
 This guide is never finished. If something is wrong, unclear, or
-missing, or if a screenshot still shows a RoboRIO, fix it! Fork this
+missing, or a screenshot is out of date, fix it! Fork this
 repo, edit the page, and send a pull request, the same
 [fork workflow](FORK_WORKFLOW.md) you use for robot code. That's good
 practice too.

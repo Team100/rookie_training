@@ -8,21 +8,25 @@ Do this loop for every change, big or small:
 1. Commit and push to your fork
 1. Open a pull request
 
+> **Which branch?** In Part 1 of this guide (RoboRIO and motors) you
+> work on **`main`**. Once you [switch to the SystemCore](SYSTEMCORE.md),
+> use **`2027`** everywhere this page says `main`.
+
 ## 1. Sync your fork
 
 The team code changes every day. Start every session by catching up, so
 your PR doesn't conflict with other people's work.
 
-**On GitHub:** open your fork, switch to the `2027` branch, and click
+**On GitHub:** open your fork, switch to the `main` branch, and click
 **Sync fork → Update branch**. Then in GitHub Desktop, click
 **Fetch origin**, then **Pull origin**.
 
 **Or on the command line:**
 
 ```
-git checkout 2027
-git pull upstream 2027
-git push origin 2027
+git checkout main
+git pull upstream main
+git push origin main
 ```
 
 ## 2. Make a branch in your fork
@@ -30,11 +34,11 @@ git push origin 2027
 Make one branch per change, named for what you're doing, e.g.
 `alice/shooter-speed`. The branch lives in **your fork** only.
 
-* GitHub Desktop: **Branch → New branch…**, based on `2027`.
+* GitHub Desktop: **Branch → New branch…**, based on `main`.
 * Command line: `git checkout -b alice/shooter-speed`
 
-Don't commit straight onto `2027` in your fork. Keeping it identical to
-the team's `2027` makes syncing easy.
+Don't commit straight onto `main` in your fork. Keeping it identical to
+the team's `main` makes syncing easy.
 
 ## 3. Change, build, test
 
@@ -64,7 +68,7 @@ Don't commit build output, logs, or files you didn't mean to change.
 
 1. Go to your fork on github.com. There will be a banner offering to
    **Compare & pull request**.
-1. Check the arrows: **base repository `Team100/all26`, base `2027`** ←
+1. Check the arrows: **base repository `Team100/all26`, base `main`** ←
    **head repository `<you>/all26`, compare `alice/shooter-speed`**.
 1. Write what you changed, why, and how you tested it (in sim? on a test
    board? which robot?).
@@ -79,9 +83,10 @@ the branch, sync your fork, and start the next change from step 1.
 * **"Permission denied" pushing:** you're pushing to `upstream`, not
   `origin`. Run `git remote -v` and push to your fork.
 * **PR shows lots of changes you didn't make:** the base is wrong (e.g.
-  `main` instead of `2027`), or your branch started from an old fork. Sync
+  `2027` instead of `main`, or the other way around), or your branch
+  started from an old fork. Sync
   your fork, then ask for help rebasing.
 * **Merge conflict:** don't panic, and don't delete things to make it go
   away. Ask a mentor; it's a normal part of working on a team.
 
-Next: [Deploy to the SystemCore](DEPLOY.md)
+Next: [Work from home on your own laptop](HOME_LAPTOP.md)

@@ -13,25 +13,26 @@ Do this on a branch in your fork ([how](FORK_WORKFLOW.md)), e.g.
 
 ## Create the study
 
-The 2027 WPILib project wizard and our library are both still changing,
-so the most reliable start is to copy our clean 2027 template.
+Use the WPILib project wizard, in **2026 WPILib VS Code**:
 
-1. In VS Code, open the whole `all26` folder for a moment
-   (**File → Open Folder…**).
-1. In the Explorer, right-click `studies/template2027` → **Copy**, then
-   right-click `studies` → **Paste**.
-1. Rename the copy (right-click → **Rename**) to something that
-   describes your project and includes your name, e.g.
-   `alice_first_motor`.
-1. Open **your study folder** by itself (**File → Open Folder…** →
-   `studies/alice_first_motor`).
-1. Set the team number: `Ctrl+Shift+P` → **WPILib: Set Team Number** →
-   `100`.
+1. `Ctrl+Shift+P` → **WPILib: Create a new project**.
+1. Choose **Template** → **Java** → **Timed Robot**.
+1. For the folder, pick `all26/studies`.
+1. Name it something that describes your project and includes your
+   name, e.g. `alice_first_motor`.
+1. Team number: `100`.
+1. Click **Generate Project**, and open it when VS Code asks.
+
+> **TODO:** check these wizard steps in 2026 WPILib, and add a
+> screenshot.
+
+> 📷 **TODO screenshot:** `readme_img/wpilib_new_project.png`: the
+> wizard filled in.
 
 ## Make sure build and deploy work
 
 Build first: `Ctrl+Shift+P` → **WPILib: Build Robot Code**. Then
-[deploy](DEPLOY.md) to a test board.
+[deploy](DEPLOY.md) to a RoboRIO test board.
 
 **Checkpoint:** in the Driver Station, Communications and Robot Code are
 both **green**, and no errors are scrolling in the console.
@@ -70,7 +71,7 @@ It should look like this:
 ```
 
 From now on, open your study by opening this `.code-workspace` file.
-For an example, see `test/single_roller/single_roller_2027.code-workspace`.
+For an example, see `test/single_roller/single_roller.code-workspace`.
 
 ### 2. Tell Gradle about `lib`
 
@@ -97,7 +98,7 @@ REV, Redux). `lib` uses them, so your study needs them too.
 1. In the Explorer, open `lib/vendordeps`.
 1. Select **all** the `.json` files there, right-click → **Copy**.
 1. Right-click **your** study's `vendordeps` folder → **Paste**. Say yes
-   to replacing `CommandsV2.json` if it asks.
+   to replacing `WPILibNewCommands.json` if it asks.
 
 Your `vendordeps` should now have the same files as `lib/vendordeps`.
 
@@ -110,7 +111,7 @@ you change anything else.
 Station.
 
 If you get stuck, compare your study with
-[`test/single_roller`](https://github.com/Team100/all26/tree/2027/test/single_roller), which is set up exactly
+[`test/single_roller`](https://github.com/Team100/all26/tree/main/test/single_roller), which is set up exactly
 this way.
 
 ## Send a pull request

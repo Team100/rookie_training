@@ -13,13 +13,19 @@ Guidelines:
   programmed. Use plain language, one step at a time, and end each
   chapter with a concrete checkpoint. Define jargon the first time it
   appears.
-* **Accuracy:** check claims against `Team100/all26` (branch `2027`)
-  and the WPILib 2027 docs before writing them. Link to the real file
+* **Two parts.** Part 1 (setup, deploy, motors, simulator, Glass) is for
+  the **RoboRIO**: `all26` branch `main`, 2026 WPILib. Part 2
+  (`SYSTEMCORE.md` onward: robot network, SSH, Pis, auton, identity) is
+  for the **SystemCore**: branch `2027`, 2027 WPILib. See the README for
+  which chapter is in which part.
+* **Accuracy:** check claims against the right `Team100/all26` branch
+  for that part, and the matching WPILib docs (`en/stable` for 2026,
+  `en/2027` for 2027), before writing them. Link to the real file
   instead of copying code that may change. Mark anything unverified
   with `TODO`.
 * **Links** into the robot code use full GitHub URLs
-  (`https://github.com/Team100/all26/blob/2027/...`), since this is a
-  separate repo.
+  (`https://github.com/Team100/all26/blob/main/...` in Part 1,
+  `.../blob/2027/...` in Part 2), since this is a separate repo.
 * **No secrets.** This repo may be public. Don't write radio WPA keys or
   other team passwords here; say "ask a mentor". Vendor-default
   passwords that are already public (SystemCore, Pi) are fine.

@@ -9,8 +9,10 @@ robot motion: **pose**, **transform**, **heading**, **course**,
 **waypoint**, **trajectory**, and **controller**.
 
 Before you start, you should have finished
-[Setup](SETUP.md), [Fork workflow](FORK_WORKFLOW.md), and the
-[simulator chapter](SIMULATOR.md).
+[Setup](SETUP.md), [Fork workflow](FORK_WORKFLOW.md), the
+[simulator chapter](SIMULATOR.md), and
+[Switch to the SystemCore](SYSTEMCORE.md). This chapter uses the
+`2027` branch.
 
 ## Part 1: The ideas
 
@@ -222,8 +224,20 @@ Only with a mentor, the first few times.
 1. Find **at least 3 meters of clear floor** in front of the robot, and
    a little behind it.
 1. Deploy (WPILib → **Deploy Robot Code**).
-1. In the Driver Station, choose **Autonomous**. Pick **There And Back**
-   in the dashboard chooser.
+1. **Pick the auton in Glass.** The Driver Station can't choose which
+   auton runs. If nobody picks one, the robot runs `NONE` and just sits
+   there when you enable.
+   1. Open Glass (`Ctrl+Shift+P` → **WPILib: Start Tool** → **Glass**).
+   1. Connect: **NetworkTables Settings** → **Client**, **Team** →
+      **100**, **Apply**. (More in
+      [Glass](GLASS_POWER.md#open-glass-and-connect).)
+   1. Choose: **SmartDashboard** → **Auton Command** → **There And
+      Back**.
+
+   > 📷 **TODO screenshot:** `readme_img/glass_auton_chooser.png`: the
+   > Auton Command chooser in Glass with an auton selected.
+
+1. In the Driver Station, choose **Autonomous**.
 1. Everyone stands clear. Say **"Enabling!"** loudly. One person keeps a
    finger on **Enter** (disable) the whole time.
 1. Enable.
