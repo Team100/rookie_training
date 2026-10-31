@@ -221,6 +221,59 @@ Try these experiments, and predict the result *before* you run each one:
 * Add `waitSeconds(1)` between the two steps.
 * Change the out-trip to go 2 m to the robot's left instead.
 
+### Make a circle (simulator first)
+
+Straight lines are the easy case. Now write a second auton that drives
+a **circle**, and get it right in the simulator **before** it goes
+anywhere near a real robot.
+
+**Goal:** a new auton, **Circle**, that drives a circle about **1 m
+across** and comes back to where it started, **facing the same way**.
+Register it in `Autons.java` like There And Back.
+
+<details>
+<summary>Hint: how do I make a circle?</summary>
+
+A trajectory goes through **waypoints**, and each waypoint has a
+**course** (the direction of travel there). Put a few waypoints around
+the circle, and make each course point along the circle, like a car
+driving around a roundabout. Look at how `UTurnWithRotation` makes a
+curve.
+</details>
+
+<details>
+<summary>Hint 2: how many waypoints?</summary>
+
+Start with four: the start, the far side, and the two sides in between,
+then back to the start. If the path looks lumpy in the field view, try
+more. What changes?
+</details>
+
+**Test it in the simulator:**
+
+1. Pick **Circle** in the Auton Command chooser. While disabled, the
+   field view draws the path. Does it look like a circle? If not, fix
+   it **before** enabling.
+1. Run it in **Autonomous**. Watch the robot follow the path.
+1. Run it from a different starting spot and heading. Does the circle
+   move with the robot, or always go to the same place on the field?
+   Why?
+
+**Measure it in the simulator, too.** Write down where the robot
+**thinks** it ended up compared to where it started (the field view, or
+its pose in Glass). In the simulator, the wheels never slip, so this is
+**only** tracking error (the controller), not localization error. Keep
+these numbers: you'll compare them with the real robot in Part 7.
+
+**Checkpoint:** the Circle path looks like a circle, the simulated
+robot ends within a few centimeters of its start, facing the same way,
+and you've written down the simulator's error. **Don't run Circle on a
+real robot until this passes.**
+
+> **Check yourself:** the simulated robot does the circle almost
+> perfectly. Will the real one? List two things the simulator doesn't
+> have that a real robot does.
+
 ## Part 6: Run it on a real robot
 
 Only with a mentor, the first few times.
@@ -329,18 +382,9 @@ For each one, **predict** the error before you run it, then measure.
 | **There and Back** (this chapter) | your baseline |
 | **There and Back, faster**: raise the max speed or acceleration | does speed make the error worse? Why? |
 | **A square**: four trajectories, back to the start | do errors add up around corners? |
-| **A circle**: drive a circle about 1 m across and come back to the start, facing the same way | how well the robot follows a **curve**, not just straight lines |
+| **A circle**: your **Circle** auton from [Part 5](#make-a-circle-simulator-first), only after it passes in the simulator | how well the robot follows a **curve**; compare the real error with your simulator error |
 | **Your choice**: change one thing (a tolerance, a controller setting, the floor), with a mentor | can you make the error smaller? |
 
-<details>
-<summary>Hint: how do I make a circle?</summary>
-
-A trajectory goes through **waypoints**, and each waypoint has a
-**course** (the direction of travel there). Put a few waypoints around
-the circle, and make each course point along the circle, like a car
-driving around a roundabout. Look at how `UTurnWithRotation` makes a
-curve.
-</details>
 
 > **Check yourself:**
 > 1. Your robot is always about 10 cm short, and Glass says it thinks it
