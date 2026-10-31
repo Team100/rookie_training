@@ -162,4 +162,4 @@ Post both tables in Slack, and add the useful rows to the
 with a pull request. The next person who sees "`:1181` is blank" at a
 competition will thank you.
 
-Next: [Part 4: Where am I?](../part4/15_LOCALIZATION.md)
+Next: [The Vision Shooter Challenge](14d_VISION_SHOOTER_CHALLENGE.md)

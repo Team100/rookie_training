@@ -88,6 +88,7 @@ Real mechanisms, tethered to your laptop with a cable. Start with
 1. **[How our vision works](docs/part3/14_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
    * then **[Break the cameras (on purpose)](docs/part3/14a_BREAK_THE_CAMERAS.md)**: the breaker vs. finder game, and measuring detection limits
      * [Breaker cards](docs/part3/14b_BREAKER_CARDS.md) (finders: don't peek!) · [Finder's guide](docs/part3/14c_FINDER_GUIDE.md)
+   * then **🏆 [The Vision Shooter Challenge](docs/part3/14d_VISION_SHOOTER_CHALLENGE.md)**: the camera finds the bucket (8–12 m), and the shooter adjusts by itself
 
 ## Part 4: Localization and auton
 
