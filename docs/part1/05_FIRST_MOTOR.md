@@ -17,7 +17,7 @@ docs/img/ with these names, and replace each "TODO photo" note below.
   [ ] kraken_led_ok.jpg           Kraken status light, healthy
   [x] tunerx_team_or_ip.png       Tuner X "Enter a Team # or IP" box (cropped)
   [x] tunerx_no_diagnostics.png   Tuner X "Failed to connect to diagnostics"
-  [ ] tunerx_devices.png          Tuner X device list showing the Kraken
+  [x] tunerx_devices_2.png        Tuner X sidebar showing Devices (2)
   [ ] tunerx_kraken_config.png    Tuner X device page: CAN ID, firmware
   [ ] tunerx_kraken_plot.png      Tuner X showing supply voltage
   [x] tunerx_kraken_control.png   Tuner X Control tab, labeled steps
@@ -166,7 +166,10 @@ here's the quick version.
 
    ![Tuner X connected over USB, showing the PDP on CAN bus rio](../img/tunerx_connected_pdp.png)
 
-   > 📷 **TODO screenshot:** retake this with the Kraken in the list too.
+   That's **Devices (1)**: just the PDP. Once your Kraken shows up, it
+   says **Devices (2)**:
+
+   ![Tuner X sidebar showing Devices (2): the PDP plus the Kraken](../img/tunerx_devices_2.png)
 
    > [!WARNING]
    > **(!!!) Only the PDP, no Kraken? Check the breaker (fuse) first!**
@@ -194,9 +197,6 @@ here's the quick version.
       [`test/single_roller`](https://github.com/Team100/all26/tree/main/test/single_roller)
       ([how](04_DEPLOY.md)). Robot code that uses a CTRE motor starts the
       diagnostic server by itself. Then refresh Tuner X.
-
-   > 📷 **TODO screenshot:** `docs/img/tunerx_devices.png`: the Tuner X
-   > device list showing the Kraken next to the PDP.
 
 1. **Check the CAN bus.** The Kraken shows up, and its status isn't an
    error. If you have two devices, click **Blink** on one to see which
