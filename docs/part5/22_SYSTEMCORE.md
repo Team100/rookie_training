@@ -6,7 +6,7 @@ In Parts 1 to 4 you learned motors, real robots, vision, and auton on a
 moves everything over to it. Most of what you know carries over. This
 page covers what's different, gets your laptop and fork ready, and moves
 your motor study to the SystemCore. Then you'll
-[put it all together on the demo bot](24_DEMO_BOT_SYSTEMCORE.md).
+[put it all together on the demo bot](25_DEMO_BOT_SYSTEMCORE.md).
 
 ## What changes
 
@@ -31,7 +31,7 @@ like this:
 | Robot address `10.1.0.2` | Still `10.1.0.2` on the robot network |
 | ssh user `lvuser` / `admin` | ssh user `systemcore`, password `systemcore` |
 | Deploy folder `/home/lvuser/deploy` | `/home/systemcore/deploy` |
-| Serial number in the console | See [Robot identity](23_IDENTITY.md) |
+| Serial number in the console | See [Robot identity](24_IDENTITY.md) |
 | One CAN bus | Five CAN ports, `can_s0` … `can_s4`; in code, `new CanBusId(0)` … |
 | `edu.wpi.first.…` packages | `org.wpilib.…` packages |
 | "2026 WPILib VS Code" | "2027 WPILib VS Code" |
@@ -198,4 +198,4 @@ Robot program output (prints, stack traces) is easiest to read in the
 
 Type `exit` to log out.
 
-Next: [Connect to the robot (radios)](22_ROBOT_NETWORK.md)
+Next: [Connect to the robot (radios)](23_ROBOT_NETWORK.md)

@@ -18,7 +18,9 @@ Guidelines:
     bot), `docs/part3/` (Pis and vision), `docs/part4/` (localization
     and auton): all for the **RoboRIO**, `all26` branch `main`, 2026
     WPILib.
-  * `docs/part5/`: the **SystemCore**, branch `2027`, 2027 WPILib.
+  * `docs/part5/` (SystemCore), `docs/part6/` (object detection),
+    `docs/part7/` (final challenge): the **SystemCore**, branch
+    `2027`, 2027 WPILib.
   * `docs/reference/`: debugging and troubleshooting.
   * Every chapter gets its own number (no `05a`-style suffixes);
     companion pages that aren't read in order (like `BREAKER_CARDS.md`)
@@ -39,7 +41,7 @@ Guidelines:
   with `TODO`.
 * **Links** into the robot code use full GitHub URLs
   (`https://github.com/Team100/all26/blob/main/...` in Parts 1 to 4,
-  `.../blob/2027/...` in Part 5), since this is a separate repo.
+  `.../blob/2027/...` in Parts 5 to 7), since this is a separate repo.
 * **No secrets.** This repo may be public. Don't write radio WPA keys or
   other team passwords here; say "ask a mentor". Vendor-default
   passwords that are already public (SystemCore, Pi) are fine.

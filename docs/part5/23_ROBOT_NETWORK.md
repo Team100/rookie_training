@@ -59,7 +59,7 @@ Laptop ──Ethernet──▶ Access point (VH-109, "Access Point Mode", on the
 If any step fails, go to [Troubleshooting](#troubleshooting) below.
 
 **No radios at all?** Plug a USB-C cable from the laptop into the
-SystemCore (see [Deploy to a SystemCore](21_SYSTEMCORE.md#3-deploy-to-a-systemcore)). That's enough to deploy
+SystemCore (see [Deploy to a SystemCore](22_SYSTEMCORE.md#3-deploy-to-a-systemcore)). That's enough to deploy
 and drive, as long as the robot is on blocks or tethered.
 
 ## Laptop network settings
@@ -240,7 +240,7 @@ Work from the laptop outward:
 1. **`robot.local` doesn't resolve, but `10.1.0.2` works:** that's a
    name-lookup problem on the laptop, not the robot. Just use the IP.
 1. **Nothing works:** go back to a USB-C cable straight to the SystemCore
-   ([SSH](21_SYSTEMCORE.md#6-ssh-into-the-systemcore)).
+   ([SSH](22_SYSTEMCORE.md#6-ssh-into-the-systemcore)).
 
 ## Good to know
 
@@ -255,4 +255,4 @@ Work from the laptop outward:
 * Useful SystemCore ports: 22 (ssh), 80 (web dashboard), 5810
   (NetworkTables).
 
-Next: [Robot identity](23_IDENTITY.md)
+Next: [Robot identity](24_IDENTITY.md)

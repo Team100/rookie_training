@@ -113,7 +113,7 @@ image versions: 2025_v2.\*"**
     it here.
 
 See [Deploy to the RoboRIO](../part1/04_DEPLOY.md#if-the-deploy-fails),
-[Deploy to a SystemCore](../part5/21_SYSTEMCORE.md#3-deploy-to-a-systemcore),
+[Deploy to a SystemCore](../part5/22_SYSTEMCORE.md#3-deploy-to-a-systemcore),
 [SSH and checks](../part3/13_SSH_AND_CHECKS.md#common-problems), and
 [Debugging](DEBUGGING.md).
 

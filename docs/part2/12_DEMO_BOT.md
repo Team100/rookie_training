@@ -37,7 +37,7 @@ low power keeps the ball well under that.
 > **Connecting:** plug a **USB-B cable** straight from your laptop into
 > the demo bot's RoboRIO, just like the test board in
 > [Deploy](../part1/04_DEPLOY.md). No radios needed: those come in
-> [Part 5](../part5/22_ROBOT_NETWORK.md), on the real robot.
+> [Part 5](../part5/23_ROBOT_NETWORK.md), on the real robot.
 
 Keep the robot **on blocks** (wheels off the floor) while it's tethered:
 you're testing the shooter, not driving.

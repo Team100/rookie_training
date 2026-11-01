@@ -9,7 +9,7 @@ Do this loop for every change, big or small:
 1. Open a pull request
 
 > **Which branch?** In Part 1 of this guide (RoboRIO and motors) you
-> work on **`main`**. Once you [switch to the SystemCore](../part5/21_SYSTEMCORE.md),
+> work on **`main`**. Once you [switch to the SystemCore](../part5/22_SYSTEMCORE.md),
 > use **`2027`** everywhere this page says `main`.
 
 ## 1. Sync your fork

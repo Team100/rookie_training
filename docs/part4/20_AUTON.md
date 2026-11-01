@@ -463,4 +463,4 @@ TrajectorySE2 back(Pose2d p) {
 Before you use this, explain to someone what every line does.
 </details>
 
-Next: [Part 5: Switch to the SystemCore](../part5/21_SYSTEMCORE.md)
+Next: [🏆 Park on the X](21_PARK_ON_THE_X.md)

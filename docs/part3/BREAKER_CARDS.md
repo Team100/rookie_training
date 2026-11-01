@@ -127,7 +127,7 @@ needed, and check `:1181` again.
 **Do it:** on **your** laptop, set your Ethernet to a static IP address
 that is the **same** as one of the Pis (for example `10.1.0.31`, mask
 `255.255.255.0`), with your laptop plugged into the robot's network.
-(See [Connect to the robot](../part5/22_ROBOT_NETWORK.md) for how to set
+(See [Connect to the robot](../part5/23_ROBOT_NETWORK.md) for how to set
 an IP.)
 
 **Why:** two devices with the same IP address confuse the whole network:

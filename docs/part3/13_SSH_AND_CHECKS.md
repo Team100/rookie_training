@@ -24,7 +24,7 @@ for the full scheme.
 * **To the whole robot:** plug into the access point's (or robot
   radio's) **DS** port, with Ethernet set to **Automatic (DHCP)**. You
   should get a `10.1.0.x` address. If you get `169.254…`, see
-  [Connect to the robot](../part5/22_ROBOT_NETWORK.md#troubleshooting).
+  [Connect to the robot](../part5/23_ROBOT_NETWORK.md#troubleshooting).
 * **To just the RoboRIO:** a USB-B cable works without changing any
   settings. The RoboRIO is then at `172.22.11.2`. On a Mac, see
   [Using a Mac with an Ethernet cable](../part1/04_DEPLOY.md#using-a-mac-with-an-ethernet-cable).
