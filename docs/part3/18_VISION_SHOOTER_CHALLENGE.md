@@ -1,6 +1,6 @@
 # 🏆 The Vision Shooter Challenge
 
-In the [Shooter Challenge](../part2/11_DEMO_BOT.md#-the-shooter-challenge)
+In the [Shooter Challenge](../part2/12_DEMO_BOT.md#-the-shooter-challenge)
 you measured the distance with a tape measure and guessed the rest. Now
 the robot measures the distance **itself**, with a camera, and picks
 the right drum speed on its own.
@@ -35,7 +35,7 @@ something you **do** trust: a tape measure.
 >    much, at 8 m and at 12 m?
 > 2. Do the 3 readings at each distance agree with each other? Which is
 >    worse, near or far? (Compare with your
->    [limits lab](14a_BREAK_THE_CAMERAS.md#lab-2-measure-the-limits).)
+>    [limits lab](17_BREAK_THE_CAMERAS.md#lab-2-measure-the-limits).)
 > 3. If the camera is always off the **same way**, you can **correct** it:
 >    write a rule like `true = a + b × camera`. That's **calibration**.
 >    What are your `a` and `b`?
@@ -105,7 +105,7 @@ a little wrong?
 1. Load **5 balls**, hold **B**. Nobody touches anything during the run.
 
 **Score = balls in the bucket ÷ seconds**, same as the
-[Shooter Challenge](../part2/11_DEMO_BOT.md#scoring). An official round
+[Shooter Challenge](../part2/12_DEMO_BOT.md#scoring). An official round
 is **3 runs at 3 different secret distances**; add up your 3 scores.
 
 Post your total, the distances the robot **thought** it saw, and a
@@ -121,4 +121,4 @@ video to **`#rookie_training`**.
 > Shooter Challenge score. Which was better? What did the camera fix,
 > and what new problems did it bring?
 
-Next: [Part 4: Where am I?](../part4/15_LOCALIZATION.md)
+Next: [Part 4: Where am I?](../part4/19_LOCALIZATION.md)

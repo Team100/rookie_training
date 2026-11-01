@@ -6,7 +6,7 @@
 > experiment deliberately overheats a motor until it's destroyed. It
 > involves high current, hot metal, and smoke.
 
-In [How motors work](../part1/05a_HOW_MOTORS_WORK.md) you learned that a
+In [How motors work](../part1/06_HOW_MOTORS_WORK.md) you learned that a
 **stalled** motor has no back-EMF, so stator current gets huge, and heat
 grows with current × current. In this experiment you'll prove it: you'll
 stall a motor, measure its currents and temperature, and see what
@@ -17,10 +17,10 @@ happens when nothing limits the stator current. You'll also see why the
 
 You need to have finished:
 
-* [How motors work](../part1/05a_HOW_MOTORS_WORK.md)
-* [Control a motor from code](../part1/07_MOTOR_CODE.md): a study that
+* [How motors work](../part1/06_HOW_MOTORS_WORK.md)
+* [Control a motor from code](../part1/08_MOTOR_CODE.md): a study that
   sets a duty cycle and a `CurrentLimit`
-* [Glass and power-draw tests](../part2/09_GLASS_POWER.md): graphing
+* [Glass and power-draw tests](../part2/10_GLASS_POWER.md): graphing
   supply current, stator current, and temperature
 
 And you need a motor that a mentor has declared **scrap**. Write
@@ -77,7 +77,7 @@ out:
 
 ## Step 2: Set up the code and the graphs
 
-Start from your study from [Control a motor from code](../part1/07_MOTOR_CODE.md).
+Start from your study from [Control a motor from code](../part1/08_MOTOR_CODE.md).
 
 1. Make the duty cycle easy to change in steps, for example with
    buttons on the Xbox controller, so you can go from 0.02 to 0.05 to
@@ -86,7 +86,7 @@ Start from your study from [Control a motor from code](../part1/07_MOTOR_CODE.md
    10 A, supply 40 A).
 1. In Glass, graph **stator current**, **supply current**,
    **temperature (C)**, and the battery **voltage** (see
-   [Glass](../part2/09_GLASS_POWER.md#make-a-graph)).
+   [Glass](../part2/10_GLASS_POWER.md#make-a-graph)).
 
 **Checkpoint:** a mentor has read your code, and the graphs show live
 values with the motor disabled.
@@ -140,7 +140,7 @@ in Slack:
    What would happen without a stator limit?
 
 If the motor smoked, take it apart (see
-[the take-apart exercise](../part1/05a_HOW_MOTORS_WORK.md#exercise-take-apart-a-kraken))
+[the take-apart exercise](../part1/06_HOW_MOTORS_WORK.md#exercise-take-apart-a-kraken))
 and photograph the coils. Compare them to a healthy motor's coils.
 
 **Checkpoint:** your graphs, predictions table, and answers are posted,

@@ -253,4 +253,4 @@ make the shaft spin.
 Want to see what too much stator current really does? With a mentor's
 approval, try the [advanced experiment: smoke a motor](../advanced/SMOKE_A_MOTOR.md).
 
-Next: [Your first study](06_STUDY.md)
+Next: [Your first study](07_STUDY.md)

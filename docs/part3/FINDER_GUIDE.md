@@ -2,7 +2,7 @@
 
 You're the **finder**. Something on the vision system is broken, and
 you don't know what. Your job: find the cause, and **show the evidence**.
-(Rules: [the game](14a_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game).
+(Rules: [the game](17_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game).
 Don't read the breaker cards!)
 
 This page doesn't tell you the answer. It gives you a **method**: check
@@ -16,7 +16,7 @@ Vision data travels through a chain. If any link breaks, the robot gets
 nothing:
 
 ```
-power → Pi → network → our app → camera → picture → tags found → robot
+power → Pi → network → our app → camera → picture → tags found → robot → right numbers?
 ```
 
 **Start at the beginning of the chain and work forward.** At each
@@ -42,7 +42,7 @@ blinking now and then?
 ## Layer 2: Can you reach the Pi?
 
 **Check:** from your laptop (on the robot network,
-[how](12_SSH_AND_CHECKS.md#connect-your-laptop)):
+[how](13_SSH_AND_CHECKS.md#connect-your-laptop)):
 
 ```
 ping 10.1.0.31
@@ -86,6 +86,10 @@ nobody is looking at the camera.
 **If it fails:** click **stderr** (or `tail -n 50 app.stderr` over ssh)
 and read the **first** error. Errors are clues: they usually say what
 went wrong, and often where.
+
+Even if it's running fine, also skim the app's **normal output**
+(**stdout**), especially from when it started. Programs sometimes print
+important warnings there, not as errors.
 
 ## Layer 5: Can the Pi see the camera?
 
@@ -131,6 +135,22 @@ radio.
 
 > **TODO (mentors):** add which NetworkTables values in Glass show
 > vision data arriving at the robot.
+
+## Layer 8: Are the measurements right?
+
+**Check:** put a tag at a distance you measure with a **tape measure**
+(say 2 m and 4 m), in the center of the picture and near the edge. Does
+the distance the camera reports match the tape?
+
+**Why:** everything can be connected, running, and detecting tags, and
+the **numbers** can still be wrong. A robot with wrong numbers misses
+its shots and gets lost on the field, and nothing ever shows an error.
+"Running" isn't the same as "right".
+
+**If it fails:** wrong everywhere by about the same amount, or worse at
+the edges? Think about what the camera needs to know about **itself** to
+turn pixels into meters ([Set up a new camera](16_NEW_CAMERA.md)). Has
+anything about this camera, or which Pi it's on, changed?
 
 ## When you think you've found it
 

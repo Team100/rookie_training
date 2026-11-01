@@ -34,7 +34,7 @@
   Language Server Workspace**, and restart.
 
 **Can't find `org.team100.lib...`**
-: Your study doesn't include `lib` yet. See [Study](../part1/06_STUDY.md#include-the-lib-directory).
+: Your study doesn't include `lib` yet. See [Study](../part1/07_STUDY.md#include-the-lib-directory).
 
 ## Deploying and running
 
@@ -48,13 +48,13 @@ image versions: 2025_v2.\*"**
   `"projectYear": "2026"` in `.wpilib/wpilib_preferences.json`, and use
   **2026 WPILib VS Code** (not 2025). This happens when a study is made
   with the 2025 project wizard. See
-  [Your first study](../part1/06_STUDY.md#make-sure-build-and-deploy-work).
+  [Your first study](../part1/07_STUDY.md#make-sure-build-and-deploy-work).
 
 **Auton is enabled, but the robot doesn't move**
 : Nobody picked an auton, so it's running `NONE`. The Driver Station
   can't choose one. Connect Glass to team 100 and pick it in
   `SmartDashboard → Auton Command`, then enable from the Driver Station.
-  See [Work on auton](../part4/16_AUTON.md#part-6-run-it-on-a-real-robot).
+  See [Work on auton](../part4/20_AUTON.md#part-6-run-it-on-a-real-robot).
 
 **RoboRIO's Comm light is off**
 : That's normal without the Driver Station. Comm means "talking to the
@@ -113,8 +113,8 @@ image versions: 2025_v2.\*"**
     it here.
 
 See [Deploy to the RoboRIO](../part1/04_DEPLOY.md#if-the-deploy-fails),
-[Deploy to a SystemCore](../part5/17_SYSTEMCORE.md#3-deploy-to-a-systemcore),
-[SSH and checks](../part3/12_SSH_AND_CHECKS.md#common-problems), and
+[Deploy to a SystemCore](../part5/21_SYSTEMCORE.md#3-deploy-to-a-systemcore),
+[SSH and checks](../part3/13_SSH_AND_CHECKS.md#common-problems), and
 [Debugging](DEBUGGING.md).
 
 Found a fix that isn't here? Add it!

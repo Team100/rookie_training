@@ -22,7 +22,7 @@ camera ──frames──▶ Raspberry Pi ──"I see tag 7, there"──▶ Ro
 1. The Pi sends that over the network to the robot.
 1. The robot code knows where every tag is on the field, and where each
    camera is on the robot, so it can work out **where the robot is**.
-   That's the next chapter: [Where am I?](../part4/15_LOCALIZATION.md)
+   That's the next chapter: [Where am I?](../part4/19_LOCALIZATION.md)
 
 We wrote our own vision code instead of using a ready-made product, so
 that you can understand it and change it. The team's
@@ -60,7 +60,7 @@ it's tilted.
 
 ## Exercise: see what the Pi sees
 
-1. Follow [Change the Pi code](13_PI_CHANGES.md#3-test-on-your-laptop-first)
+1. Follow [Change the Pi code](14_PI_CHANGES.md#3-test-on-your-laptop-first)
    to run the vision code on your **laptop** with the fake camera.
 1. Read the
    [code walkthrough](https://github.com/Team100/all26/blob/main/raspberry_pi/doc/walkthrough.md).
@@ -68,7 +68,7 @@ it's tilted.
    result is sent.
 1. On a real Pi, hold a tag in front of the camera, and look at the
    Pi's dashboard and at the values that reach the robot in
-   [Glass](../part2/09_GLASS_POWER.md).
+   [Glass](../part2/10_GLASS_POWER.md).
 
 **Checkpoint:** you can point to the three places in the code (frame in,
 tags found, result out), and show a tag being detected live.
@@ -77,4 +77,4 @@ tags found, result out), and show a tag being detected live.
 > to find the Pi dashboard, and which NetworkTables values to look at in
 > Glass.
 
-Next: [Break the cameras (on purpose)](14a_BREAK_THE_CAMERAS.md)
+Next: [Set up a new camera](16_NEW_CAMERA.md)

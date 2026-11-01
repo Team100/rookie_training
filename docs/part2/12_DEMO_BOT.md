@@ -37,7 +37,7 @@ low power keeps the ball well under that.
 > **Connecting:** plug a **USB-B cable** straight from your laptop into
 > the demo bot's RoboRIO, just like the test board in
 > [Deploy](../part1/04_DEPLOY.md). No radios needed: those come in
-> [Part 5](../part5/18_ROBOT_NETWORK.md), on the real robot.
+> [Part 5](../part5/22_ROBOT_NETWORK.md), on the real robot.
 
 Keep the robot **on blocks** (wheels off the floor) while it's tethered:
 you're testing the shooter, not driving.
@@ -132,7 +132,7 @@ A ball fed into slow drums just dribbles out. So the robot needs to
 **Goal:** print (or log) whether the drums are **ready**: both at least
 as fast as a target speed you choose.
 
-**Checkpoint:** in [Glass](09_GLASS_POWER.md#make-a-graph), graph both
+**Checkpoint:** in [Glass](10_GLASS_POWER.md#make-a-graph), graph both
 drum speeds as they spin up. Mark where they cross your target. How long
 does spin-up take?
 
@@ -176,7 +176,7 @@ put "in sequence", "in parallel", "until something is true", and
 
 ## Step 7: The mystery graph
 
-Same game as on the [Discus](10_DISCUS.md#step-5-the-mystery-graph),
+Same game as on the [Discus](11_DISCUS.md#step-5-the-mystery-graph),
 now with the whole shooter. One of you shoots; the other has to work
 out **what happened, and when, just by looking at the graphs**.
 
@@ -288,8 +288,8 @@ robot was pointing, the right drum speed, how each ball would fly.
 >    itself? What would it need to know about its own camera to get the
 >    distance right?
 
-Keep your list. In [Part 3](../part3/14_VISION.md), robots use cameras to
+Keep your list. In [Part 3](../part3/15_VISION.md), robots use cameras to
 measure where things are, and you'll see why a camera has to be
 **calibrated** before its measurements can be trusted.
 
-Next: [Part 3: SSH into the RoboRIO and the Pis](../part3/12_SSH_AND_CHECKS.md)
+Next: [Part 3: SSH into the RoboRIO and the Pis](../part3/13_SSH_AND_CHECKS.md)

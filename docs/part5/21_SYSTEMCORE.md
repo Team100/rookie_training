@@ -6,7 +6,7 @@ In Parts 1 to 4 you learned motors, real robots, vision, and auton on a
 moves everything over to it. Most of what you know carries over. This
 page covers what's different, gets your laptop and fork ready, and moves
 your motor study to the SystemCore. Then you'll
-[put it all together on the demo bot](19_DEMO_BOT_SYSTEMCORE.md).
+[put it all together on the demo bot](24_DEMO_BOT_SYSTEMCORE.md).
 
 ## What changes
 
@@ -31,7 +31,7 @@ like this:
 | Robot address `10.1.0.2` | Still `10.1.0.2` on the robot network |
 | ssh user `lvuser` / `admin` | ssh user `systemcore`, password `systemcore` |
 | Deploy folder `/home/lvuser/deploy` | `/home/systemcore/deploy` |
-| Serial number in the console | See [Robot identity](IDENTITY.md) |
+| Serial number in the console | See [Robot identity](23_IDENTITY.md) |
 | One CAN bus | Five CAN ports, `can_s0` … `can_s4`; in code, `new CanBusId(0)` … |
 | `edu.wpi.first.…` packages | `org.wpilib.…` packages |
 | "2026 WPILib VS Code" | "2027 WPILib VS Code" |
@@ -80,7 +80,7 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
    it up. Wait for its screen to show that it has booted.
 1. Connect your laptop to the SystemCore with a **USB-C** cable.
    * You can also use Ethernet through the radio or a switch; see
-     [SSH and checks](../part3/12_SSH_AND_CHECKS.md#connect-your-laptop).
+     [SSH and checks](../part3/13_SSH_AND_CHECKS.md#connect-your-laptop).
 
    > 📷 **TODO photo:** `docs/img/systemcore_usb_c.jpg`: the SystemCore
    > USB-C port with the cable plugged in.
@@ -102,7 +102,7 @@ Open `studies/discus` in **2027 WPILib VS Code** and build it.
 
 If it fails: check the cable, wait for the SystemCore to finish booting,
 and try `ping robot.local`. More in
-[SSH and checks](../part3/12_SSH_AND_CHECKS.md#common-problems).
+[SSH and checks](../part3/13_SSH_AND_CHECKS.md#common-problems).
 
 **Checkpoint:** Communications and Robot Code are both green in the
 Driver Station.
@@ -136,13 +136,13 @@ The RoboRIO has one CAN bus. The SystemCore has **five CAN ports**,
 
 ## 5. Move your motor study to the SystemCore
 
-Your study from [Control a motor from code](../part1/07_MOTOR_CODE.md) was built for
+Your study from [Control a motor from code](../part1/08_MOTOR_CODE.md) was built for
 the RoboRIO, on `main`. Rebuild it on `2027`.
 
 1. On a new branch from `2027`, copy
    [`studies/template2027`](https://github.com/Team100/all26/tree/2027/studies/template2027)
    to a new study with your name, and set it up with `lib` the same way
-   as in [Your first study](../part1/06_STUDY.md#include-the-lib-directory). Compare
+   as in [Your first study](../part1/07_STUDY.md#include-the-lib-directory). Compare
    with
    [`test/single_roller`](https://github.com/Team100/all26/tree/2027/test/single_roller),
    which is set up this way on `2027`.
@@ -167,7 +167,7 @@ Send it in as a PR against **`2027`**.
 
 ## 6. SSH into the SystemCore
 
-Same idea as [SSH into the RoboRIO](../part3/12_SSH_AND_CHECKS.md), with a
+Same idea as [SSH into the RoboRIO](../part3/13_SSH_AND_CHECKS.md), with a
 different login and different things to check.
 
 ```
@@ -198,4 +198,4 @@ Robot program output (prints, stack traces) is easiest to read in the
 
 Type `exit` to log out.
 
-Next: [Connect to the robot (radios)](18_ROBOT_NETWORK.md)
+Next: [Connect to the robot (radios)](22_ROBOT_NETWORK.md)

@@ -20,6 +20,10 @@ Guidelines:
     WPILib.
   * `docs/part5/`: the **SystemCore**, branch `2027`, 2027 WPILib.
   * `docs/reference/`: debugging and troubleshooting.
+  * Every chapter gets its own number (no `05a`-style suffixes);
+    companion pages that aren't read in order (like `BREAKER_CARDS.md`)
+    have no number. Renumbering means updating every link and the
+    README.
   * `docs/advanced/`: experiments that need a mentor's sign-off first.
   * `docs/img/`: images.
   * Part 2 deliberately has **no robot code and no pointers to existing

@@ -44,7 +44,7 @@ Console** to see what the robot code prints.
 If you deployed `comp` to a test board, expect **lots of errors**. The
 competition code is looking for motors and cameras that your test board
 doesn't have. That's fine, and it's why you'll make your own
-[study](06_STUDY.md) soon.
+[study](07_STUDY.md) soon.
 
 ## If the deploy fails
 

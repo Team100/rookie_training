@@ -46,7 +46,7 @@ breakpoint. Check the terminal. More about the field widget is
 1. `W A S D` move the robot (axes 0 and 1). `E R` rotate it (axis 2).
 
 > **Check yourself:** which way does the robot move when you press `W`?
-> Is that +x on the field? (See [Auton](../part4/16_AUTON.md#pose-where-am-i).)
+> Is that +x on the field? (See [Auton](../part4/20_AUTON.md#pose-where-am-i).)
 
 ## Run an auton
 
@@ -74,4 +74,4 @@ control it, and tested in the simulator. That's a real milestone.
 
 **Post a photo of your group succeeding to `#rookie_training` in Slack!**
 
-Next: [Part 2: Glass and power-draw tests](../part2/09_GLASS_POWER.md)
+Next: [Part 2: Glass and power-draw tests](../part2/10_GLASS_POWER.md)

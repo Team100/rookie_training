@@ -10,8 +10,8 @@ robot motion: **pose**, **transform**, **heading**, **course**,
 
 Before you start, you should have finished
 [Setup](../part1/01_SETUP.md), [Fork workflow](../part1/02_FORK_WORKFLOW.md), the
-[simulator chapter](../part1/08_SIMULATOR.md), and
-[Where am I? (localization)](15_LOCALIZATION.md). This chapter uses the
+[simulator chapter](../part1/09_SIMULATOR.md), and
+[Where am I? (localization)](19_LOCALIZATION.md). This chapter uses the
 `main` branch and a RoboRIO robot.
 
 ## Part 1: The ideas
@@ -205,7 +205,7 @@ Stuck? Use the hints at the bottom. Try each one before opening the next.
 
    > 🖥️ **Advanced:** in a terminal, run `./gradlew simulateJava` in the `comp` folder ([how](../part1/01_SETUP.md#advanced-run-commands-from-a-terminal)).
 1. Open the field view (see the
-   [simulator chapter](../part1/08_SIMULATOR.md)).
+   [simulator chapter](../part1/09_SIMULATOR.md)).
 1. Find the **Auton Command** chooser (`NetworkTables → SmartDashboard →
    Auton Command`) and pick **There And Back**. While the robot is
    disabled, the field should draw both trajectories.
@@ -289,7 +289,7 @@ Only with a mentor, the first few times.
    1. Open Glass (`Ctrl+Shift+P` → **WPILib: Start Tool** → **Glass**).
    1. Connect: **NetworkTables Settings** → **Client**, **Team** →
       **100**, **Apply**. (More in
-      [Glass](../part2/09_GLASS_POWER.md#open-glass-and-connect).)
+      [Glass](../part2/10_GLASS_POWER.md#open-glass-and-connect).)
    1. Choose: **SmartDashboard** → **Auton Command** → **There And
       Back**.
 
@@ -463,4 +463,4 @@ TrajectorySE2 back(Pose2d p) {
 Before you use this, explain to someone what every line does.
 </details>
 
-Next: [Part 5: Switch to the SystemCore](../part5/17_SYSTEMCORE.md)
+Next: [Part 5: Switch to the SystemCore](../part5/21_SYSTEMCORE.md)

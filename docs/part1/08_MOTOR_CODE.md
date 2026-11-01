@@ -12,7 +12,7 @@ on the real robot code, where nobody has written the answer down.
 
 You need:
 
-* a [study](06_STUDY.md) with `lib` included, that builds and deploys
+* a [study](07_STUDY.md) with `lib` included, that builds and deploys
 * the motor from [Your first motor](05_FIRST_MOTOR.md), and its CAN ID
 
 Open your study's workspace and find `Robot.java`. For now, everything
@@ -140,7 +140,7 @@ your job:
 | `CanId canId` | The motor's CAN ID (the one on its masking tape) |
 | `NeutralMode100 neutral` | What the motor does at zero: coast or brake |
 | `MotorPhase phase` | Which way is "forward" |
-| `CurrentLimit limit` | Maximum current, in amps: a **stator** limit and a **supply** limit ([what's the difference?](05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current)) |
+| `CurrentLimit limit` | Maximum current, in amps: a **stator** limit and a **supply** limit ([what's the difference?](06_HOW_MOTORS_WORK.md#stator-current-vs-supply-current)) |
 | `Friction friction` | A model of friction; not used yet |
 | `PIDConstants pid` | Feedback control settings; not used yet |
 
@@ -328,4 +328,4 @@ your code, so make sure your comments from Step 2 are in there.
 > `lib`, the library has moved on. Check the examples above, and the
 > motor class itself, and fix this page.
 
-Next: [Use the simulator](08_SIMULATOR.md)
+Next: [Use the simulator](09_SIMULATOR.md)

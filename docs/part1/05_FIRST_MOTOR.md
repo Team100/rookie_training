@@ -223,7 +223,7 @@ here's the quick version.
 
 No Tuner X? You can write robot code that **scans** the CAN bus: try
 every possible ID and print the ones that answer. Come back to this
-after [Your first study](06_STUDY.md), once you can build and deploy a
+after [Your first study](07_STUDY.md), once you can build and deploy a
 study.
 
 The idea:
@@ -313,4 +313,4 @@ Not moving?
 Our [test board setup](https://github.com/Team100/all26/blob/main/lib/doc/setup.md)
 has more details.
 
-Next: [How motors work](05a_HOW_MOTORS_WORK.md)
+Next: [How motors work](06_HOW_MOTORS_WORK.md)

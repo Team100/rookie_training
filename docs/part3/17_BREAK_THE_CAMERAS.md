@@ -42,7 +42,7 @@ use.
 ## Before you start: know what "healthy" looks like
 
 You can't spot "broken" until you know "working". With a Pi connected to
-your laptop or the robot ([how](12_SSH_AND_CHECKS.md#connect-your-laptop)),
+your laptop or the robot ([how](13_SSH_AND_CHECKS.md#connect-your-laptop)),
 write down what each of these shows when everything is fine:
 
 | Where to look | What you see when healthy |
@@ -69,10 +69,10 @@ practices exactly that.
 ### Roles
 
 * **Breaker:** picks a card from the
-  [breaker cards](14b_BREAKER_CARDS.md), secretly breaks one thing, and
+  [breaker cards](BREAKER_CARDS.md), secretly breaks one thing, and
   makes sure it's really broken. **Finders: don't read the breaker
   cards.** It spoils the game, and you won't learn anything.
-* **Finder:** uses the [finder's guide](14c_FINDER_GUIDE.md) to work out
+* **Finder:** uses the [finder's guide](FINDER_GUIDE.md) to work out
   **what** broke and **show the evidence**.
 
 ### How a round works
@@ -147,7 +147,7 @@ with fast motion. Keep that in mind for the speed test.
 > 1. Why do you think fast movement makes detection fail? (Hint: what
 >    happens to a photo of something moving fast?)
 > 2. Our code trusts far-away tags **less** (see
->    [Where am I?](../part4/15_LOCALIZATION.md)). Does your distance
+>    [Where am I?](../part4/19_LOCALIZATION.md)). Does your distance
 >    test agree that far tags are worse? How?
 > 3. If the robot will see tags from 4 m away while driving at 2 m/s,
 >    will it work, based on your measurements?
@@ -158,8 +158,8 @@ tries.
 ## Share what you learned
 
 Post both tables in Slack, and add the useful rows to the
-[Troubleshooting table in Change the Pi code](13_PI_CHANGES.md#troubleshooting)
+[Troubleshooting table in Change the Pi code](14_PI_CHANGES.md#troubleshooting)
 with a pull request. The next person who sees "`:1181` is blank" at a
 competition will thank you.
 
-Next: [The Vision Shooter Challenge](14d_VISION_SHOOTER_CHALLENGE.md)
+Next: [The Vision Shooter Challenge](18_VISION_SHOOTER_CHALLENGE.md)

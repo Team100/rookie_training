@@ -55,10 +55,10 @@ Learn the basics on a RoboRIO test board. Parts 1 to 4 use the
 ### Motors
 
 5. **[Your first motor](docs/part1/05_FIRST_MOTOR.md)**: wiring a Kraken, CAN IDs, spinning it with no code
-   * then **[How motors work](docs/part1/05a_HOW_MOTORS_WORK.md)**: electricity, magnets, stator vs. supply current; take apart a Kraken
-1. **[Your first study](docs/part1/06_STUDY.md)**: your own small project that uses `lib`
-1. **[Control a motor from code](docs/part1/07_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller
-1. **[Use the simulator](docs/part1/08_SIMULATOR.md)**: test without a robot
+1. **[How motors work](docs/part1/06_HOW_MOTORS_WORK.md)**: electricity, magnets, stator vs. supply current; take apart a Kraken
+1. **[Your first study](docs/part1/07_STUDY.md)**: your own small project that uses `lib`
+1. **[Control a motor from code](docs/part1/08_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller
+1. **[Use the simulator](docs/part1/09_SIMULATOR.md)**: test without a robot
 
 ### 🎉 Finished Part 1?
 
@@ -77,23 +77,24 @@ guide.
 Real mechanisms, tethered to your laptop with a cable. Start with
 **easy mode**, then try **hard mode**.
 
-9. **[Glass and power-draw tests](docs/part2/09_GLASS_POWER.md)**: graph live values; the rag test
-1. **Easy mode: [the Discus](docs/part2/10_DISCUS.md)**: write a study that spins a heavy disc, measure it, and make it hold a speed
-1. **Hard mode: [the shooter bot](docs/part2/11_DEMO_BOT.md)**: write a study that spins up the shooter and feeds balls, safely
+10. **[Glass and power-draw tests](docs/part2/10_GLASS_POWER.md)**: graph live values; the rag test
+1. **Easy mode: [the Discus](docs/part2/11_DISCUS.md)**: spin a heavy disc, measure it, make it hold a speed; 🏆 Discus Challenge
+1. **Hard mode: [the shooter bot](docs/part2/12_DEMO_BOT.md)**: spin up the shooter and feed balls, safely; 🏆 Shooter Challenge
 
 ## Part 3: Raspberry Pis and vision
 
-12. **[SSH into the RoboRIO and the Pis](docs/part3/12_SSH_AND_CHECKS.md)**: log in and check that things are healthy
-1. **[Change the Raspberry Pi code](docs/part3/13_PI_CHANGES.md)**: edit, test, deploy, PR
-1. **[How our vision works](docs/part3/14_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
-   * then **[Break the cameras (on purpose)](docs/part3/14a_BREAK_THE_CAMERAS.md)**: the breaker vs. finder game, and measuring detection limits
-     * [Breaker cards](docs/part3/14b_BREAKER_CARDS.md) (finders: don't peek!) · [Finder's guide](docs/part3/14c_FINDER_GUIDE.md)
-   * then **🏆 [The Vision Shooter Challenge](docs/part3/14d_VISION_SHOOTER_CHALLENGE.md)**: the camera finds the bucket (8–12 m), and the shooter adjusts by itself
+13. **[SSH into the RoboRIO and the Pis](docs/part3/13_SSH_AND_CHECKS.md)**: log in and check that things are healthy
+1. **[Change the Raspberry Pi code](docs/part3/14_PI_CHANGES.md)**: edit, test, deploy, PR
+1. **[How our vision works](docs/part3/15_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
+1. **[Set up a new camera](docs/part3/16_NEW_CAMERA.md)**: measure it, calibrate it, and measure again: before vs. after
+1. **[Break the cameras (on purpose)](docs/part3/17_BREAK_THE_CAMERAS.md)**: the breaker vs. finder game, and measuring detection limits
+   * [Breaker cards](docs/part3/BREAKER_CARDS.md) (finders: don't peek!) · [Finder's guide](docs/part3/FINDER_GUIDE.md)
+1. **🏆 [The Vision Shooter Challenge](docs/part3/18_VISION_SHOOTER_CHALLENGE.md)**: the camera finds the bucket (8–12 m), and the shooter adjusts by itself
 
 ## Part 4: Localization and auton
 
-15. **[Where am I?](docs/part4/15_LOCALIZATION.md)**: odometry, vision, and how the robot combines them
-1. **[Work on auton](docs/part4/16_AUTON.md)**: simulate a circle, then measure real error
+19. **[Where am I?](docs/part4/19_LOCALIZATION.md)**: odometry, vision, and how the robot combines them
+1. **[Work on auton](docs/part4/20_AUTON.md)**: simulate a circle, then measure real error
 
 ## Part 5: SystemCore, all together, on the real robot
 
@@ -101,10 +102,10 @@ The competition robot runs on the new
 [SystemCore](https://docs.wpilib.org/en/2027/). Part 5 uses the
 **`2027`** branch of `Team100/all26` and **2027 WPILib**.
 
-17. **[Switch to the SystemCore](docs/part5/17_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, SSH
-1. **[Connect to the robot (radios)](docs/part5/18_ROBOT_NETWORK.md)**: radios, laptop network, robot etiquette
-1. **[Robot identity](docs/part5/IDENTITY.md)**: how the code knows which robot it's on
-1. **[Put it together on the demo bot](docs/part5/19_DEMO_BOT_SYSTEMCORE.md)**: move your shooter study to the SystemCore and bring up the whole robot
+21. **[Switch to the SystemCore](docs/part5/21_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, SSH
+1. **[Connect to the robot (radios)](docs/part5/22_ROBOT_NETWORK.md)**: radios, laptop network, robot etiquette
+1. **[Robot identity](docs/part5/23_IDENTITY.md)**: how the code knows which robot it's on
+1. **[Put it together on the demo bot](docs/part5/24_DEMO_BOT_SYSTEMCORE.md)**: move your shooter study to the SystemCore and bring up the whole robot
 
 ## Advanced (mentor approval required)
 
@@ -113,7 +114,7 @@ The competition robot runs on the new
 
 ## Whenever you need them
 
-* [RoboRIO → SystemCore cheat sheet](docs/part5/17_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
+* [RoboRIO → SystemCore cheat sheet](docs/part5/21_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
 * [Debugging](docs/reference/DEBUGGING.md): errors, prints, logs, the debugger
 * [Troubleshooting](docs/reference/TROUBLESHOOTING.md): Git, build, deploy, and robot problems
 * [Coding conventions](https://github.com/Team100/all26/blob/2027/lib/doc/getting_started/Conventions.md)

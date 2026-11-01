@@ -133,4 +133,4 @@ Commit and push your new study, then open a PR
 is fine. It's quick to review, and your *real* changes come next in
 their own PR, where they're easy to see.
 
-Next: [Control a motor from code](07_MOTOR_CODE.md)
+Next: [Control a motor from code](08_MOTOR_CODE.md)

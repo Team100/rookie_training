@@ -8,7 +8,7 @@ skills on the real robots.
 
 You need:
 
-* the Kraken code from [Control a motor from code](../part1/07_MOTOR_CODE.md),
+* the Kraken code from [Control a motor from code](../part1/08_MOTOR_CODE.md),
   deployed and working
 * a laptop connected to the RoboRIO (USB-B is fine)
 
@@ -53,7 +53,7 @@ And the robot as a whole logs:
 > breakers. That's why
 > [`CurrentLimit`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/config/CurrentLimit.java)
 > has a limit for each. The full story is in
-> [How motors work](../part1/05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).
+> [How motors work](../part1/06_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).
 
 ## Open Glass and connect
 
@@ -68,7 +68,7 @@ And the robot as a whole logs:
 
    Glass works out the robot's address for you, whether you're on USB or
    the robot network.
-   * For the [simulator](../part1/08_SIMULATOR.md), type `localhost` instead of 100.
+   * For the [simulator](../part1/09_SIMULATOR.md), type `localhost` instead of 100.
    * Still not connecting? Type the robot's address instead: `10.1.0.2`
      on the robot network, or `172.22.11.2` over USB.
 
@@ -111,7 +111,7 @@ sure it's `DEBUG` (the default) or `TRACE`, not `COMP`.
 Glass is also where you **choose which auton runs** on a real robot
 (**SmartDashboard** → **Auton Command**), because the Driver Station
 can't.
-See [Work on auton](../part4/16_AUTON.md#part-6-run-it-on-a-real-robot).
+See [Work on auton](../part4/20_AUTON.md#part-6-run-it-on-a-real-robot).
 
 The WPILib [Glass docs](https://docs.wpilib.org/en/stable/docs/software/dashboards/glass/index.html)
 cover more widgets, like the field view you used in the simulator.
@@ -126,7 +126,7 @@ does.
 > **Use a rag, never bare fingers**, and keep it low and slow:
 > * the test board motor, at **10% or less**
 > * your **10 A** current limit from
->   [Control a motor from code](../part1/07_MOTOR_CODE.md) (don't raise it)
+>   [Control a motor from code](../part1/08_MOTOR_CODE.md) (don't raise it)
 > * a mentor watching, and one person's finger on **Enter** (disable)
 >
 > Wrap the rag around the **shaft** (or the wheel or hub on it) and
@@ -153,7 +153,7 @@ drawing tool, is fine.) Then post it to **`#rookie_training`** in Slack.
 > **Check yourself:**
 > 1. When you squeezed **hard**, which current went up more: stator or
 >    supply? Why? (See
->    [How motors work](../part1/05a_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).)
+>    [How motors work](../part1/06_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).)
 > 2. Did the stator current flatten out at about 10 A when you squeezed
 >    hard? What was doing that?
 > 3. What did the speed do? And the battery voltage?
@@ -162,6 +162,6 @@ drawing tool, is fine.) Then post it to **`#rookie_training`** in Slack.
 can answer the three questions.
 
 **We'll use this later to measure our real robots**: the
-[Discus](10_DISCUS.md) and the [shooter bot](11_DEMO_BOT.md).
+[Discus](11_DISCUS.md) and the [shooter bot](12_DEMO_BOT.md).
 
-Next: [Easy mode: the Discus](10_DISCUS.md)
+Next: [Easy mode: the Discus](11_DISCUS.md)

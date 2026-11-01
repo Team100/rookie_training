@@ -9,7 +9,7 @@ In this chapter you'll write **your own study** that controls it, step
 by step: first just spinning it, then measuring it, then making it hold
 a speed by itself. Nobody hands you the code. Each step has a goal, a
 checkpoint, and hints if you're stuck, just like
-[Control a motor from code](../part1/07_MOTOR_CODE.md).
+[Control a motor from code](../part1/08_MOTOR_CODE.md).
 
 ![The Discus: a Falcon 500 motor, a 4:1 gearbox, and a heavy aluminum disc](../img/discus.jpg)
 
@@ -28,7 +28,7 @@ checkpoint, and hints if you're stuck, just like
 > **Connecting:** plug a **USB-B cable** straight from your laptop into
 > the robot's RoboRIO, just like the test board in
 > [Deploy](../part1/04_DEPLOY.md). No radios needed: those come in
-> [Part 5](../part5/18_ROBOT_NETWORK.md), on the real robot.
+> [Part 5](../part5/22_ROBOT_NETWORK.md), on the real robot.
 
 ## Step 1: Find the motor
 
@@ -51,8 +51,8 @@ A Falcon 500 is a CTRE motor, so Tuner X can see it. Check its card for
 **Goal:** a new study, with `lib` included, that creates the Discus
 motor. Use a **low current limit** to start.
 
-You've done this before: [Your first study](../part1/06_STUDY.md), then
-Step 3 of [Control a motor from code](../part1/07_MOTOR_CODE.md#step-3-create-the-motor).
+You've done this before: [Your first study](../part1/07_STUDY.md), then
+Step 3 of [Control a motor from code](../part1/08_MOTOR_CODE.md#step-3-create-the-motor).
 
 **Checkpoint:** it builds, deploys, and prints your "motor created"
 messages.
@@ -77,7 +77,7 @@ folder, in the `ctre` part.
 
 ## Step 4: Measure it
 
-**Goal:** you can see, in [Glass](09_GLASS_POWER.md#make-a-graph), a graph
+**Goal:** you can see, in [Glass](10_GLASS_POWER.md#make-a-graph), a graph
 of the disc's **speed**, **stator current**, and **supply current**
 while you drive it with the stick.
 
@@ -90,7 +90,7 @@ speed in **rotations per second**.
 > **Check yourself:**
 > 1. Push the stick to 20% and hold it. The disc speeds up, then levels
 >    off. Why does it stop speeding up? (Think back-EMF, from
->    [How motors work](../part1/05a_HOW_MOTORS_WORK.md#why-it-doesnt-melt-every-time-back-emf).)
+>    [How motors work](../part1/06_HOW_MOTORS_WORK.md#why-it-doesnt-melt-every-time-back-emf).)
 > 2. Look at the current graph. When is the current biggest: while
 >    speeding up, or at a steady speed? Why?
 
@@ -104,7 +104,7 @@ get the disc's speed.
 
 ## Step 5: The mystery graph
 
-Now use what you learned in the [rag test](09_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
+Now use what you learned in the [rag test](10_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
 on a real mechanism. One of you makes things happen to the Discus; the
 other has to work out **what happened, and when, just by looking at
 the graph**.
@@ -221,7 +221,7 @@ How much of the battery's energy actually ends up in the spinning disc?
 ![Template: time to target vs. efficiency](../img/discus_template_energy.png)
 
 Where did the rest of the energy go? (Think about
-[heat](../part1/05a_HOW_MOTORS_WORK.md#heat), friction, and the
+[heat](../part1/06_HOW_MOTORS_WORK.md#heat), friction, and the
 gearbox.) Are the fastest runs the most efficient, or the least?
 
 </details>
@@ -263,7 +263,7 @@ each one. What's different about how the disc gets to the target?
 
 Now the fun part. While your code holds the speed, **push on the disc
 with a rag** (gently at first; same safety as the
-[rag test](09_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)).
+[rag test](10_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)).
 Your code doesn't know you're there. Can it keep the speed anyway?
 
 1. Make Glass graph these four things, stacked like the template below.
@@ -300,7 +300,7 @@ power a speed needs, sent **before** anything goes wrong. Good robots
 use both.
 
 Remember the `Friction` argument you set to zeros back in
-[Control a motor from code](../part1/07_MOTOR_CODE.md#step-3-create-the-motor)?
+[Control a motor from code](../part1/08_MOTOR_CODE.md#step-3-create-the-motor)?
 By the end of this step, you'll know what it's for.
 
 ### 8a: Build a recipe
@@ -437,4 +437,4 @@ request.
 Commit your study, push, and open a PR with your graphs and your
 answers to the check-yourself questions.
 
-Next: [Hard mode: the shooter bot](11_DEMO_BOT.md)
+Next: [Hard mode: the shooter bot](12_DEMO_BOT.md)
