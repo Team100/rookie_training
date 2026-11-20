@@ -277,6 +277,91 @@ real robot until this passes.**
 > perfectly. Will the real one? List two things the simulator doesn't
 > have that a real robot does.
 
+### Change the speed (simulator first)
+
+In a match, auton is only 20 seconds long, so speed matters. But faster
+isn't free: the faster the robot goes, the harder it is to stay on the
+path. In this exercise you'll make There and Back faster (and slower),
+and **measure** what that costs.
+
+The **path** (the shape) and the **speed** are set in different places.
+The waypoints decide the shape. The **timing constraints** decide how
+fast the robot goes along it. Look at this line in your
+`ThereAndBack.java`:
+
+```java
+trajectoryFactory = new TrajectorySE2Factory(new TimingConstraintFactory(kinodynamics).slow());
+```
+
+Open
+[`TimingConstraintFactory`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/trajectory/se2/constraint/TimingConstraintFactory.java).
+`slow()` is just `scaled(0.25, 0.25, 0.25, 0.25)`: 25% of the robot's
+top speed, 25% of its top acceleration, and so on. Read the comment on
+`scaled()` to see what each of the four numbers means. There are other
+ready-made settings, like `allGood()` and `medium()`.
+
+> **Don't edit `TimingConstraintFactory`.** Every auton shares it, so a
+> change there changes all of them. Call `scaled(...)` with your own
+> numbers in **your** auton instead. (The comment on `allGood()` says
+> the same thing.)
+
+**1. Measure the baseline.** How long does There and Back take now?
+A stopwatch works, but the planner already knows: every trajectory has
+a `duration()`, in seconds. Print it from inside `out()` and `back()`,
+just before you return the trajectory:
+
+```java
+TrajectorySE2 t = planner.restToRest(waypoints);
+System.out.println("out takes " + t.duration() + " s");
+return t;
+```
+
+The message shows up in the VS Code terminal where the simulator is
+running. Write down the time for each half, and the end error you
+measured in the simulator.
+
+**2. Go faster.** Change `slow()` to `scaled(0.5, 0.5, 0.25, 0.25)`
+(twice the speed and twice the acceleration).
+
+> **Check yourself:** **before you run it**, predict the new time. Is it
+> exactly half? (Hint: on a 2 m drive, does the robot ever reach its top
+> speed, or is it speeding up and slowing down the whole time?)
+
+Run it and compare with your prediction. Then try a few more settings,
+and fill in a table:
+
+| Setting | Predicted time (s) | Actual time (s) | End error in sim (cm) |
+| --- | --- | --- | --- |
+| `slow()` | | | |
+| `scaled(0.5, 0.5, 0.25, 0.25)` | | | |
+| `scaled(0.75, 0.75, 0.25, 0.25)` | | | |
+| `scaled(0.1, 0.1, 0.1, 0.1)` (slower!) | | | |
+
+Which number matters most for a 2 m drive: speed or acceleration? Change
+only one at a time to find out.
+
+**3. Fast out, slow back.** Make the robot drive out fast and come back
+slowly. You'll need a way to give `out` and `back` different
+constraints.
+
+<details>
+<summary>Hint: different speeds for each half</summary>
+
+The speed lives in the planner, and right now both halves use the same
+one. Can you make **two** `TrajectorySE2Factory`s and two
+`TrajectorySE2Planner`s, one for each half?
+</details>
+
+**4. Speed up the Circle.** Try your faster settings on Circle. A curve
+has a constraint a straight line doesn't: the third number,
+**centripetal** acceleration (the push that keeps the robot on the
+curve). What happens to the time when you raise only that one?
+
+**Checkpoint:** a filled-in table, and one sentence on what makes the
+robot slower or faster on a short drive. On the real robot (in
+[Part 7](#the-experiments)), go up **in small steps**, with a mentor and
+**more clear floor** than before, since a fast robot can overshoot.
+
 ## Part 6: Run it on a real robot
 
 Only with a mentor, the first few times.
@@ -385,7 +470,7 @@ For each one, **predict** the error before you run it, then measure.
 | Experiment | What it tests |
 | --- | --- |
 | **There and Back** (this chapter) | your baseline |
-| **There and Back, faster**: raise the max speed or acceleration | does speed make the error worse? Why? |
+| **There and Back, faster**: your settings from [Change the speed](#change-the-speed-simulator-first) | does speed make the error worse? Why? |
 | **A square**: four trajectories, back to the start | do errors add up around corners? |
 | **A circle**: your **Circle** auton from [Part 5](#make-a-circle-simulator-first), only after it passes in the simulator | how well the robot follows a **curve**; compare the real error with your simulator error |
 | **Your choice**: change one thing (a tolerance, a controller setting, the floor), with a mentor | can you make the error smaller? |
@@ -404,7 +489,167 @@ For each one, **predict** the error before you run it, then measure.
 one** other experiment, with averages, spreads, and one sentence each on
 what you think caused the error.
 
-## Part 8: Send it in
+## Part 8: Do other things during auton
+
+A real auton doesn't just drive. It **does things** on the way: put the
+intake down, run the rollers, shoot. Each of those is a **subsystem**
+(a part of the robot with its own motors), and each subsystem has
+**commands**, just like the drive. Open
+[`Machinery.java`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/robot/Machinery.java)
+and find them: `m_shooter`, `m_intake`, and `m_intakeExtend`. Their
+commands are in
+[`Shooter`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/subsystems/Shooter.java),
+[`Intake`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/subsystems/Intake.java),
+and
+[`IntakeExtend`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/subsystems/IntakeExtend.java).
+
+Read the comment above each command. Some **end by themselves**
+("Ends when complete"). Most **never end** ("Never ends"): the intake
+keeps rolling until something stops it. That difference is the key to
+everything below.
+
+> **Check yourself:** in `IntakeExtend`, which command ends by itself,
+> `goToExtendedPosition()` or `goToExtendedPositionEndlessly()`? How can
+> you tell?
+
+Do this part **in the simulator**. Only run it on a real robot if that
+robot actually has these mechanisms, and only with a mentor: a shooter
+can hurt someone.
+
+### Three ways to combine commands
+
+You already know `sequence` (one after another). Here are the three
+shapes you'll use most, from simplest to most useful. Read
+[WPILib command compositions](https://docs.wpilib.org/en/stable/docs/software/commandbased/command-compositions.html)
+for the details.
+
+**1. Stop, then do it: `sequence`.** Drive, stop, shoot, drive again.
+This is the simplest, and it's the right choice when the robot has to
+be still (shooting is more accurate standing still).
+
+```java
+sequence(
+        outStep.until(outStep::isDone),
+        machinery.m_shooter.auto().withTimeout(2),
+        backStep.until(backStep::isDone));
+```
+
+Why `withTimeout(2)`? `auto()` never ends, and a `sequence` only moves
+on when a step **ends**. Without a timeout the robot would shoot forever
+and never come back. (There's a comment about exactly this bug in
+[`Auton2`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/auton/Auton2.java).)
+
+**2. Do it while you drive: `deadline`.** Run the intake the whole time
+the robot drives out, and stop it when the drive ends.
+
+```java
+deadline(
+        outStep.until(outStep::isDone),
+        machinery.m_intake.intake());
+```
+
+The **first** command is the "deadline": when it ends, the others are
+stopped. This is what you want almost every time something runs during
+a drive.
+
+> **Watch out:** `parallel(...)` looks similar, but it waits for **all**
+> its commands to end. With a never-ending command like `intake()`
+> inside, a `parallel` never ends, so nothing after it ever runs. Many
+> of our competition autons use `parallel` anyway, but only as the
+> **last** step, where it doesn't matter because auton ends on its own.
+
+**3. Start it partway along the path: `waitUntil`.** Put the intake
+down near the end of the drive, not at the start. You need a way to
+say **when**. There are three, and only one is a good idea most of the
+time:
+
+| Say "when" with… | Example | Problem |
+| --- | --- | --- |
+| **time** | `waitSeconds(1).andThen(...)` (in `Auton2`) | change the speed and it fires in a different place |
+| **distance left** | `waitUntil(() -> outStep.toGo() < 0.5).andThen(...)` | none, for straight drives (see below) |
+| **place on the field** | `waitUntil(() -> FieldConstants2026.isInNeutralZone(...))` (in [`LeftBumpHalfSweepAuton`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/auton/LeftBumpHalfSweepAuton.java)) | only works for autons that use real field positions |
+
+`toGo()` is a method on the drive command: how many meters the robot
+still is from the **end** of the trajectory. Its comment in
+[`VelocityReferenceControllerSE2`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/subsystems/se2/commands/helper/VelocityReferenceControllerSE2.java)
+says it's for exactly this: "start doing X if Y is near the goal."
+Put the `waitUntil` inside the same `deadline` as the drive, so it
+stops if the drive ends first.
+
+> **Check yourself:**
+> 1. You made There and Back faster in
+>    [Change the speed](#change-the-speed-simulator-first). If the
+>    intake goes down after `waitSeconds(1)`, where on the path does it
+>    go down now? Where does it go down with `toGo() < 0.5`?
+> 2. `toGo()` is the straight-line distance to the end, not the distance
+>    along the path. What is `toGo()` at the **start** of your Circle?
+>    What would `waitUntil(() -> circle.toGo() < 0.5)` do?
+> 3. `toGo()` returns 0 when the drive command isn't running. What
+>    happens if you put the `waitUntil` **before** the drive in a
+>    `sequence`?
+
+### Rules that will bite you
+
+* **One command per subsystem at a time.** Two commands that use the
+  same subsystem (say, `m_intake.intake()` and `m_intake.stop()`) can't
+  be in the same `deadline` or `parallel`. WPILib will stop with an
+  error when the robot code starts. (See the comment "the parallel
+  requirement issue" in
+  [`DoubleCircleAuton`](https://github.com/Team100/all26/blob/main/comp/src/main/java/org/team100/frc2026/auton/DoubleCircleAuton.java).)
+* **Every never-ending command needs something to end it:**
+  `withTimeout`, `until`, or a `deadline`.
+* **Use each command object once.** Once a command is inside a
+  `sequence` or `deadline`, it can't be put in another one. If you need
+  to shoot twice, call `machinery.m_shooter.auto()` twice to get two
+  commands.
+* **To see it in the simulator**, add a message. `print("intake down!")`
+  (from `Commands`, like `sequence`) is a command that prints and
+  ends right away, so you can drop it into a `sequence` to see exactly
+  when each step starts.
+
+### Your turn: There, Back, and Shoot
+
+Make a new auton, **There Back Shoot**, from a copy of `ThereAndBack`:
+
+1. On the way out, when the robot is **0.5 m from the end**, put the
+   intake down and run the rollers, until the out-trip ends.
+1. On the way back, pull the intake up.
+1. When the robot is home, shoot for 2 seconds, then stop.
+
+Register it in `Autons.java` and run it in the simulator, with a
+`print` at each step.
+
+<details>
+<summary>Hint 1: the shape</summary>
+
+The whole auton is a `sequence` of three steps: out (with the intake),
+back (with the intake going up), and shoot. The first two are each a
+`deadline` with the drive first.
+</details>
+
+<details>
+<summary>Hint 2: down, then roll</summary>
+
+`goToExtendedPosition()` ends when the intake is down, so you can
+follow it with `.andThen(machinery.m_intake.intake())`. Then put
+`waitUntil(...)` in front of all that.
+</details>
+
+<details>
+<summary>Hint 3: the imports</summary>
+
+You'll need `deadline`, `print`, `sequence`, and `waitUntil` from
+`edu.wpi.first.wpilibj2.command.Commands`. Copy the `import static`
+line for `sequence` and change the last word.
+</details>
+
+**Checkpoint:** in the simulator, your printed messages show the intake
+going down near the end of the out-trip (not at the start), the intake
+coming up on the way back, and the shot starting only after the robot
+is home. Then make the drive faster: does the intake still go down
+0.5 m from the end?
+
+## Part 9: Send it in
 
 Commit, push to your fork, and open a PR against `Team100/all26`,
 branch `main`. In the description, say what you tested (sim? which

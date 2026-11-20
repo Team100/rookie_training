@@ -104,7 +104,7 @@ Real mechanisms, tethered to your laptop with a cable. Start with
 ## Part 3: Localization and auton
 
 13. **[Where am I?](docs/part3/13_LOCALIZATION.md)**: how the wheels tell the robot where it is, and how wrong they get; hands-on experiments with graphs
-1. **[Work on auton](docs/part3/14_AUTON.md)**: simulate a circle, then measure real error
+1. **[Work on auton](docs/part3/14_AUTON.md)**: simulate a circle, change the speed, run mechanisms during auton, then measure real error
 1. **🏆 [Park on the X](docs/part3/15_PARK_ON_THE_X.md)**: from a taped start, the demo bot drives itself to a spot, using only its wheels
 
 ## Part 4: SystemCore, all together, on the real robot
