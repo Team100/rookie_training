@@ -45,6 +45,11 @@ move.
 * **Motor** (one per jaw): a Kraken or a SPARK. *(You know this one
   from 1.8.)* The two face each other, so one runs `REVERSE`.
 
+Here's the same thing matched to the robot. Each numbered badge on the
+robot marks the part that layer controls:
+
+![The gripper bot seen from above, next to its six code layers; numbered badges link each layer to the part of the robot it controls](../img/gripper_robot_layers.svg)
+
 The binding, servo, mechanism, and motor come from **`lib`**. You
 **write** the middle two: your own `Gripper` subsystem and its
 commands.
