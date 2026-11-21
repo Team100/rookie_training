@@ -77,7 +77,7 @@ Learn the basics on a RoboRIO test board. Parts 1 to 3 use the
 5. **[Your first motor](docs/part1/05_FIRST_MOTOR.md)**: wiring a Kraken, CAN IDs, spinning it with no code
 1. **[How motors work](docs/part1/06_HOW_MOTORS_WORK.md)**: electricity, magnets, stator vs. supply current; take apart a Kraken
 1. **[Your first study](docs/part1/07_STUDY.md)**: your own small project that uses `lib`
-1. **[Control a motor from code](docs/part1/08_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller
+1. **[Control a motor from code](docs/part1/08_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller, turning to an angle; build a two-motor grabber
 1. **[Use the simulator](docs/part1/09_SIMULATOR.md)**: test without a robot
 
 ### 🎉 Finished Part 1?

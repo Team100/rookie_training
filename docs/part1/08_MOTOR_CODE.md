@@ -1,8 +1,9 @@
 # Control a motor from code
 
 Now you'll write real control code: make the motor spin from your study,
-read its speed, ramp it up gently, and then drive it with an Xbox
-controller.
+read its speed, ramp it up gently, and drive it with an Xbox
+controller. Then you'll move it to an **angle**, and finish by building
+a two-motor **grabber**.
 
 This chapter doesn't hand you the code. Each step says **what to
 build** and **where to look**, then has a **checkpoint**. If you're
@@ -29,7 +30,7 @@ chapter exactly, so each step points you at the right one:
 | --- | --- | --- |
 | Step 2: the every-cycle calls | [`test/single_roller` `Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java), its `robotPeriodic()` | Everything else. It hides its motor **inside** a `SingleRollerSubsystem`, so you won't find a motor class there. |
 | Step 3: creating a motor | [`studies/music` `Robot.java`](https://github.com/Team100/all26/blob/main/studies/music/src/main/java/frc/robot/Robot.java), the `if (MOTOR)` block in its constructor | The music parts (`Player`, `Play`). It uses `KrakenX44Motor`; yours may be a different class. |
-| Steps 4 to 7 | No example: this is where you figure it out | |
+| Steps 4 to 11 | No example: this is where you figure it out | |
 
 ## The robot lifecycle
 
@@ -344,6 +345,200 @@ the Driver Station's USB tab is the controller's **port**.
 read `leftY()`, make it smaller so it's never more than 0.1, and send it
 to the motor. This replaces your ramp from Step 6.
 </details>
+
+## Step 8: Where is the shaft?
+
+So far you've controlled **how fast** the motor turns. Lots of
+mechanisms need **where** instead: an arm that lifts to 45°, a hood
+that tilts, a grabber that closes. The first step is knowing where the
+shaft is pointing now.
+
+Stick a strip of masking tape on the shaft (or its hub) like a flag, so
+you can see which way it points.
+
+**Goal:** print the shaft's **position**, in **degrees**, every cycle.
+
+**Look in:** the same encoder type you used in Step 5. There's a method
+for position next to the one for velocity.
+
+**Checkpoint:** with the robot **disabled**, turn the shaft by hand
+exactly one full turn (watch the flag). The number goes up by about
+**360**. Turn it back and it comes back down.
+
+> **Check yourself:** turn it **two** full turns. Does it say 720, or
+> does it start over at 0? The method name has a word in it that tells
+> you. Why might a robot want 720 and not 0?
+
+> **Check yourself:** restart the robot code and look again. Where is
+> "zero" now? What does that mean for a mechanism that has to know
+> exactly where it is?
+
+<details>
+<summary>Hint 1</summary>
+
+It's `getUnwrappedPositionRad()`. The units are at the end of the name
+again. How many degrees are in a radian? (`Math.toDegrees` exists.)
+</details>
+
+## Step 9: Turn a quarter turn, by yourself
+
+**Goal:** when you press **A**, the shaft turns **90°** from where it
+is now, and stops there. Press A again: another 90°.
+
+This is **feedback**, and it's the most important idea in robot
+control. Every cycle:
+
+1. Compare where you **want** to be (the **target**) with where you
+   **are** (the measured position).
+1. The difference is the **error**: `error = target − measured`.
+1. Set the power from the error: far away, more power; close, less.
+
+Keep the 10% power cap from Step 7, so it can't fling anything.
+
+**Checkpoint:** press A, and the flag ends up a quarter turn from where
+it started, within a few degrees. Print the target, the position, and
+the error so you can see it working.
+
+> **Check yourself:** does it stop **exactly** at 90°? If not, is it
+> short or past? Look at your formula: when the error gets small, what
+> happens to the power? Is that enough power to turn the motor at all?
+
+> **Check yourself:** try a much **bigger** `k`. What does the flag do
+> now? (Keep a finger on Enter.)
+
+<details>
+<summary>Hint 1: when do I pick the target?</summary>
+
+The target changes only at the moment you press A, not every cycle. So
+it has to be remembered between cycles (what remembers?). Look in
+`DriverXboxControl` for the A button. To act once per **press** and not
+on every cycle it's held, remember whether it was pressed last cycle.
+</details>
+
+<details>
+<summary>Hint 2: the formula</summary>
+
+`power = k × error`, with the error in radians. Start with `k` around
+0.1 and raise it until the shaft really moves. Then cap it with
+`Math.max` and `Math.min` so it stays between −0.1 and 0.1.
+</details>
+
+<details>
+<summary>Hint 3: the first target</summary>
+
+Set the target to the shaft's current position when teleop starts, so
+it doesn't leap somewhere when you enable. Then each press of A adds
+`Math.PI / 2` to it.
+</details>
+
+## Step 10: Let the motor do it
+
+The Kraken has a feedback controller **built in**, and it runs 1000
+times a second, much faster than your 50. You give it the target and a
+**gain** (the number that plays the part of your `k`).
+
+**Goal:** the same quarter turns as Step 9, but using the motor's own
+position control.
+
+**Look in:** `Motor.java` again, for a method with **position** in its
+name. Then look back at the motor's constructor: one argument has been
+"not used yet" all chapter. Now you use it. Open that class: it has a
+way to make a **position** one.
+
+**Checkpoint:** in Glass, graph the motor's **desired position** and its
+**actual position** (your motor logs both). Press A a few times. The
+actual line follows the desired one up in steps.
+
+> **Check yourself:** compare with Step 9. Which one gets closer to
+> exactly 90°? Which one gets there faster? Hold the shaft gently with
+> a rag while it's sitting still: which one pushes back harder?
+
+> [!WARNING]
+> A high gain can snap the shaft around hard. Raise it a little at a
+> time, keep the current limit at 10 amps, and keep a finger on
+> **Enter**.
+
+<details>
+<summary>Hint 1</summary>
+
+`PIDConstants.makePositionPID(p)`. Its comments say what units `p` is
+in and what to start with. Remember that this is in the constructor,
+so changing it means redeploying.
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+`setUnwrappedPosition(position, velocity, torque)`. You only want a
+position, so what do you pass for the other two?
+</details>
+
+## Step 11: Build a grabber
+
+Now use what you've learned on a real mechanism: a **grabber**, two
+motors whose arms swing together to grab something, and swing apart to
+let go. It has just two positions: **OPEN** and **CLOSED**.
+
+> **TODO (mentors):** which board or bot has the grabber, its two CAN
+> IDs, and a photo.
+> 📷 **TODO photo:** `docs/img/grabber.jpg`: the grabber, open and
+> closed, with the motors labeled.
+
+**Goal:**
+
+* At startup, the grabber is **OPEN** (set it open by hand before you
+  deploy).
+* Press **A**: both arms swing to **CLOSED**. Press **B**: both swing
+  back to **OPEN**.
+* The two arms move **at the same time**, toward each other.
+* It grabs a soft object (a foam ball, a rolled-up rag) and **holds
+  it** without crushing it or burning up the motors.
+
+**Checkpoint:** hand a mentor the grabber and a foam ball. They press A
+and B five times each, and every time it closes on the ball, holds it,
+and lets go.
+
+> **Check yourself:** the two motors face each other. If you send them
+> both the same target, which way does each one turn? Which
+> constructor argument fixes that, so one target closes both?
+
+> **Check yourself:** when the grabber is closed on a ball, the arms
+> can't reach the CLOSED angle. The error never goes to zero. What does
+> the motor do then, and for how long? Which number from Step 3 keeps
+> that safe? (Remember the
+> [stator limit](06_HOW_MOTORS_WORK.md#stator-current-vs-supply-current).)
+
+> **Check yourself:** OPEN and CLOSED are two numbers. Where in your
+> code should they live, so you change them in one place? What would
+> you name them?
+
+<details>
+<summary>Hint 1: two motors</summary>
+
+Make a second motor field, with its own CAN ID. Everything else can be
+the same, except one argument.
+</details>
+
+<details>
+<summary>Hint 2: what is "zero"?</summary>
+
+From Step 8: zero is wherever the shaft was when the code started.
+That's why you set the grabber open by hand first. Then OPEN is `0`,
+and CLOSED is however many radians the arms swing. Measure it: turn an
+arm by hand from open to closed and watch your printed position.
+</details>
+
+<details>
+<summary>Hint 3: putting it together</summary>
+
+Keep one field for the target. A sets it to CLOSED, B sets it to OPEN.
+Every cycle, send that target to both motors with the method from
+Step 10.
+</details>
+
+> **Make it better:** add a third position, **HALF**, on another
+> button. Or print `GRABBED!` when the arms stopped short of CLOSED and
+> the current is high: that means something is in the grabber.
 
 ## Send it in
 
