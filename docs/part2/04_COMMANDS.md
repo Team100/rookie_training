@@ -21,12 +21,34 @@ Two rules:
   ready-made subsystems. Read them to learn the patterns, but don't put
   them in your code.
 
-First you'll tour the pieces, then build the gripper from them.
+## The layers
 
-> Unlike the rest of Part 2, this chapter points you at the team's
-> code on purpose: knowing what's in `lib`, and how it fits together,
-> is the lesson. Read the examples to understand them, then write your
-> own `Gripper`. Don't copy whole files.
+Team 100 code is built in **layers**. Each layer uses the one below it,
+and adds one idea. The numbers match the picture:
+
+![The gripper bot, and the six layers of code that run it](../img/gripper_layers.svg)
+
+1. **Motor**: one Kraken or SPARK. *(You know this one from 1.8.)*
+1. **Mechanism**: a motor plus its gears and limits. It works in
+   **jaw** angles, not motor angles, and won't drive past fully open or
+   closed.
+1. **Servo**: moves one jaw to an angle **smoothly**, and says when
+   it's there.
+1. **Subsystem**: **owns** both jaws, and knows OPEN and CLOSED. Only
+   **one command** can use it at a time: a new one **interrupts** the
+   old one, so two buttons can never fight over the jaws.
+1. **Command**: something the gripper **does**: close, open, grab and
+   release. Team 100 commands normally **never end** by themselves:
+   "close" means "close, and keep holding".
+1. **Binding**: connects a button to a command, once, at startup.
+
+Layers 1 to 3 and the bindings come from **`lib`**. You **write**
+layers 4 and 5: your own `Gripper` and its commands.
+
+**Learn more:** the [appendix](#appendix-existing-things-you-can-use)
+explains each `lib` piece, with links, and lists
+[existing subsystems](#existing-subsystems-to-read-not-to-use) to learn
+the patterns from.
 
 This chapter is **optional**, but if you want to work on the real robot
 code, do it: everything there is built this way.
@@ -63,97 +85,6 @@ can't tell a ball from a finger.
 
 Gear ratio (motor turns per jaw turn): **TODO**
 
-## Existing things you can use
-
-Team 100 code is built in **layers**. Each layer uses the one below
-it, and adds one idea:
-
-```
- binding     "while A is held, close the gripper"
-   ↓
- command     "close": run every cycle until something else takes over
-   ↓
- subsystem   the gripper: owns both jaws, knows OPEN and CLOSED
-   ↓
- servo       one jaw: goes to an angle smoothly, says when it's there
-   ↓
- mechanism   one jaw: motor + encoder + gear ratio + limits
-   ↓
- motor       one Kraken or SPARK
-```
-
-In 1.8 you worked only at the bottom: the **motor**. Here's what's
-above it. You'll **use** the motor, mechanism, servo, and binding
-layers from `lib`, and **write** the subsystem and commands yourself.
-All links are to `lib` on the `main` branch.
-
-### Motor: the one you know
-
-| Class | What it does |
-| --- | --- |
-| [`KrakenX44Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX44Motor.java), [`KrakenX60Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java) | A Kraken, same as in [1.8 Step 3](../part1/08_MOTOR_CODE.md#step-3-create-the-motor). |
-| [`NeoCANSparkMotor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/rev/NeoCANSparkMotor.java) and the rest of the `rev` folder | A REV motor on a SPARK. Same arguments, plus two at the end. |
-
-### Mechanism: a motor attached to something
-
-| Class | What it does |
-| --- | --- |
-| [`RotaryMechanism`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/mechanism/RotaryMechanism.java) | A motor, its encoder, and the **gear ratio** to the thing that turns. It works in **jaw** angles, not motor angles, so you never divide by the gear ratio yourself. It also has a **min and max angle**: it refuses to drive past them, like a fence. |
-
-### Servo: go to an angle, smoothly
-
-| Class | What it does |
-| --- | --- |
-| [`OutboardAngularPositionServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/OutboardAngularPositionServo.java) | Wraps a mechanism. `setPositionProfiled(angle)` moves it there **smoothly** (speeds up, cruises, slows down) using the motor's built-in feedback. `atGoal()` says whether it got there. `reset()` starts fresh from wherever it is now. ("Outboard" means the feedback runs in the motor controller, which is what we use whenever we can.) Read the [`servo` README](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/README.md) and the comments in [`AngularPositionServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/AngularPositionServo.java). |
-| [`TrapezoidProfileR1`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/profile/r1/TrapezoidProfileR1.java) | The "smoothly" part: a **profile** with a top speed and a top acceleration. Plotted, the speed looks like a trapezoid: up, flat, down. |
-| [`ProfileReferenceR1`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/reference/r1/ProfileReferenceR1.java) | Walks through the profile one cycle at a time and hands the servo each next step. You create it and pass it in; the servo does the rest. |
-| [`RDynamicsAnalytic`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/dynamics/r/RDynamicsAnalytic.java) | A physics model of what's being turned (mass, length), so the servo can add a little extra push to accelerate it. For a light jaw, `RDynamicsAnalytic.thinRod(mass, length)` is close enough. |
-
-### Subsystem and commands: what the gripper can do
-
-| Thing | What it does |
-| --- | --- |
-| **Subsystem** | A class that **owns** hardware. Every `lib` subsystem extends WPILib's `SubsystemBase`, and so will yours. Only **one command** can use a subsystem at a time: starting a new one **interrupts** the old one, so two buttons can never fight over the jaws. |
-| **Command** | Something a subsystem **does**. Inside your subsystem, `run(...)`, `startRun(...)`, and `runOnce(...)` (from `SubsystemBase`) make one for you, and mark it as using this subsystem. Look at how the examples below use them. |
-| **Default command** | What a subsystem does when no other command is using it. `setDefaultCommand(...)`. |
-| [The `commands` README](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/commands/README.md) | **The Team 100 style:** commands normally **never end** by themselves. "Close" means "close, and keep holding closed", until another command takes over. When a sequence needs to move on, you add the ending yourself: `.until(...)`. |
-| The `CommandScheduler` | Runs every command, every cycle. You already call it in `robotPeriodic()` ([1.8 Step 2](../part1/08_MOTOR_CODE.md#step-2-keep-the-library-ticking)). |
-
-### Bindings: connect buttons to commands
-
-| Class | What it does |
-| --- | --- |
-| [`DriverXboxControl`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/hid/DriverXboxControl.java) | The controller, same as in 1.8. `a()`, `b()`, `x()` and so on. |
-| [`TriggerUtil`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/util/TriggerUtil.java) | `whileTrue(m_driver::a, command)`: run the command **while** A is held, then stop it. `onTrue(...)`: **start** it when A is pressed, and let it keep going. This is how the team binds buttons; use it, not `new Trigger(...)`. |
-
-### Examples to read (not to use)
-
-These are ready-made subsystems and setups that put the pieces
-together. **Don't use them in your code**; you're writing your own.
-Read them for the **pattern**: each is a little different from your
-gripper.
-
-| Example | Read it for | What's different from your gripper |
-| --- | --- | --- |
-| [`DualAngularSubsystem`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/subsystems/r1/DualAngularSubsystem.java) | **Two motors** driven together: two mechanisms, two servos, one target. Private methods that do the same thing to both. `position()` calls `reset()` first, using `startRun`. | It only knows Kraken X44s, and it has no named positions. |
-| [`OutboardRotaryPositionSubsystem`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/OutboardRotaryPositionSubsystem.java) | **Named positions** (`HOME`, `EXTEND`) as constants. Building the profile, reference, and mechanism step by step, with comments on every number. Uses a **NEO** (REV). | One motor. |
-| [`OutboardRotaryPositionSubsystemSetup`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/OutboardRotaryPositionSubsystemSetup.java) | What goes in `Robot`: create the subsystem, set a default command, bind a button with `whileTrue`. | |
-| [`SimpleSequence`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/SimpleSequence.java) | **"Do this, then that"**: `sequence(...)`, with `.until(...isDone)` and `.withTimeout(2)` to make never-ending commands end. | |
-| [`IntakeExtend`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/subsystems/IntakeExtend.java) | A **real competition** subsystem with two motors and two positions, like yours. Notice the pair `goToExtendedPosition()` (ends when it gets there) and `goToExtendedPositionEndlessly()` (never ends). | It's for this year's robot, so it has extra parts you don't need. |
-
-**Checkpoint:** before you write any code, answer these with your
-group (write the answers in your study's `README`):
-
-1. In `DualAngularSubsystem`, what makes the two motors move
-   **together**? What makes them turn in **opposite** directions?
-1. Why does `DualAngularSubsystem.position()` call `reset()` before it
-   starts moving? (The comment on `reset()` in `AngularPositionServo`
-   says why, in capital letters.)
-1. In `OutboardRotaryPositionSubsystem`, which numbers would you change
-   for a gripper jaw?
-1. `extend()` never ends. So how does `SimpleSequence` move on to the
-   next step?
-
 ## Step 1: Your `Gripper` subsystem
 
 **Goal:** your own class `Gripper` that extends `SubsystemBase`, built
@@ -166,6 +97,9 @@ from `lib`'s **building blocks** (no `lib` subsystems inside it):
 * `OPEN` and `CLOSED` angles as constants, **inside** `Gripper`
 
 `Robot` creates one `Gripper` and has **no motor fields**.
+
+Not sure what one of these is? Each has a short explanation and a
+link in the [appendix](#appendix-existing-things-you-can-use).
 
 **Checkpoint:** it builds, and the motors' "created" logs appear in
 Glass under your gripper's name.
@@ -248,7 +182,7 @@ Now try both kinds of binding, and write down what happens when you
 * `onTrue(m_driver::a, m_gripper.close())`
 
 > **Check yourself:** with `onTrue`, `close` never ends. So how does
-> pressing B stop it? (Look back at **Subsystem** in the tour.)
+> pressing B stop it? (See **Subsystem** in [the layers](#the-layers).)
 
 <details>
 <summary>Hint 1</summary>
@@ -319,11 +253,83 @@ a mechanism?**
 ## Send it in
 
 Commit, push, and open a PR ([how](../part1/02_FORK_WORKFLOW.md)).
-Include your answers to the tour questions and your Step 5 table. Ask a
+Include your Step 5 table. Ask a
 mentor to compare your `Gripper` with `IntakeExtend`: what's the same,
 and what's different?
 
 > If a class or method named here has moved or changed in `lib`, the
 > library has moved on. Find where it went, and fix this page.
+
+## Appendix: existing things you can use
+
+Everything here is in `lib` on the `main` branch. You'll **use** the
+motor, mechanism, servo, and binding pieces, and **write** the
+subsystem and commands yourself.
+
+### Motor: the one you know
+
+| Class | What it does |
+| --- | --- |
+| [`KrakenX44Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX44Motor.java), [`KrakenX60Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java) | A Kraken, same as in [1.8 Step 3](../part1/08_MOTOR_CODE.md#step-3-create-the-motor). |
+| [`NeoCANSparkMotor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/rev/NeoCANSparkMotor.java) and the rest of the `rev` folder | A REV motor on a SPARK. Same arguments, plus two at the end. |
+
+### Mechanism: a motor attached to something
+
+| Class | What it does |
+| --- | --- |
+| [`RotaryMechanism`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/mechanism/RotaryMechanism.java) | A motor, its encoder, and the **gear ratio** to the thing that turns. It works in **jaw** angles, not motor angles, so you never divide by the gear ratio yourself. It also has a **min and max angle**: it refuses to drive past them, like a fence. |
+
+### Servo: go to an angle, smoothly
+
+| Class | What it does |
+| --- | --- |
+| [`OutboardAngularPositionServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/OutboardAngularPositionServo.java) | Wraps a mechanism. `setPositionProfiled(angle)` moves it there **smoothly** (speeds up, cruises, slows down) using the motor's built-in feedback. `atGoal()` says whether it got there. `reset()` starts fresh from wherever it is now. ("Outboard" means the feedback runs in the motor controller, which is what we use whenever we can.) Read the [`servo` README](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/README.md) and the comments in [`AngularPositionServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/AngularPositionServo.java). |
+| [`TrapezoidProfileR1`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/profile/r1/TrapezoidProfileR1.java) | The "smoothly" part: a **profile** with a top speed and a top acceleration. Plotted, the speed looks like a trapezoid: up, flat, down. |
+| [`ProfileReferenceR1`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/reference/r1/ProfileReferenceR1.java) | Walks through the profile one cycle at a time and hands the servo each next step. You create it and pass it in; the servo does the rest. |
+| [`RDynamicsAnalytic`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/dynamics/r/RDynamicsAnalytic.java) | A physics model of what's being turned (mass, length), so the servo can add a little extra push to accelerate it. For a light jaw, `RDynamicsAnalytic.thinRod(mass, length)` is close enough. |
+
+### Subsystem and commands: what the gripper can do
+
+| Thing | What it does |
+| --- | --- |
+| **Subsystem** | A class that **owns** hardware. Every `lib` subsystem extends WPILib's `SubsystemBase`, and so will yours. Only **one command** can use a subsystem at a time: starting a new one **interrupts** the old one, so two buttons can never fight over the jaws. |
+| **Command** | Something a subsystem **does**. Inside your subsystem, `run(...)`, `startRun(...)`, and `runOnce(...)` (from `SubsystemBase`) make one for you, and mark it as using this subsystem. Look at how the examples below use them. |
+| **Default command** | What a subsystem does when no other command is using it. `setDefaultCommand(...)`. |
+| [The `commands` README](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/commands/README.md) | **The Team 100 style:** commands normally **never end** by themselves. "Close" means "close, and keep holding closed", until another command takes over. When a sequence needs to move on, you add the ending yourself: `.until(...)`. |
+| The `CommandScheduler` | Runs every command, every cycle. You already call it in `robotPeriodic()` ([1.8 Step 2](../part1/08_MOTOR_CODE.md#step-2-keep-the-library-ticking)). |
+
+### Bindings: connect buttons to commands
+
+| Class | What it does |
+| --- | --- |
+| [`DriverXboxControl`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/hid/DriverXboxControl.java) | The controller, same as in 1.8. `a()`, `b()`, `x()` and so on. |
+| [`TriggerUtil`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/util/TriggerUtil.java) | `whileTrue(m_driver::a, command)`: run the command **while** A is held, then stop it. `onTrue(...)`: **start** it when A is pressed, and let it keep going. This is how the team binds buttons; use it, not `new Trigger(...)`. |
+
+### Existing subsystems to read (not to use)
+
+These are ready-made subsystems and setups that put the pieces
+together. **Don't use them in your code**; you're writing your own.
+Read them for the **pattern**: each is a little different from your
+gripper.
+
+| Example | Read it for | What's different from your gripper |
+| --- | --- | --- |
+| [`DualAngularSubsystem`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/subsystems/r1/DualAngularSubsystem.java) | **Two motors** driven together: two mechanisms, two servos, one target. Private methods that do the same thing to both. `position()` calls `reset()` first, using `startRun`. | It only knows Kraken X44s, and it has no named positions. |
+| [`OutboardRotaryPositionSubsystem`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/OutboardRotaryPositionSubsystem.java) | **Named positions** (`HOME`, `EXTEND`) as constants. Building the profile, reference, and mechanism step by step, with comments on every number. Uses a **NEO** (REV). | One motor. |
+| [`OutboardRotaryPositionSubsystemSetup`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/OutboardRotaryPositionSubsystemSetup.java) | What goes in `Robot`: create the subsystem, set a default command, bind a button with `whileTrue`. | |
+| [`SimpleSequence`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/SimpleSequence.java) | **"Do this, then that"**: `sequence(...)`, with `.until(...isDone)` and `.withTimeout(2)` to make never-ending commands end. | |
+| [`IntakeExtend`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/subsystems/IntakeExtend.java) | A **real competition** subsystem with two motors and two positions, like yours. Notice the pair `goToExtendedPosition()` (ends when it gets there) and `goToExtendedPositionEndlessly()` (never ends). | It's for this year's robot, so it has extra parts you don't need. |
+
+**Check yourself** (good to talk over with your group):
+
+1. In `DualAngularSubsystem`, what makes the two motors move
+   **together**? What makes them turn in **opposite** directions?
+1. Why does `DualAngularSubsystem.position()` call `reset()` before it
+   starts moving? (The comment on `reset()` in `AngularPositionServo`
+   says why, in capital letters.)
+1. In `OutboardRotaryPositionSubsystem`, which numbers would you change
+   for a gripper jaw?
+1. `extend()` never ends. So how does `SimpleSequence` move on to the
+   next step?
 
 Next: [Part 3: Where am I? (localization)](../part3/01_LOCALIZATION.md)
