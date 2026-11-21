@@ -14,7 +14,9 @@ running it there. For now that's a **RoboRIO** test board.
    * **Windows, USB-B cable** (the square "printer" kind): the easiest.
      It needs the RoboRIO's USB driver, which comes with the
      **FRC Game Tools** ([download](https://www.ni.com/en/support/downloads/drivers/download.frc-game-tools.html)).
-     Team laptops already have them.
+     Check whether yours has them: no **FRC Driver Station** in the
+     Start menu means install them. (TODO: confirm which team laptops
+     have them.)
    * **Mac:** USB won't work (macOS has no driver for the RoboRIO's
      USB network). Use an Ethernet cable and follow
      [Using an Ethernet cable](#using-an-ethernet-cable-mac-or-windows).
