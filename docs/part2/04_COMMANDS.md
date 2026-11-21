@@ -24,26 +24,30 @@ Two rules:
 ## The layers
 
 Team 100 code is built in **layers**. Each layer uses the one below it,
-and adds one idea. The numbers match the picture:
+and adds one idea. The picture shows what happens when you press **A**:
+it goes down through every layer, 50 times a second, until the jaws
+move.
 
-![The gripper bot, and the six layers of code that run it](../img/gripper_layers.svg)
+![What happens when you press A: binding, command, gripper subsystem, then two servos, mechanisms and motors, then the jaws](../img/gripper_layers.svg)
 
-1. **Motor**: one Kraken or SPARK. *(You know this one from 1.8.)*
-1. **Mechanism**: a motor plus its gears and limits. It works in
-   **jaw** angles, not motor angles, and won't drive past fully open or
-   closed.
-1. **Servo**: moves one jaw to an angle **smoothly**, and says when
-   it's there.
-1. **Subsystem**: **owns** both jaws, and knows OPEN and CLOSED. Only
-   **one command** can use it at a time: a new one **interrupts** the
-   old one, so two buttons can never fight over the jaws.
-1. **Command**: something the gripper **does**: close, open, grab and
-   release. Team 100 commands normally **never end** by themselves:
-   "close" means "close, and keep holding".
-1. **Binding**: connects a button to a command, once, at startup.
+* **Binding**: connects a button to a command, once, at startup.
+* **Command**: something the gripper **does**: close, open, grab and
+  release. Team 100 commands normally **never end** by themselves:
+  "close" means "close, and keep holding".
+* **Subsystem**: **owns** both jaws, and knows OPEN and CLOSED. Only
+  **one command** can use it at a time: a new one **interrupts** the
+  old one, so two buttons can never fight over the jaws.
+* **Servo** (one per jaw): moves the jaw to an angle **smoothly**, and
+  says when it's there.
+* **Mechanism** (one per jaw): the motor plus its gears and limits. It
+  works in **jaw** angles, not motor angles, and won't drive past fully
+  open or closed.
+* **Motor** (one per jaw): a Kraken or a SPARK. *(You know this one
+  from 1.8.)* The two face each other, so one runs `REVERSE`.
 
-Layers 1 to 3 and the bindings come from **`lib`**. You **write**
-layers 4 and 5: your own `Gripper` and its commands.
+The binding, servo, mechanism, and motor come from **`lib`**. You
+**write** the middle two: your own `Gripper` subsystem and its
+commands.
 
 **Learn more:** the [appendix](#appendix-existing-things-you-can-use)
 explains each `lib` piece, with links, and lists
