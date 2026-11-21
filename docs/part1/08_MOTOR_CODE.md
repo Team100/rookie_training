@@ -2,8 +2,8 @@
 
 Now you'll write real control code: make the motor spin from your study,
 read its speed, ramp it up gently, and drive it with an Xbox
-controller. Then you'll move it to an **angle**, and finish by building
-a two-motor **grabber**.
+controller. Next you'll ask for a **speed** instead of a power, turn
+it to an **angle**, and finish by building a two-motor **grabber**.
 
 This chapter doesn't hand you the code. Each step says **what to
 build** and **where to look**, then has a **checkpoint**. If you're
@@ -30,7 +30,7 @@ chapter exactly, so each step points you at the right one:
 | --- | --- | --- |
 | Step 2: the every-cycle calls | [`test/single_roller` `Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java), its `robotPeriodic()` | Everything else. It hides its motor **inside** a `SingleRollerSubsystem`, so you won't find a motor class there. |
 | Step 3: creating a motor | [`studies/music` `Robot.java`](https://github.com/Team100/all26/blob/main/studies/music/src/main/java/frc/robot/Robot.java), the `if (MOTOR)` block in its constructor | The music parts (`Player`, `Play`). It uses `KrakenX44Motor`; yours may be a different class. |
-| Steps 4 to 11 | No example: this is where you figure it out | |
+| Steps 4 to 12 | No example: this is where you figure it out | |
 
 ## The robot lifecycle
 
@@ -346,7 +346,106 @@ read `leftY()`, make it smaller so it's never more than 0.1, and send it
 to the motor. This replaces your ramp from Step 6.
 </details>
 
-## Step 8: Where is the shaft?
+## Step 8: Ask for a speed, not a power
+
+`setDutyCycle(0.1)` means "use **10% of the battery**". It doesn't say
+how fast. The same 10% gives a different speed when the battery is low,
+when something rubs, or when you push on the shaft. Usually what you
+really want is a **speed**: "spin at 1 rotation per second, whatever it
+takes."
+
+Our library does that with a **velocity servo**. (A *servo* is anything
+that measures what it's doing and corrects itself.) You give it a speed,
+and the Kraken's built-in controller adjusts the power 1000 times a
+second to hold it. It has two ways to ask:
+
+| Method | You say | What happens |
+| --- | --- | --- |
+| `setDutyCycle(x)` | "Use this much power." | No feedback. Speed is whatever it turns out to be. |
+| `setVelocityDirect(v)` | "Go this speed, **now**." | The motor jumps straight at `v` with as much power as it's allowed. Good when the target changes every cycle, like following a joystick. |
+| `setVelocityProfiled(v)` | "Get to this speed, **smoothly**." | It speeds up a little each cycle (a **profile**, like your ramp in Step 6, done for you) until it reaches `v`. Easy on the hardware; good for a shooter spinning up. |
+
+All three only last one cycle: **call them every cycle** in
+`teleopPeriodic()`.
+
+The servo measures speed in **meters per second**, the speed of the
+**edge of a wheel**, because that's what matters for a shooter or a
+conveyor. So it needs to know the wheel's size and the gear ratio.
+
+**Look in:**
+[`LinearVelocityServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/LinearVelocityServo.java)
+for the methods, and
+[`OutboardLinearVelocityServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/OutboardLinearVelocityServo.java)
+for `make(...)`, which builds one from your motor. To see what to pass
+it, look at the constructor of
+[`Feeder`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/subsystems/Feeder.java)
+(ignore the `SimulatedMotor` part).
+
+### 8a: Follow the stick, as a speed
+
+**Goal:** the left stick sets a **speed** with `setVelocityDirect`, up
+to about 1 m/s, in place of Step 7's duty cycle.
+
+**Checkpoint:** in Glass, graph the servo's **setpoint** and its
+measured **velocity**. Push the stick: velocity follows the setpoint.
+
+Now the comparison. Hold the stick still, and press **gently** on the
+shaft with a rag ([rag test](../part2/10_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
+rules). Then do the same with your Step 7 duty-cycle code.
+
+> **Check yourself:** with duty cycle, what happens to the speed when
+> you press? With the servo? What does the servo do to the **current**
+> to keep the speed up? (Which number from Step 3 stops that from going
+> too far?)
+
+### 8b: Spin up smoothly
+
+**Goal:** hold **A**: the motor goes to **2 m/s** with
+`setVelocityProfiled`. Let go: it goes back to 0, smoothly.
+
+**Checkpoint:** a Glass graph of the **goal**, the **setpoint**, and the
+measured **velocity**, as you press A. The goal jumps; the setpoint
+climbs in a straight ramp; the velocity follows the setpoint.
+
+> **Check yourself:** change A to use `setVelocityDirect(2)`. Graph it
+> again. What's different about the start? Listen too. Which would you
+> use for a heavy shooter wheel, and why?
+
+> **Check yourself:** where does the steepness of the ramp come from?
+> Change it and see.
+
+<details>
+<summary>Hint 1: the motor needs a velocity gain now</summary>
+
+Remember the `PIDConstants` argument that was "not used yet"? The servo
+uses the Kraken's velocity controller, so give it a velocity gain:
+`PIDConstants.makeVelocityPID(...)`. Look at what `Feeder` uses, and at
+the comment on `makeVelocityPID` about where to start.
+</details>
+
+<details>
+<summary>Hint 2: what wheel?</summary>
+
+Your test board has no wheel and no gearbox. So: gear ratio `1`, and
+pretend the wheel has a circumference of exactly **1 meter**. Then
+**1 m/s means 1 rotation per second**. What diameter gives that? (The
+circumference is π × diameter.)
+</details>
+
+<details>
+<summary>Hint 3: dynamics, profile, reference</summary>
+
+Copy the shape from `Feeder`: a `PDynamics` (a small `drum(...)` is
+fine), an `AccelLimitedVelocityProfileR1` (its number is the maximum
+acceleration in m/s²; try `2`), and a `VelocityProfileReferenceR1`
+that uses it. The last argument of `make` is a tolerance in m/s;
+`0.05` is fine.
+</details>
+
+> In [the Discus](../part2/11_DISCUS.md#step-7-hold-a-speed-by-itself-feedback)
+> you'll build this feedback yourself, to see what's going on inside.
+
+## Step 9: Where is the shaft?
 
 So far you've controlled **how fast** the motor turns. Lots of
 mechanisms need **where** instead: an arm that lifts to 45°, a hood
@@ -380,7 +479,7 @@ It's `getUnwrappedPositionRad()`. The units are at the end of the name
 again. How many degrees are in a radian? (`Math.toDegrees` exists.)
 </details>
 
-## Step 9: Turn a quarter turn, by yourself
+## Step 10: Turn a quarter turn, by yourself
 
 **Goal:** when you press **A**, the shaft turns **90°** from where it
 is now, and stops there. Press A again: another 90°.
@@ -431,25 +530,25 @@ it doesn't leap somewhere when you enable. Then each press of A adds
 `Math.PI / 2` to it.
 </details>
 
-## Step 10: Let the motor do it
+## Step 11: Let the motor do it
 
 The Kraken has a feedback controller **built in**, and it runs 1000
 times a second, much faster than your 50. You give it the target and a
 **gain** (the number that plays the part of your `k`).
 
-**Goal:** the same quarter turns as Step 9, but using the motor's own
+**Goal:** the same quarter turns as Step 10, but using the motor's own
 position control.
 
 **Look in:** `Motor.java` again, for a method with **position** in its
-name. Then look back at the motor's constructor: one argument has been
-"not used yet" all chapter. Now you use it. Open that class: it has a
-way to make a **position** one.
+name. Then look back at the motor's constructor: in Step 8 you gave
+it a **velocity** gain. Position control needs a **position** gain
+instead. Open `PIDConstants`: it has a way to make one.
 
 **Checkpoint:** in Glass, graph the motor's **desired position** and its
 **actual position** (your motor logs both). Press A a few times. The
 actual line follows the desired one up in steps.
 
-> **Check yourself:** compare with Step 9. Which one gets closer to
+> **Check yourself:** compare with Step 10. Which one gets closer to
 > exactly 90°? Which one gets there faster? Hold the shaft gently with
 > a rag while it's sitting still: which one pushes back harder?
 
@@ -473,7 +572,7 @@ so changing it means redeploying.
 position, so what do you pass for the other two?
 </details>
 
-## Step 11: Build a grabber
+## Step 12: Build a grabber
 
 Now use what you've learned on a real mechanism: a **grabber**, two
 motors whose arms swing together to grab something, and swing apart to
@@ -522,7 +621,7 @@ the same, except one argument.
 <details>
 <summary>Hint 2: what is "zero"?</summary>
 
-From Step 8: zero is wherever the shaft was when the code started.
+From Step 9: zero is wherever the shaft was when the code started.
 That's why you set the grabber open by hand first. Then OPEN is `0`,
 and CLOSED is however many radians the arms swing. Measure it: turn an
 arm by hand from open to closed and watch your printed position.
@@ -533,7 +632,7 @@ arm by hand from open to closed and watch your printed position.
 
 Keep one field for the target. A sets it to CLOSED, B sets it to OPEN.
 Every cycle, send that target to both motors with the method from
-Step 10.
+Step 11.
 </details>
 
 > **Make it better:** add a third position, **HALF**, on another
