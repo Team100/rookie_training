@@ -30,8 +30,9 @@ What's new compared to the 2025 guide:
   **RoboRIO**; then the new **SystemCore** controller, cameras and
   vision, finding balls with a neural network, and a final challenge
   that uses everything.
-* **Krakens only.** The competition robot uses Kraken X60 and X44
-  motors, so that's what this guide uses.
+* **Krakens first.** The competition robot uses Kraken X60 and X44
+  motors, so the wiring chapters use them. The motor-code chapter also
+  covers REV motors on SPARK controllers, like the demo bot's.
 * **Raspberry Pi 5 cameras** run our own Python vision code, and you can
   change and deploy it yourself.
 

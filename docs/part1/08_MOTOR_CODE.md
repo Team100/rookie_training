@@ -14,7 +14,15 @@ on the real robot code, where nobody has written the answer down.
 You need:
 
 * a [study](07_STUDY.md) with `lib` included, that builds and deploys
-* the motor from [Your first motor](05_FIRST_MOTOR.md), and its CAN ID
+* a motor and its CAN ID: a **Kraken** (CTRE) from
+  [Your first motor](05_FIRST_MOTOR.md), or a **REV** motor (NEO, NEO
+  Vortex, NEO 550, or Minion) on a **SPARK MAX** or **SPARK Flex**
+  controller. For REV, you find the CAN ID with the **REV Hardware
+  Client** instead of Tuner X (see the
+  [shooter bot appendix](../part2/12_DEMO_BOT.md#appendix-find-the-can-ids-yourself)).
+
+Every step works for **both kinds**. Where they differ, the step says
+so.
 
 Open your study's workspace and find `Robot.java`. For now, everything
 goes in this one file.
@@ -125,15 +133,19 @@ or we'd see the same old value forever. Read about
 ## Step 3: Create the motor
 
 Our motor classes are in [`lib/.../motor`](https://github.com/Team100/all26/tree/main/lib/src/main/java/org/team100/lib/motor).
-CTRE motors are in the `ctre` folder, **one class for each kind of
-motor**:
+There's **one class for each kind of motor**. CTRE motors are in the
+`ctre` folder, and REV motors (on a SPARK controller) are in the `rev`
+folder:
 
-* Kraken X60: [`KrakenX60Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java)
-* Kraken X44: [`KrakenX44Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX44Motor.java)
-* Falcon 500: [`Falcon500Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/Falcon500Motor.java)
+| CTRE (`ctre` folder) | REV (`rev` folder) |
+| --- | --- |
+| Kraken X60: [`KrakenX60Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java) | NEO: [`NeoCANSparkMotor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/rev/NeoCANSparkMotor.java) |
+| Kraken X44: [`KrakenX44Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX44Motor.java) | NEO Vortex: [`NeoVortexCANSparkMotor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/rev/NeoVortexCANSparkMotor.java) |
+| Falcon 500: [`Falcon500Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/Falcon500Motor.java) | NEO 550: [`Neo550CANSparkMotor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/rev/Neo550CANSparkMotor.java) |
+| | Minion: [`MinionSparkMotor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/rev/MinionSparkMotor.java) |
 
 **Use the class that represents the motor you actually have**, or, if
-yours isn't listed, look in the `ctre` folder for the class that matches
+yours isn't listed, look in those folders for the class that matches
 it. The classes differ in the motor's physics (how strong and how fast
 it is), so the wrong one gives you wrong numbers.
 
@@ -166,6 +178,13 @@ your job:
 | `CurrentLimit limit` | Maximum current, in amps: a **stator** limit and a **supply** limit ([what's the difference?](06_HOW_MOTORS_WORK.md#stator-current-vs-supply-current)) |
 | `Friction friction` | A model of friction; not used yet |
 | `PIDConstants pid` | Feedback control settings; not used yet |
+| `int averageDepth` | **REV only.** How many speed readings the SPARK averages |
+| `int measurementPeriod` | **REV only.** Over how many milliseconds the SPARK measures each speed reading |
+
+**REV differences:** the two extra arguments at the end control how
+the SPARK smooths its speed reading: bigger is smoother but later.
+And a SPARK uses only the **stator** number of `CurrentLimit`; nothing
+limits its supply current.
 
 Use **safe** values on a test board: a **low current limit** (about 10
 amps), and **coast**, so the motor spins down freely.
@@ -202,9 +221,14 @@ their constructors and comments. `PIDConstants` has a handy way to say
 * limit: `new CurrentLimit(10, 10)` (stator, supply)
 * friction: `new Friction(0, 0, 0, 0)`
 * pid: `PIDConstants.zero()`
+* REV only: `0, 0` for the last two (REV's defaults)
 
 Also look at what `studies/music` calls at the very start of its
 constructor, before anything else.
+
+For a REV motor, the whole thing looks like the Kraken one with two
+more numbers on the end:
+`new NeoCANSparkMotor(log.name("motor"), currentLog, new CanId(…), …, PIDConstants.zero(), 0, 0)`.
 </details>
 
 ## Step 4: Turn the motor
@@ -369,8 +393,8 @@ takes."
 
 Our library does that with a **velocity servo**. (A *servo* is anything
 that measures what it's doing and corrects itself.) You give it a speed,
-and the Kraken's built-in controller adjusts the power 1000 times a
-second to hold it. It has two ways to ask:
+and the motor controller's built-in feedback (in the Kraken, or in the
+SPARK) adjusts the power about 1000 times a second to hold it. It has two ways to ask:
 
 | Method | You say | What happens |
 | --- | --- | --- |
@@ -431,9 +455,17 @@ climbs in a straight ramp; the velocity follows the setpoint.
 <summary>Hint 1: the motor needs a velocity gain now</summary>
 
 Remember the `PIDConstants` argument that was "not used yet"? The servo
-uses the Kraken's velocity controller, so give it a velocity gain:
-`PIDConstants.makeVelocityPID(...)`. Look at what `Feeder` uses, and at
-the comment on `makeVelocityPID` about where to start.
+uses the motor controller's velocity feedback, so give it a velocity
+gain: `PIDConstants.makeVelocityPID(...)`. `Feeder` uses Krakens, so
+its number is a Kraken number. Read the comment on `makeVelocityPID`
+about where to start, and start **lower** than `Feeder`.
+
+**REV:** the comments on `PIDConstants` and
+`OutboardLinearVelocityServo` warn that SPARK velocity control isn't
+very good, especially on light mechanisms. If the speed hunts back and
+forth, try **smaller** `averageDepth` and `measurementPeriod` numbers
+(a quicker speed reading). If it's still bad, that's a real
+difference between the two kinds of motor controller, not your code.
 </details>
 
 <details>
@@ -523,6 +555,9 @@ Why `robotPeriodic()` and not `teleopPeriodic()`? The checkpoint has
 you turn the shaft while the robot is **disabled**. Check the lifecycle
 table: which one still runs then?
 
+This is the same code for a Kraken or a REV motor: both of their
+encoders are `IncrementalEncoder`s, so they have the same methods.
+
 If `IncrementalEncoder` is underlined in red, hover over it and choose
 **Quick Fix** to add the `import`.
 </details>
@@ -580,8 +615,8 @@ it doesn't leap somewhere when you enable. Then each press of A adds
 
 ## Step 11: Let the motor do it
 
-The Kraken has a feedback controller **built in**, and it runs 1000
-times a second, much faster than your 50. You give it the target and a
+Both the Kraken and the SPARK have a feedback controller **built in**,
+and it runs about 1000 times a second, much faster than your 50. You give it the target and a
 **gain** (the number that plays the part of your `k`).
 
 **Goal:** the same quarter turns as Step 10, but using the motor's own
