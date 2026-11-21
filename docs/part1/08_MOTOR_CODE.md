@@ -586,7 +586,8 @@ the error so you can see it working.
 > happens to the power? Is that enough power to turn the motor at all?
 
 > **Check yourself:** try a much **bigger** `k`. What does the flag do
-> now? (Keep a finger on Enter.)
+> now? (Keep a finger on Enter.) You'll learn how to pick `k` properly
+> in [Step 11](#tuning-p-the-highest-one-that-doesnt-oscillate).
 
 <details>
 <summary>Hint 1: when do I pick the target?</summary>
@@ -654,6 +655,72 @@ so changing it means redeploying.
 `setUnwrappedPosition(position, velocity, torque)`. You only want a
 position, so what do you pass for the other two?
 </details>
+
+### Tuning P: "the highest one that doesn't oscillate"
+
+You'll hear this a lot. Here's what it means.
+
+**P** is the gain: `power = P × error`. (In Step 10 you called it `k`.
+**P** stands for **proportional**: the push is in proportion to how far
+off you are.) Choosing it is called **tuning**.
+
+* **P too small:** a gentle push. The shaft creeps toward the target
+  and **stops short**, because near the target the push is too weak to
+  beat friction. It's also easy to push off target with a rag.
+* **P bigger:** a stronger push. It gets there faster, stops closer,
+  and fights back harder when you push it. **Bigger is better, up to a
+  point.**
+* **P too big:** it **oscillates**: it swings past the target, comes
+  back, swings past the other way, and keeps going back and forth. You
+  might see it **wobble**, or just hear it **buzz** while it's sitting
+  still.
+
+Why does too much P overshoot? The shaft has **momentum**. When it
+reaches the target, the error is zero, so the push is zero, but the
+shaft is still moving, so it coasts past. Now the error points the
+other way, and a big P shoves it back hard, so it overshoots again.
+It's like adjusting a shower: turn the knob too far each time and
+you go from freezing to scalding and back, and never get "just right".
+
+So "**the highest P that doesn't oscillate**" means: as stiff and
+accurate as possible, but not so strong it starts shaking.
+
+On a Glass graph after you press A (dashes are the **desired**
+position, stars are the **actual** position):
+
+```
+ too small                about right              too big
+
+                                                        **      **
+ - - - - - - - - - -      - - - - ************     - - *- *- - *- *- -*
+           **********            *                    *    *   *   * *
+       ****                     *                     *     ***     *
+    ***                        *                     *
+  **                         **                     *
+ *                        ***                      *
+```
+
+**How to tune it:**
+
+1. Start small (use the number the `PIDConstants` comments suggest).
+1. Press A a few times and look at the graph. **Stops short?** Double
+   P, redeploy, and try again.
+1. Keep doubling until you see **overshoot and wobble**, or hear a
+   buzz. That P is too big.
+1. Go back to the **last value that didn't wobble**. If it's close to
+   the edge (a little overshoot), go a bit lower still: a real
+   mechanism with a load on it is wobblier than a bare shaft.
+1. Write down your final P, and the one that oscillated, in a comment
+   next to it, with the date. That's what the team does in real code
+   (look for `// tuned` comments in `lib`).
+
+> **Check yourself:** with your final P, does the shaft stop
+> **exactly** on target? If not, why not? (What would fix that is the
+> **I** and **D** in PID. They're for later.)
+
+**Checkpoint:** post two Glass screenshots to `#rookie_training`: one
+with a P that oscillates, and one with your final P. Write both numbers
+on them.
 
 ## Step 12: Build a grabber
 
