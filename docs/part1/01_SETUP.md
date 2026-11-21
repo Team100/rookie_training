@@ -61,6 +61,13 @@ freely.
    VS Code for robot code, not a different VS Code you already have.
    (You'll add 2027 WPILib later, when you
    [switch to the SystemCore](../part4/01_SYSTEMCORE.md).)
+1. **FRC Game Tools** (Windows only). Download them from
+   [NI](https://www.ni.com/en/support/downloads/drivers/download.frc-game-tools.html)
+   (you may need a free NI account) and follow the
+   [WPILib guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html).
+   They install the **FRC Driver Station** and the RoboRIO's **USB
+   driver**, without which your laptop can't reach the RoboRIO over a
+   USB cable. Macs can't run them; you'll use an Ethernet cable instead.
 1. **Git.** Windows: install [Git for Windows](https://git-scm.com/download/win)
    and accept the defaults. Mac: run `xcode-select --install`.
 1. **GitHub Desktop** (optional but recommended):
