@@ -493,6 +493,40 @@ Step 5 (not on the motor). The units are at the end of the name
 again. How many degrees are in a radian? (`Math.toDegrees` exists.)
 </details>
 
+<details>
+<summary>Hint 2: code example</summary>
+
+You already have the encoder field from Step 5. If you don't, add it:
+
+```java
+// a field, next to m_motor
+private final IncrementalEncoder m_encoder;
+
+// in the constructor, after you create m_motor
+m_encoder = m_motor.encoder();
+```
+
+Then read it and print it every cycle:
+
+```java
+@Override
+public void robotPeriodic() {
+    // ... your four calls from Step 2 stay here, first ...
+
+    double positionRad = m_encoder.getUnwrappedPositionRad();
+    double positionDeg = Math.toDegrees(positionRad);
+    System.out.printf("position %.1f deg%n", positionDeg);
+}
+```
+
+Why `robotPeriodic()` and not `teleopPeriodic()`? The checkpoint has
+you turn the shaft while the robot is **disabled**. Check the lifecycle
+table: which one still runs then?
+
+If `IncrementalEncoder` is underlined in red, hover over it and choose
+**Quick Fix** to add the `import`.
+</details>
+
 ## Step 10: Turn a quarter turn, by yourself
 
 **Goal:** when you press **A**, the shaft turns **90°** from where it
