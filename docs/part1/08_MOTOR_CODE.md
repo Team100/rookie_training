@@ -98,7 +98,7 @@ one sends logs to the dashboard.
 > An **empty** `robotPeriodic()` (the one the WPILib template gives you)
 > is the #1 reason rookies see no logs in Glass.
 
-**Look in:** the `robotPeriodic()` of `test/single_roller`. Find the
+**Look in:** the `robotPeriodic()` of [`test/single_roller` `Robot.java`](https://github.com/Team100/all26/blob/main/test/single_roller/src/main/java/frc/robot/Robot.java). Find the
 four lines that do this. (It has a few extra lines you don't need yet.)
 
 **Checkpoint:** it builds, and you've written a short comment above each

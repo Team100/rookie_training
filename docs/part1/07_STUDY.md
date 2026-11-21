@@ -84,7 +84,7 @@ It should look like this:
 ```
 
 From now on, open your study by opening this `.code-workspace` file.
-For an example, see `test/single_roller/single_roller.code-workspace`.
+For an example, see [`test/single_roller/single_roller.code-workspace`](https://github.com/Team100/all26/blob/main/test/single_roller/single_roller.code-workspace).
 
 ### 2. Tell Gradle about `lib`
 
