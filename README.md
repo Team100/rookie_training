@@ -101,7 +101,7 @@ Real mechanisms, tethered to your laptop with a cable. Start with
 * **2.1** **[Glass and power-draw tests](docs/part2/01_GLASS_POWER.md)**: graph live values; the rag test
 * **2.2** **Easy mode: [the Discus](docs/part2/02_DISCUS.md)**: spin a heavy disc, measure it, make it hold a speed; 🏆 Discus Challenge
 * **2.3** **Hard mode: [the shooter bot](docs/part2/03_DEMO_BOT.md)**: spin up the shooter and feed balls, safely; 🏆 Shooter Challenge
-* **2.4** **[Optional] [Commands vs. `if()`: the gripper bot](docs/part2/04_COMMANDS.md)**: rebuild two-motor OPEN/CLOSED control the way the team's robot code does it
+* **2.4** **[Optional] [Commands: build a gripper the Team 100 way](docs/part2/04_COMMANDS.md)**: a tour of `lib`'s building blocks, then your own two-motor gripper subsystem and commands
 
 ## Part 3: Localization and auton
 

@@ -36,9 +36,12 @@ Guidelines:
   * Part 2 deliberately has **no robot code and no pointers to existing
     robot code**: students build their own studies from goals, hints,
     and checkpoints.
-    `docs/part2/04_COMMANDS.md` (optional) rebuilds the Part 1 grabber
-    as a two-motor gripper with WPILib commands; it points at WPILib
-    docs, not at team robot code.
+    **Exception:** `docs/part2/04_COMMANDS.md` (optional) is about
+    reusing Team 100 code. It points at `lib` only (never `comp` or
+    `test`): students use `lib`'s building blocks (motors, mechanisms,
+    servos, profiles, `TriggerUtil`) and write their **own** subsystem
+    and commands. `lib`'s ready-made subsystems are examples to read,
+    not to use.
 
   The README lists every chapter. If you add, move, or renumber one,
   update the README and the "Next:" links around it.

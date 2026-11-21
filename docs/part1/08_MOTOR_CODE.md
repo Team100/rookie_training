@@ -787,8 +787,8 @@ Step 11.
 
 > **Later:** the team's robot code doesn't use `if()`s for buttons; it
 > uses **commands**. In the optional
-> [2.4: Commands vs. `if()`](../part2/04_COMMANDS.md) you rebuild this
-> grabber that way, and see why.
+> [2.4: Commands](../part2/04_COMMANDS.md) you rebuild this grabber
+> from `lib`'s building blocks, with your own subsystem and commands.
 
 > **Make it better:** add a third position, **HALF**, on another
 > button. Or print `GRABBED!` when the arms stopped short of CLOSED and

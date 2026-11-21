@@ -555,5 +555,5 @@ masking tape.
 the table in [Step 1](#step-1-the-motors-and-their-can-ids) if yours
 is different, and tell a mentor, so the next group doesn't get stuck.
 
-Next: [Optional] [Commands vs. `if()`: the gripper bot](04_COMMANDS.md), or
+Next: [Optional] [Commands: build a gripper the Team 100 way](04_COMMANDS.md), or
 skip to [Part 3: Where am I? (localization)](../part3/01_LOCALIZATION.md)

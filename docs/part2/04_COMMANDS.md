@@ -1,28 +1,44 @@
-# [Optional] Commands vs. `if()`: the gripper bot
+# [Optional] Commands: build a gripper the Team 100 way
 
 In [Control a motor from code](../part1/08_MOTOR_CODE.md#step-12-build-a-grabber)
-you built a grabber with `if()` statements in `teleopPeriodic()`. That
-works, and it's the best way to *learn*, because you can see everything
-that happens each cycle.
+you built a grabber from scratch: raw motor calls, and `if()`s in
+`teleopPeriodic()`. That's the best way to *learn* what happens each
+cycle.
 
-But the team's real robot code doesn't look like that. It uses
-**commands**. In this chapter you'll build a two-motor **gripper** both
-ways, add a feature that's hard with `if()`, and see for yourself why
-commands exist.
+The team's robot code doesn't work like that. It builds mechanisms
+from pieces that already exist in **`lib`**, and drives them with
+**commands**. Most of the job of writing robot code is knowing what's
+already there and putting it together.
 
-This chapter is **optional**, but if you want to work on the real
-robot code, do it: everything there is commands.
+In this chapter you'll write your **own** subsystem and your **own**
+commands for a two-motor **gripper**, built from `lib`'s **building
+blocks**: motors, mechanisms, servos, profiles, and button bindings.
+Two rules:
+
+* **Use `lib`'s building blocks**, not raw WPILib or raw motor calls,
+  when `lib` has a way to do it.
+* **Write the subsystem and commands yourself.** `lib` also has some
+  ready-made subsystems. Read them to learn the patterns, but don't put
+  them in your code.
+
+First you'll tour the pieces, then build the gripper from them.
+
+> Unlike the rest of Part 2, this chapter points you at the team's
+> code on purpose: knowing what's in `lib`, and how it fits together,
+> is the lesson. Read the examples to understand them, then write your
+> own `Gripper`. Don't copy whole files.
+
+This chapter is **optional**, but if you want to work on the real robot
+code, do it: everything there is built this way.
 
 You need:
 
-* the grabber from [1.8, Step 12](../part1/08_MOTOR_CODE.md#step-12-build-a-grabber),
-  or at least Steps 9 to 11 (position control)
-* the [shooter bot](03_DEMO_BOT.md), where Step 6's hints already
-  mentioned commands
+* [1.8, Steps 9 to 12](../part1/08_MOTOR_CODE.md#step-9-where-is-the-shaft)
+  (position control and the grabber)
+* a **new study** with `lib` included, like
+  [Your first study](../part1/07_STUDY.md)
 
-Make a **new study** for this chapter, with `lib` included, like
-[Your first study](../part1/07_STUDY.md). Kraken or REV motors both
-work; use whichever the gripper bot has.
+Kraken or REV motors both work; use whichever the gripper bot has.
 
 ## Safety first
 
@@ -35,8 +51,8 @@ can't tell a ball from a finger.
 
 ## The gripper bot
 
-> **TODO (mentors):** which bot this is, a photo, and the two motors'
-> CAN IDs and types.
+> **TODO (mentors):** which bot this is, a photo, the two motors' types
+> and CAN IDs, and the gear ratio from motor to jaw.
 > 📷 **TODO photo:** `docs/img/gripper_bot.jpg`: the gripper bot, open
 > and closed, with the two motors labeled.
 
@@ -45,242 +61,269 @@ can't tell a ball from a finger.
 | Left jaw | TODO | TODO |
 | Right jaw | TODO | TODO |
 
-## Step 1: The `if()` gripper, plus one new trick
+Gear ratio (motor turns per jaw turn): **TODO**
 
-**Goal:** the same gripper as in Part 1, with one new button:
+## Existing things you can use
 
-* **A**: close. **B**: open.
-* **X**: **grab and release**: close, wait **2 seconds**, then open by
-  itself.
+Team 100 code is built in **layers**. Each layer uses the one below
+it, and adds one idea:
 
-Write it the way you know: fields, and `if()`s in `teleopPeriodic()`.
+```
+ binding     "while A is held, close the gripper"
+   ↓
+ command     "close": run every cycle until something else takes over
+   ↓
+ subsystem   the gripper: owns both jaws, knows OPEN and CLOSED
+   ↓
+ servo       one jaw: goes to an angle smoothly, says when it's there
+   ↓
+ mechanism   one jaw: motor + encoder + gear ratio + limits
+   ↓
+ motor       one Kraken or SPARK
+```
 
-**Checkpoint:** all three buttons work. Then try these, and **write
-down what happens**:
+In 1.8 you worked only at the bottom: the **motor**. Here's what's
+above it. You'll **use** the motor, mechanism, servo, and binding
+layers from `lib`, and **write** the subsystem and commands yourself.
+All links are to `lib` on the `main` branch.
 
-1. Press X, then press **B** in the middle of the 2 seconds.
-1. Press X, then press **A** in the middle.
-1. Press X twice, quickly.
+### Motor: the one you know
 
-> **Check yourself:** how did you do "wait 2 seconds"? You can't stop
-> and wait inside `teleopPeriodic()`: what would happen to everything
-> else the robot does in those 2 seconds?
+| Class | What it does |
+| --- | --- |
+| [`KrakenX44Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX44Motor.java), [`KrakenX60Motor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/ctre/KrakenX60Motor.java) | A Kraken, same as in [1.8 Step 3](../part1/08_MOTOR_CODE.md#step-3-create-the-motor). |
+| [`NeoCANSparkMotor`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/motor/rev/NeoCANSparkMotor.java) and the rest of the `rev` folder | A REV motor on a SPARK. Same arguments, plus two at the end. |
 
-> **Check yourself:** count the fields and `if()`s you needed just for
-> X. Now imagine the gripper also needs to work in **auton**: "drive to
-> the ball, grab it, drive back". Which of your code could auton reuse?
+### Mechanism: a motor attached to something
 
-<details>
-<summary>Hint 1: waiting without stopping</summary>
+| Class | What it does |
+| --- | --- |
+| [`RotaryMechanism`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/mechanism/RotaryMechanism.java) | A motor, its encoder, and the **gear ratio** to the thing that turns. It works in **jaw** angles, not motor angles, so you never divide by the gear ratio yourself. It also has a **min and max angle**: it refuses to drive past them, like a fence. |
 
-Don't wait; **remember**. When X is pressed, remember the time (try
-`Timer.getFPGATimestamp()`, in seconds). Every cycle, check: has it
-been 2 seconds since then? If so, open.
-</details>
+### Servo: go to an angle, smoothly
 
-<details>
-<summary>Hint 2: what is it doing right now?</summary>
+| Class | What it does |
+| --- | --- |
+| [`OutboardAngularPositionServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/OutboardAngularPositionServo.java) | Wraps a mechanism. `setPositionProfiled(angle)` moves it there **smoothly** (speeds up, cruises, slows down) using the motor's built-in feedback. `atGoal()` says whether it got there. `reset()` starts fresh from wherever it is now. ("Outboard" means the feedback runs in the motor controller, which is what we use whenever we can.) Read the [`servo` README](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/README.md) and the comments in [`AngularPositionServo`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/servo/AngularPositionServo.java). |
+| [`TrapezoidProfileR1`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/profile/r1/TrapezoidProfileR1.java) | The "smoothly" part: a **profile** with a top speed and a top acceleration. Plotted, the speed looks like a trapezoid: up, flat, down. |
+| [`ProfileReferenceR1`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/reference/r1/ProfileReferenceR1.java) | Walks through the profile one cycle at a time and hands the servo each next step. You create it and pass it in; the servo does the rest. |
+| [`RDynamicsAnalytic`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/dynamics/r/RDynamicsAnalytic.java) | A physics model of what's being turned (mass, length), so the servo can add a little extra push to accelerate it. For a light jaw, `RDynamicsAnalytic.thinRod(mass, length)` is close enough. |
 
-You need a variable that says what the gripper is doing: "idle",
-"grabbing", "releasing". Each button, and the clock, moves it from one
-to another. Draw it as boxes and arrows first.
-</details>
+### Subsystem and commands: what the gripper can do
 
-## Commands, in plain words
+| Thing | What it does |
+| --- | --- |
+| **Subsystem** | A class that **owns** hardware. Every `lib` subsystem extends WPILib's `SubsystemBase`, and so will yours. Only **one command** can use a subsystem at a time: starting a new one **interrupts** the old one, so two buttons can never fight over the jaws. |
+| **Command** | Something a subsystem **does**. Inside your subsystem, `run(...)`, `startRun(...)`, and `runOnce(...)` (from `SubsystemBase`) make one for you, and mark it as using this subsystem. Look at how the examples below use them. |
+| **Default command** | What a subsystem does when no other command is using it. `setDefaultCommand(...)`. |
+| [The `commands` README](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/commands/README.md) | **The Team 100 style:** commands normally **never end** by themselves. "Close" means "close, and keep holding closed", until another command takes over. When a sequence needs to move on, you add the ending yourself: `.until(...)`. |
+| The `CommandScheduler` | Runs every command, every cycle. You already call it in `robotPeriodic()` ([1.8 Step 2](../part1/08_MOTOR_CODE.md#step-2-keep-the-library-ticking)). |
 
-Here's the other way to think about it. Instead of checking every
-button every cycle, you **describe the robot once**, at startup:
+### Bindings: connect buttons to commands
 
-| Word | What it means | For the gripper |
+| Class | What it does |
+| --- | --- |
+| [`DriverXboxControl`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/hid/DriverXboxControl.java) | The controller, same as in 1.8. `a()`, `b()`, `x()` and so on. |
+| [`TriggerUtil`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/util/TriggerUtil.java) | `whileTrue(m_driver::a, command)`: run the command **while** A is held, then stop it. `onTrue(...)`: **start** it when A is pressed, and let it keep going. This is how the team binds buttons; use it, not `new Trigger(...)`. |
+
+### Examples to read (not to use)
+
+These are ready-made subsystems and setups that put the pieces
+together. **Don't use them in your code**; you're writing your own.
+Read them for the **pattern**: each is a little different from your
+gripper.
+
+| Example | Read it for | What's different from your gripper |
 | --- | --- | --- |
-| **Subsystem** | A class that **owns** some hardware. | `Gripper`, which owns both jaw motors. |
-| **Command** | Something a subsystem can **do**. It starts, runs every cycle, and may end. | "close", "open", "grab and release" |
-| **Requirement** | Which subsystem a command uses. **Only one command can use a subsystem at a time**: starting a new one **interrupts** the old one. | "open" and "close" both require `Gripper`, so they can never fight. |
-| **Trigger** (or **binding**) | "When *this* happens, run *that* command." | "While A is held, run close." |
-| **Default command** | What a subsystem does when nothing else is using it. | "Hold still." |
-| **Scheduler** | The part that runs every command, every cycle. | You already call it: it's the `CommandScheduler` line in your `robotPeriodic()`. |
+| [`DualAngularSubsystem`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/subsystems/r1/DualAngularSubsystem.java) | **Two motors** driven together: two mechanisms, two servos, one target. Private methods that do the same thing to both. `position()` calls `reset()` first, using `startRun`. | It only knows Kraken X44s, and it has no named positions. |
+| [`OutboardRotaryPositionSubsystem`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/OutboardRotaryPositionSubsystem.java) | **Named positions** (`HOME`, `EXTEND`) as constants. Building the profile, reference, and mechanism step by step, with comments on every number. Uses a **NEO** (REV). | One motor. |
+| [`OutboardRotaryPositionSubsystemSetup`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/OutboardRotaryPositionSubsystemSetup.java) | What goes in `Robot`: create the subsystem, set a default command, bind a button with `whileTrue`. | |
+| [`SimpleSequence`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/lib/examples/motion/SimpleSequence.java) | **"Do this, then that"**: `sequence(...)`, with `.until(...isDone)` and `.withTimeout(2)` to make never-ending commands end. | |
+| [`IntakeExtend`](https://github.com/Team100/all26/blob/main/lib/src/main/java/org/team100/frc2026/subsystems/IntakeExtend.java) | A **real competition** subsystem with two motors and two positions, like yours. Notice the pair `goToExtendedPosition()` (ends when it gets there) and `goToExtendedPositionEndlessly()` (never ends). | It's for this year's robot, so it has extra parts you don't need. |
 
-The `if()` version and the command version both end up calling the
-same motor methods every 20 ms. The difference is **who decides**:
-your `if()`s, or the scheduler, following rules you set up once.
+**Checkpoint:** before you write any code, answer these with your
+group (write the answers in your study's `README`):
 
-Read [WPILib: What is "command-based" programming?](https://docs.wpilib.org/en/stable/docs/software/commandbased/what-is-command-based.html)
-before you go on.
+1. In `DualAngularSubsystem`, what makes the two motors move
+   **together**? What makes them turn in **opposite** directions?
+1. Why does `DualAngularSubsystem.position()` call `reset()` before it
+   starts moving? (The comment on `reset()` in `AngularPositionServo`
+   says why, in capital letters.)
+1. In `OutboardRotaryPositionSubsystem`, which numbers would you change
+   for a gripper jaw?
+1. `extend()` never ends. So how does `SimpleSequence` move on to the
+   next step?
 
-## Step 2: A `Gripper` subsystem
+## Step 1: Your `Gripper` subsystem
 
-**Goal:** a new class, `Gripper`, that **owns** both motors. `Robot`
-creates one `Gripper` and has **no motor fields** of its own.
+**Goal:** your own class `Gripper` that extends `SubsystemBase`, built
+from `lib`'s **building blocks** (no `lib` subsystems inside it):
 
-Put the OPEN and CLOSED angles inside `Gripper` too: they're facts
-about the gripper, and nothing else needs them.
+* two motors (your kind: Kraken or REV)
+* a `RotaryMechanism` for each, with the **gear ratio**, and a **min
+  and max** angle so it can't drive past fully open or fully closed
+* an `OutboardAngularPositionServo` for each, sharing one profile
+* `OPEN` and `CLOSED` angles as constants, **inside** `Gripper`
 
-**Look in:** [WPILib: Subsystems](https://docs.wpilib.org/en/stable/docs/software/commandbased/subsystems.html).
-Which class should `Gripper` extend?
+`Robot` creates one `Gripper` and has **no motor fields**.
 
-**Checkpoint:** it builds, and the motors' "created" messages still
-print when the code starts.
+**Checkpoint:** it builds, and the motors' "created" logs appear in
+Glass under your gripper's name.
+
+> **Check yourself:** `DualAngularSubsystem` is already two motors going
+> to the same angle. List what a real gripper needs that it doesn't
+> have (think: names, limits, motor types, closing on a ball). That
+> list is why you're writing your own.
+
+> **Check yourself:** what should the min and max angles be, compared
+> with OPEN and CLOSED? A little wider, exactly the same, or narrower?
+> What goes wrong with each?
 
 <details>
-<summary>Hint 1</summary>
+<summary>Hint 1: which pieces, in which order?</summary>
 
-`public class Gripper extends SubsystemBase`. Move the motor creation
-from `Robot`'s constructor into `Gripper`'s. What does `Gripper`'s
-constructor need to be given, so it can make its motors' logs?
+Bottom to top: motor → `RotaryMechanism` → `OutboardAngularPositionServo`.
+`OutboardRotaryPositionSubsystem` does this for one motor, in a
+`mech(...)` method; you do it twice. `DualAngularSubsystem` shows how
+to name the two sets of logs (`log.name("1")`, `log.name("2")`) so they
+don't land on top of each other.
 </details>
 
-## Step 3: `open()` and `close()` commands
+<details>
+<summary>Hint 2: the angles</summary>
 
-**Goal:** `Gripper` has two methods, `open()` and `close()`, that each
-**return a `Command`**. Each command sends its target to both motors
-every cycle.
+Angles are **jaw** angles, in radians, because the mechanism knows the
+gear ratio. Measure them like in [1.8 Step 9](../part1/08_MOTOR_CODE.md#step-9-where-is-the-shaft):
+set the jaws open by hand, start the code (so open is 0), and move a
+jaw to closed by hand, watching its logged position. Keep both angles
+between −180° and +180°: `setPositionProfiled` takes a **wrapped**
+angle (read its comment).
+</details>
 
-**Look in:** [WPILib: Commands](https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html).
-`SubsystemBase` has small methods that make a command for you **and**
-set its requirement automatically. Find them.
+<details>
+<summary>Hint 3: the two motors face each other</summary>
+
+Same trick as `DualAngularSubsystem`: one motor `FORWARD`, one
+`REVERSE`. Then one target closes both.
+</details>
+
+## Step 2: `open()` and `close()` commands
+
+**Goal:** `Gripper` has `open()` and `close()`, each **returning a
+`Command`**, in the Team 100 style: it moves there and then **keeps
+holding**, and never ends by itself. Also give `Gripper` an
+`atGoal()` that's true when **both** jaws are there.
 
 **Checkpoint:** it builds. (Nothing moves yet: nobody runs the
 commands.)
 
-> **Check yourself:** why does `close()` **return** a command, instead
+> **Check yourself:** why does `close()` **return** a command instead
 > of closing the gripper right away?
 
 <details>
 <summary>Hint 1</summary>
 
-Look for `run(...)` on `SubsystemBase`. It takes a little piece of code
-(a **lambda**, like `() -> doSomething()`) and makes a command that
-runs it every cycle, requiring this subsystem.
+Copy the **shape** of `DualAngularSubsystem.position()`: `startRun`
+with "reset both servos" as the start, and "set both to this angle,
+profiled" as the run. Then `close()` is that, with `CLOSED`.
 </details>
 
-<details>
-<summary>Hint 2</summary>
+## Step 3: Bind the buttons
 
-Write a private method that sends one target to both motors. Then
-`close()` is just `run(...)` calling it with CLOSED.
-</details>
+**Goal:** A closes, B opens, and there's a default command, all set up
+**once** in `Robot`'s constructor with `TriggerUtil`.
+`teleopPeriodic()` is **empty**.
 
-## Step 4: Bind the buttons
+Decide the default first: when nothing is pressed, should the gripper
+**open**, **hold where it is**, or **stop pushing**? Think about the
+robot carrying a ball. Write your choice and why in a comment.
 
-**Goal:** A closes and B opens, like before, but `teleopPeriodic()` is
-**empty**. The buttons are connected **once**, in `Robot`'s
-constructor.
-
-**Look in:** [WPILib: Binding commands to triggers](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html).
-A `Trigger` can be made from anything that answers true or false. Your
-`DriverXboxControl` has `a()` and `b()`.
-
-**Checkpoint:** A and B work, and there are no `if()`s for buttons
-anywhere.
+**Checkpoint:** A and B work, and enabling without touching anything
+does what you chose.
 
 Now try both kinds of binding, and write down what happens when you
 **let go** of the button:
 
-* `whileTrue(...)`
-* `onTrue(...)`
+* `whileTrue(m_driver::a, m_gripper.close())`
+* `onTrue(m_driver::a, m_gripper.close())`
 
-> **Check yourself:** with `onTrue`, the `close` command never ends by
-> itself. So how does pressing B stop it? (Look back at the
-> **Requirement** row in the table.)
-
-> **Check yourself:** what does the gripper do right after you enable,
-> before you press anything? Is that what you want?
+> **Check yourself:** with `onTrue`, `close` never ends. So how does
+> pressing B stop it? (Look back at **Subsystem** in the tour.)
 
 <details>
 <summary>Hint 1</summary>
 
-`new Trigger(m_driver::a).onTrue(m_gripper.close());`. The `::` means
-"this method, to call later", not "call it now".
+`OutboardRotaryPositionSubsystemSetup` is almost exactly this, with
+one button. You need `import static org.team100.lib.util.TriggerUtil.whileTrue;`
+(or `onTrue`) at the top, like it has.
 </details>
 
-## Step 5: A default command
+## Step 4: Grab and release
 
-**Goal:** when no button command is running, the gripper does
-something sensible on purpose, not by accident.
+**Goal:** **X** does "close, wait 2 seconds, open", by itself. Build it
+from your `close()` and `open()`, the way `SimpleSequence` does, with
+**no new fields**.
 
-Decide first: when nothing is pressed, should it **open**, **hold where
-it is**, or **stop pushing**? Think about the robot carrying a ball.
-Write your choice and your reason in a comment.
+Build it and press X. It probably gets **stuck** closed. Before you
+open the hints, work out why.
 
-**Look in:** the Subsystems page again, for **default commands**.
+**Checkpoint:** X grabs, waits, and releases. Then try:
 
-**Checkpoint:** enable without touching anything: the gripper does what
-you chose. Then switch A and B back to `whileTrue` and check that
-letting go returns to your default.
+1. Press X, then **B** in the middle.
+1. Press X, then **A** in the middle.
+1. Press X twice, quickly.
 
-> **Check yourself:** which binding, `whileTrue` or `onTrue`, makes
-> sense for your default? Why?
-
-## Step 6: Grab and release, the command way
-
-**Goal:** X does "close, wait 2 seconds, open", built from commands,
-with **no new fields**.
-
-**Look in:** [WPILib: Command compositions](https://docs.wpilib.org/en/stable/docs/software/commandbased/command-compositions.html).
-You want one thing, **then** another, **then** another.
-
-Build it, and press X. It probably doesn't work yet. Before you open
-the hints, work out why.
-
-**Checkpoint:** X grabs, waits, and releases. Then repeat the three
-tests from Step 1 (B during X, A during X, X twice) and compare with
-what you wrote down.
-
-> **Check yourself:** what does B do to the X command halfway through?
-> Did you write any code to make that happen?
+Write down what happens. Did you write any code to handle those?
 
 <details>
 <summary>Hint 1: why it gets stuck</summary>
 
-A **sequence** starts the next command only when the current one
-**ends**. Your `close()` runs every cycle, forever. When does it end?
+A sequence starts the next step only when the current one **ends**.
+Team 100 commands never end by themselves. Which one is stuck?
 </details>
 
 <details>
 <summary>Hint 2: making it end</summary>
 
-Give `Gripper` a method that says whether the jaws are **at** their
-target: read both encoders and compare with the target, with a small
-tolerance. Then `close().until(m_gripper::atTarget)` ends when it gets
-there. Another way: `withTimeout(...)`.
-
-Careful: if the gripper closes on a ball, it **never reaches** CLOSED.
-Which ending is safer, then?
+`SimpleSequence` uses `.until(rotary::isDone)`. You have `atGoal()`.
+But careful: if the gripper closes on a **ball**, it never reaches
+CLOSED, so `atGoal()` is never true. `SimpleSequence` also uses
+`.withTimeout(...)`. Which is safer here? Could you use both?
 </details>
 
 <details>
-<summary>Hint 3: the pieces</summary>
+<summary>Hint 3: where does the sequence go?</summary>
 
-`Commands.sequence(...)`, `Commands.waitSeconds(...)`, and your own
-`close()` and `open()`.
+`SimpleSequence` puts its sequence in its own little class, to keep
+`Robot` tidy. You could do that, or give `Gripper` a
+`grabAndRelease()` method. Which is better, if auton will need it too?
 </details>
 
-## Step 7: Compare
+## Step 5: Compare
 
-**Goal:** decide for yourself which way is better, and when.
+Fill in this table, from your 1.8 grabber and your new gripper:
 
-Fill in this table, from your two versions:
-
-| | `if()` version (Step 1) | Command version (Steps 2 to 6) |
+| | 1.8 grabber (`if()`) | 2.4 gripper (`lib` + commands) |
 | --- | --- | --- |
 | Lines in `teleopPeriodic()` | | |
-| Extra fields just for X | | |
-| What B does during X | | |
+| Code you wrote to keep two buttons from fighting | | |
+| What happens if it's told to go past fully open | | |
+| Moves smoothly, or jumps? | | |
 | Could auton reuse "grab and release"? | | |
-| Easier to see what happens each cycle? | | |
-| Easier to add a fourth button? | | |
+| How much of it did you write, and how much came from `lib`? | | |
 
-**Checkpoint:** post your filled-in table to `#rookie_training`, with
-one sentence: **when would you still use `if()`?**
-
-> **Check yourself:** there's still an `if`-like question hiding in the
-> command version: "is it at the target?" Where did it go?
+**Checkpoint:** post your table to `#rookie_training`, with one
+sentence: **what would you look for in `lib` first, next time you build
+a mechanism?**
 
 ## Send it in
 
-Commit, push, and open a PR ([how](../part1/02_FORK_WORKFLOW.md)). In
-the description, include your table from Step 7. Ask a mentor to
-compare your `Gripper` with a subsystem in the team's robot code: what's
-the same, and what's different?
+Commit, push, and open a PR ([how](../part1/02_FORK_WORKFLOW.md)).
+Include your answers to the tour questions and your Step 5 table. Ask a
+mentor to compare your `Gripper` with `IntakeExtend`: what's the same,
+and what's different?
+
+> If a class or method named here has moved or changed in `lib`, the
+> library has moved on. Find where it went, and fix this page.
 
 Next: [Part 3: Where am I? (localization)](../part3/01_LOCALIZATION.md)
