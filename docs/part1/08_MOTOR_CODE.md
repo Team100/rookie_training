@@ -243,6 +243,17 @@ Call `setDutyCycle(0.1)` on your motor, in `teleopPeriodic()`.
 **Look in:** your motor has an `encoder()` method. Open the type it
 returns and find a method for **velocity**. What units does it use?
 
+> [!WARNING]
+> Call `encoder()` **once**, in the constructor, and keep the result in
+> a field. Each call makes a **new** encoder that signs up with
+> `LogPoller` and never leaves. Call it every cycle and that list grows
+> by 50 a second, and your robot code gets slower and slower.
+
+> **Motor or encoder?** The motor's methods **tell it what to do**
+> (`setDutyCycle`, `setUnwrappedPosition`, ...). **Readings** (speed,
+> position) come from the encoder. So if a "get" method seems to be
+> missing from your motor, look in its encoder.
+
 **Checkpoint:** you see the speed printed, and you can say how many
 **rotations per second** that is.
 
@@ -265,8 +276,10 @@ radians are in one rotation?
 <details>
 <summary>Hint 2</summary>
 
-`m_motor.encoder().getVelocityRad_S()`. To print a number with two
-decimals: `System.out.printf("speed %.2f%n", speed);`
+Make a field `private final IncrementalEncoder m_encoder;`, set it in
+the constructor with `m_encoder = m_motor.encoder();`, and read
+`m_encoder.getVelocityRad_S()` in `teleopPeriodic()`. To print a number
+with two decimals: `System.out.printf("speed %.2f%n", speed);`
 </details>
 
 ## Step 6: Speed up slowly
@@ -475,7 +488,8 @@ exactly one full turn (watch the flag). The number goes up by about
 <details>
 <summary>Hint 1</summary>
 
-It's `getUnwrappedPositionRad()`. The units are at the end of the name
+It's `getUnwrappedPositionRad()`, on the encoder field you made in
+Step 5 (not on the motor). The units are at the end of the name
 again. How many degrees are in a radian? (`Math.toDegrees` exists.)
 </details>
 

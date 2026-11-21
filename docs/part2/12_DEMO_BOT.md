@@ -307,7 +307,9 @@ does spin-up take?
 <summary>Hint 1: reading the speed</summary>
 
 Measure each drum's speed like you did on the Discus: `encoder()` gives
-you the motor's speed in radians per second. Pick a target a bit below
+you the motor's speed in radians per second. Call `encoder()` once, in
+the constructor, and keep it in a field
+([why](../part1/08_MOTOR_CODE.md#step-5-read-the-speed)). Pick a target a bit below
 the speed they reach at your power, so "ready" happens a moment before
 they level off.
 </details>
