@@ -68,7 +68,7 @@ cable.
 1. **Open the Driver Station** (Windows only), team `100`.
    **Communications** and **Robot Code** should go green.
 1. **Glass** connects the same way: **Team** → **100**
-   ([how](10_GLASS_POWER.md#open-glass-and-connect)).
+   ([how](01_GLASS_POWER.md#open-glass-and-connect)).
 
 If it doesn't work:
 
@@ -129,7 +129,7 @@ your code and deploy it.
 
 Keep the robot **on blocks** (wheels off the floor): you're testing the
 shooter, not driving. More about radios comes in
-[Part 4](../part4/17_ROBOT_NETWORK.md).
+[Part 4](../part4/02_ROBOT_NETWORK.md).
 
 ## Step 1: The motors and their CAN IDs
 
@@ -295,7 +295,7 @@ A ball fed into slow drums just dribbles out. So the robot needs to
 **Goal:** print (or log) whether the drums are **ready**: both at least
 as fast as a target speed you choose.
 
-**Checkpoint:** in [Glass](10_GLASS_POWER.md#make-a-graph), graph both
+**Checkpoint:** in [Glass](01_GLASS_POWER.md#make-a-graph), graph both
 drum speeds as they spin up. Mark where they cross your target. How long
 does spin-up take?
 
@@ -402,7 +402,7 @@ and "repeatedly". Read
 
 ## Step 7: The mystery graph
 
-Same game as on the [Discus](11_DISCUS.md#step-5-the-mystery-graph),
+Same game as on the [Discus](02_DISCUS.md#step-5-the-mystery-graph),
 now with the whole shooter. One of you shoots; the other has to work
 out **what happened, and when, just by looking at the graphs**.
 
@@ -514,7 +514,7 @@ robot was pointing, the right drum speed, how each ball would fly.
 >    itself? What would it need to know about its own camera to get the
 >    distance right?
 
-Keep your list. In [Part 5](../part5/23_VISION.md), robots use cameras to
+Keep your list. In [Part 5](../part5/03_VISION.md), robots use cameras to
 measure where things are, and you'll see why a camera has to be
 **calibrated** before its measurements can be trusted.
 
@@ -555,4 +555,5 @@ masking tape.
 the table in [Step 1](#step-1-the-motors-and-their-can-ids) if yours
 is different, and tell a mentor, so the next group doesn't get stuck.
 
-Next: [Part 3: Where am I? (localization)](../part3/13_LOCALIZATION.md)
+Next: [Optional] [Commands vs. `if()`: the gripper bot](04_COMMANDS.md), or
+skip to [Part 3: Where am I? (localization)](../part3/01_LOCALIZATION.md)

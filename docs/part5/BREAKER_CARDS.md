@@ -9,7 +9,7 @@ make sure it's really broken, and then put it back **exactly** the way
 it was. Every card is something that really happens to robots at
 competitions. Read the whole card before you start.
 
-Rules (see [the game](25_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game)):
+Rules (see [the game](05_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game)):
 
 * **Only the cards a mentor approved.** Nothing else.
 * **Check it's really broken** using the card's "What the finder should
@@ -127,7 +127,7 @@ needed, and check `:1181` again.
 **Do it:** on **your** laptop, set your Ethernet to a static IP address
 that is the **same** as one of the Pis (for example `10.1.0.31`, mask
 `255.255.255.0`), with your laptop plugged into the robot's network.
-(See [Connect to the robot](../part4/17_ROBOT_NETWORK.md) for how to set
+(See [Connect to the robot](../part4/02_ROBOT_NETWORK.md) for how to set
 an IP.)
 
 **Why:** two devices with the same IP address confuse the whole network:
@@ -164,7 +164,7 @@ power on. Check `vcgencmd get_throttled` says `0x0`.
 **Do it:** with a mentor, on a branch in **your fork**, make one small
 change in the Pi code that makes it crash at startup (for example, a
 typo in a name). Deploy it to the Pi
-([how](22_PI_CHANGES.md#4-deploy-to-a-pi)).
+([how](02_PI_CHANGES.md#4-deploy-to-a-pi)).
 
 **Why:** "it worked on my laptop" is the most famous last words in
 programming. A bad deploy right before a match is a classic disaster,

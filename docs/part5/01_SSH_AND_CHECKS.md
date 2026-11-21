@@ -28,7 +28,7 @@ for the full scheme.
 * **To the whole robot:** plug into the access point's (or robot
   radio's) **DS** port, with Ethernet set to **Automatic (DHCP)**. You
   should get a `10.1.0.x` address. If you get `169.254…`, see
-  [Connect to the robot](../part4/17_ROBOT_NETWORK.md#troubleshooting).
+  [Connect to the robot](../part4/02_ROBOT_NETWORK.md#troubleshooting).
 * **To a Pi on the bench, without a robot:** set your laptop to
   `10.1.0.2` so it pretends to be the SystemCore
   ([how](https://github.com/Team100/all26/blob/2027/lib/doc/network.md#impersonating-the-roborio)).
@@ -49,7 +49,7 @@ If `ping` fails, `ssh` will fail too. Fix the cable and IP first.
 ## SystemCore
 
 You already know this one:
-[SSH into the SystemCore](../part4/16_SYSTEMCORE.md#6-ssh-into-the-systemcore).
+[SSH into the SystemCore](../part4/01_SYSTEMCORE.md#6-ssh-into-the-systemcore).
 Its checks include whether it can see the cameras:
 `ping -c 3 10.1.0.31` (each Pi) should get 3 replies.
 
@@ -142,10 +142,10 @@ wait for the green LED to stop blinking, then unplug. (Or use the
 * **Look, don't change.** Don't edit files on the SystemCore or a Pi by
   hand. The next deploy overwrites them, and nobody else will know what
   you did. Change the code in your fork and deploy it
-  ([Pi changes](22_PI_CHANGES.md)).
+  ([Pi changes](02_PI_CHANGES.md)).
 * **Don't `sudo apt upgrade` a robot at an event.** Updates can break
   things right before a match.
 * Tell the drive team before you restart anything on a robot that someone
   else is using.
 
-Next: [Change the Raspberry Pi code and deploy it](22_PI_CHANGES.md)
+Next: [Change the Raspberry Pi code and deploy it](02_PI_CHANGES.md)

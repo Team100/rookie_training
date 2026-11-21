@@ -23,8 +23,8 @@ camera ──frames──▶ Raspberry Pi ──"I see tag 7, there"──▶ Sy
 1. The robot code knows where every tag is on the field, and where each
    camera is on the robot, so it can work out **where the robot is**.
    Then it uses that to fix the drift you measured in
-   [Where am I?](../part3/13_LOCALIZATION.md). You'll put it to work in
-   [Park on the X, from anywhere](27_PARK_FROM_ANYWHERE.md).
+   [Where am I?](../part3/01_LOCALIZATION.md). You'll put it to work in
+   [Park on the X, from anywhere](07_PARK_FROM_ANYWHERE.md).
 
 We wrote our own vision code instead of using a ready-made product, so
 that you can understand it and change it. The team's
@@ -62,7 +62,7 @@ it's tilted.
 
 ## Exercise: see what the Pi sees
 
-1. Follow [Change the Pi code](22_PI_CHANGES.md#3-test-on-your-laptop-first)
+1. Follow [Change the Pi code](02_PI_CHANGES.md#3-test-on-your-laptop-first)
    to run the vision code on your **laptop** with the fake camera.
 1. Read the
    [code walkthrough](https://github.com/Team100/all26/blob/2027/raspberry_pi/doc/walkthrough.md).
@@ -70,7 +70,7 @@ it's tilted.
    result is sent.
 1. On a real Pi, hold a tag in front of the camera, and look at the
    Pi's dashboard and at the values that reach the robot in
-   [Glass](../part2/10_GLASS_POWER.md).
+   [Glass](../part2/01_GLASS_POWER.md).
 
 **Checkpoint:** you can point to the three places in the code (frame in,
 tags found, result out), and show a tag being detected live.
@@ -79,4 +79,4 @@ tags found, result out), and show a tag being detected live.
 > to find the Pi dashboard, and which NetworkTables values to look at in
 > Glass.
 
-Next: [Set up a new camera](24_NEW_CAMERA.md)
+Next: [Set up a new camera](04_NEW_CAMERA.md)

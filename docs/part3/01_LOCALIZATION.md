@@ -7,7 +7,7 @@ In this chapter the robot uses only its **wheels**. You'll watch the
 numbers change as the wheels turn, and then find out how wrong they can
 get. You don't need to read any robot code: you'll learn it from
 experiments and graphs. (Cameras come later, in
-[Part 5](../part5/23_VISION.md).)
+[Part 5](../part5/03_VISION.md).)
 
 Do this in pairs, with the **demo bot** and a mentor.
 
@@ -18,7 +18,7 @@ A robot's **pose** is three numbers:
 * **x** and **y**: where it is on the field, in meters
 * **heading** (written **θ**, "theta"): which way it's facing
 
-The [auton chapter](14_AUTON.md#pose-where-am-i) explains the field's
+The [auton chapter](02_AUTON.md#pose-where-am-i) explains the field's
 coordinates in detail; skim that section now.
 
 ## How the wheels say where you are (odometry)
@@ -74,10 +74,10 @@ Experiment 5.
 1. **Deploy the team's demo bot code.** Open
    [`studies/demo_bot`](https://github.com/Team100/all26/tree/main/studies/demo_bot)
    from your fork, on `main`, in **2026** WPILib VS Code, and deploy it
-   ([connect over USB or the `100_Gamma` Wi-Fi](../part2/12_DEMO_BOT.md#connect-to-the-demo-bot)).
+   ([connect over USB or the `100_Gamma` Wi-Fi](../part2/03_DEMO_BOT.md#connect-to-the-demo-bot)).
    It already has driving and odometry built in.
 1. **Connect Glass** to the robot
-   ([how](../part2/10_GLASS_POWER.md#open-glass-and-connect)).
+   ([how](../part2/01_GLASS_POWER.md#open-glass-and-connect)).
 1. **Open the field view:** **NetworkTables → field**. The little robot
    on it is where the demo bot **thinks** it is. It starts at (0, 0),
    the corner of the field, facing +x.
@@ -89,9 +89,9 @@ Experiment 5.
      for `right`.
 
    No `LinearMechanism`? Set the
-   [log level](../part2/10_GLASS_POWER.md#find-your-motors-values) to
+   [log level](../part2/01_GLASS_POWER.md#find-your-motors-values) to
    `DEBUG`.
-1. **Make a graph** ([how](../part2/10_GLASS_POWER.md#make-a-graph)) of
+1. **Make a graph** ([how](../part2/01_GLASS_POWER.md#make-a-graph)) of
    the left and right `position (m)`.
 1. **Learn the controls.** Drive with the **right stick** only: up and
    down to go forward and back, left and right to turn. The top speed is
@@ -107,7 +107,7 @@ starts. To zero it, click **Restart Robot Code** in the Driver Station
 > keep a finger on **Enter** (disable).
 
 **For the floor experiments, use Wi-Fi** (`100_Gamma`,
-[how](../part2/12_DEMO_BOT.md#b-wi-fi-100_gamma)), so no cable follows
+[how](../part2/03_DEMO_BOT.md#b-wi-fi-100_gamma)), so no cable follows
 the robot around.
 
 > **TODO (mentors):** which floor to use (carpet or smooth).
@@ -270,7 +270,7 @@ Try Experiments 4 and 6 there, driving with the keyboard.
 ## What about cameras?
 
 Odometry is **fast** and **smooth**, but it **drifts**, and it never
-knows when it's been pushed. In [Part 5](../part5/23_VISION.md) you'll
+knows when it's been pushed. In [Part 5](../part5/03_VISION.md) you'll
 add **cameras** that look for **AprilTags**, markers at known places on
 the field. Seeing one tells the robot where it really is.
 
@@ -297,4 +297,4 @@ You don't need them yet.
 * the field view moving while the robot is on blocks, and explain why
   that's not a bug
 
-Next: [Work on auton](14_AUTON.md)
+Next: [Work on auton](02_AUTON.md)

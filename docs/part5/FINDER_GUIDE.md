@@ -2,7 +2,7 @@
 
 You're the **finder**. Something on the vision system is broken, and
 you don't know what. Your job: find the cause, and **show the evidence**.
-(Rules: [the game](25_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game).
+(Rules: [the game](05_BREAK_THE_CAMERAS.md#lab-1-the-breaker-vs-finder-game).
 Don't read the breaker cards!)
 
 This page doesn't tell you the answer. It gives you a **method**: check
@@ -42,7 +42,7 @@ blinking now and then?
 ## Layer 2: Can you reach the Pi?
 
 **Check:** from your laptop (on the robot network,
-[how](21_SSH_AND_CHECKS.md#connect-your-laptop)):
+[how](01_SSH_AND_CHECKS.md#connect-your-laptop)):
 
 ```
 ping 10.1.0.31
@@ -149,7 +149,7 @@ its shots and gets lost on the field, and nothing ever shows an error.
 
 **If it fails:** wrong everywhere by about the same amount, or worse at
 the edges? Think about what the camera needs to know about **itself** to
-turn pixels into meters ([Set up a new camera](24_NEW_CAMERA.md)). Has
+turn pixels into meters ([Set up a new camera](04_NEW_CAMERA.md)). Has
 anything about this camera, or which Pi it's on, changed?
 
 ## When you think you've found it

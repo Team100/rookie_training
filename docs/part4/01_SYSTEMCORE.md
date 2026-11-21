@@ -6,7 +6,7 @@ auton on a **RoboRIO**. The competition robot runs on the new
 moves everything over to it, and the rest of the guide stays there. Most of what you know carries over. This
 page covers what's different, gets your laptop and fork ready, and moves
 your motor study to the SystemCore. Then you'll
-[put it all together on the demo bot](19_DEMO_BOT_SYSTEMCORE.md).
+[put it all together on the demo bot](04_DEMO_BOT_SYSTEMCORE.md).
 
 ## What changes
 
@@ -31,11 +31,11 @@ like this:
 | Robot address `10.1.0.2` | Still `10.1.0.2` on the robot network |
 | ssh user `lvuser` / `admin` | ssh user `systemcore`, password `systemcore` |
 | Deploy folder `/home/lvuser/deploy` | `/home/systemcore/deploy` |
-| Serial number in the console | See [Robot identity](18_IDENTITY.md) |
+| Serial number in the console | See [Robot identity](03_IDENTITY.md) |
 | One CAN bus | Five CAN ports, `can_s0` … `can_s4`; in code, `new CanBusId(0)` … |
 | `edu.wpi.first.…` packages | `org.wpilib.…` packages |
 | "2026 WPILib VS Code" | "2027 WPILib VS Code" |
-| Mac: Glass from `~/wpilib/2026/tools` | Mac: Glass from `~/wpilib/2027/tools` ([how](../part2/10_GLASS_POWER.md#open-glass-and-connect)) |
+| Mac: Glass from `~/wpilib/2026/tools` | Mac: Glass from `~/wpilib/2027/tools` ([how](../part2/01_GLASS_POWER.md#open-glass-and-connect)) |
 | Reset button reboots it | TODO: how to reboot or clear an e-stop |
 
 The SystemCore also has a web dashboard at http://robot.local, and its
@@ -86,7 +86,7 @@ first thing to check.
    it up. Wait for its screen to show that it has booted.
 1. Connect your laptop to the SystemCore with a **USB-C** cable.
    * You can also use Ethernet through the radio or a switch; see
-     [Connect to the robot](17_ROBOT_NETWORK.md).
+     [Connect to the robot](02_ROBOT_NETWORK.md).
 
    > 📷 **TODO photo:** `docs/img/systemcore_usb_c.jpg`: the SystemCore
    > USB-C port with the cable plugged in.
@@ -208,7 +208,7 @@ Type `exit` to log out.
 ### Common problems
 
 * **`ping` fails:** `ssh` will fail too. Fix the cable and the laptop's
-  network first ([Connect to the robot](17_ROBOT_NETWORK.md#troubleshooting)).
+  network first ([Connect to the robot](02_ROBOT_NETWORK.md#troubleshooting)).
 * **`REMOTE HOST IDENTIFICATION HAS CHANGED`:** the SystemCore was
   reimaged, or a different device now has that address. Clear the old
   key and try again: `ssh-keygen -R robot.local` (or the address you
@@ -222,4 +222,4 @@ Type `exit` to log out.
 **Look, don't change.** Don't edit files on the SystemCore by hand. The
 next deploy overwrites them, and nobody else will know what you did.
 
-Next: [Connect to the robot (radios)](17_ROBOT_NETWORK.md)
+Next: [Connect to the robot (radios)](02_ROBOT_NETWORK.md)

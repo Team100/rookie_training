@@ -87,7 +87,7 @@ with the 2025 project wizard. See
 Nobody picked an auton, so it's running `NONE`. The Driver Station
 can't choose one. Connect Glass to team 100 and pick it in
 `SmartDashboard → Auton Command`, then enable from the Driver Station.
-See [Work on auton](../part3/14_AUTON.md#part-6-run-it-on-a-real-robot).
+See [Work on auton](../part3/02_AUTON.md#part-6-run-it-on-a-real-robot).
 
 ### RoboRIO's Comm light is off
 
@@ -171,7 +171,7 @@ stop.
 
 On a **SystemCore** the bus isn't `""`: it's one of the five CAN
 ports, and your code has to name the right one. See
-[CAN on the SystemCore](../part4/16_SYSTEMCORE.md#4-can-on-the-systemcore).
+[CAN on the SystemCore](../part4/01_SYSTEMCORE.md#4-can-on-the-systemcore).
 > **TODO:** what this line looks like on a SystemCore, and check the
 > advice above against CTRE's
 > [Phoenix 6 docs](https://v6.docs.ctr-electronics.com/en/stable/).
@@ -193,9 +193,9 @@ Common causes:
   it here.
 
 See [Deploy to the RoboRIO](../part1/04_DEPLOY.md#if-the-deploy-fails),
-[Deploy to a SystemCore](../part4/16_SYSTEMCORE.md#3-deploy-to-a-systemcore),
-[SSH into the SystemCore](../part4/16_SYSTEMCORE.md#common-problems),
-[SSH into the Pis](../part5/21_SSH_AND_CHECKS.md#common-problems), and
+[Deploy to a SystemCore](../part4/01_SYSTEMCORE.md#3-deploy-to-a-systemcore),
+[SSH into the SystemCore](../part4/01_SYSTEMCORE.md#common-problems),
+[SSH into the Pis](../part5/01_SSH_AND_CHECKS.md#common-problems), and
 [Debugging](DEBUGGING.md).
 
 Found a fix that isn't here? Add it!

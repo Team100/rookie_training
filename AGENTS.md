@@ -15,23 +15,30 @@ Guidelines:
   appears.
 * **Layout.** Chapters live in `docs/`, numbered in reading order:
   * `docs/part1/` (basics), `docs/part2/` (real robots: Discus, shooter
-    bot), `docs/part3/` (localization and auton): all for the
-    **RoboRIO**, `all26` branch `main`, 2026 WPILib.
+    bot, optional commands/gripper), `docs/part3/` (localization and
+    auton): all for the **RoboRIO**, `all26` branch `main`, 2026 WPILib.
   * `docs/part4/` (SystemCore), `docs/part5/` (Pis and vision),
     `docs/part6/` (object detection), `docs/part7/` (final challenge):
     the **SystemCore**, branch `2027`, 2027 WPILib.
   * Part 3 deliberately uses **wheels only** (odometry). Cameras and
     AprilTags come in Part 5, so don't make Parts 3 or 4 depend on them.
   * `docs/reference/`: debugging and troubleshooting.
-  * Every chapter gets its own number (no `05a`-style suffixes);
-    companion pages that aren't read in order (like `BREAKER_CARDS.md`)
-    have no number. Renumbering means updating every link and the
+  * Chapters are numbered **within their part**: the file is
+    `docs/partN/MM_NAME.md`, and the README shows it as **N.M** (e.g.
+    `docs/part2/03_DEMO_BOT.md` is 2.3). Adding a chapter only renumbers
+    later chapters in the same part; adding one at the end of a part
+    renumbers nothing. No `05a`-style suffixes. Companion pages that
+    aren't read in order (like `BREAKER_CARDS.md`) have no number.
+    Renumbering means updating the links to the moved files and the
     README.
   * `docs/advanced/`: experiments that need a mentor's sign-off first.
   * `docs/img/`: images.
   * Part 2 deliberately has **no robot code and no pointers to existing
     robot code**: students build their own studies from goals, hints,
     and checkpoints.
+    `docs/part2/04_COMMANDS.md` (optional) rebuilds the Part 1 grabber
+    as a two-motor gripper with WPILib commands; it points at WPILib
+    docs, not at team robot code.
 
   The README lists every chapter. If you add, move, or renumber one,
   update the README and the "Next:" links around it.

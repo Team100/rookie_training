@@ -4,14 +4,14 @@ So far your auton started from one taped spot, and drove a shape. Now
 it has to drive to a **place**: an **X of tape on the floor**. It can
 only win if it uses **both** things you learned in this part:
 
-* **localization** ([Where am I?](13_LOCALIZATION.md)): the robot knows
+* **localization** ([Where am I?](01_LOCALIZATION.md)): the robot knows
   where it starts, and its odometry has to be **good**, and
-* **auton** ([Work on auton](14_AUTON.md)): plan a path to the X and
+* **auton** ([Work on auton](02_AUTON.md)): plan a path to the X and
   follow it.
 
 Use one of the **demo bots ("A" or "B")**, on the **RoboRIO**, with the
 `main` branch, the same as the rest of Part 3. No cameras yet: the robot
-has only its wheels. (In [Part 5](../part5/27_PARK_FROM_ANYWHERE.md)
+has only its wheels. (In [Part 5](../part5/07_PARK_FROM_ANYWHERE.md)
 you'll add a camera and start from anywhere.)
 
 > [!CAUTION]
@@ -49,14 +49,14 @@ That card is all you get.
 
 The robot always starts on **start 1**.
 
-This is just your [auton chapter](14_AUTON.md) with a target: plan a
+This is just your [auton chapter](02_AUTON.md) with a target: plan a
 path from the start to the X, run it, and measure.
 
 **Checkpoint:** 3 runs in a row end within **20 cm** of the X.
 
 > **Check yourself:** the mentor moves the X twice as far away. Does
 > your error get bigger? Why? (Think about
-> [drift](13_LOCALIZATION.md#experiment-6-drift).)
+> [drift](01_LOCALIZATION.md#experiment-6-drift).)
 
 ## Hard mode: roll for it
 
@@ -96,8 +96,8 @@ to the final heading.
 <summary>Hint 3: it always misses the same way</summary>
 
 That's a **bias**. Go back to
-[Experiment 4](13_LOCALIZATION.md#experiment-4-one-meter-for-real) and
-[Experiment 5](13_LOCALIZATION.md#experiment-5-the-spin-test). Is the
+[Experiment 4](01_LOCALIZATION.md#experiment-4-one-meter-for-real) and
+[Experiment 5](01_LOCALIZATION.md#experiment-5-the-spin-test). Is the
 wheel size or the track width in the code a little wrong for **this**
 robot? Fix the number with a mentor, and measure again.
 </details>
@@ -117,7 +117,7 @@ the X**, in **cm**. Write down the heading error in degrees too.
   scores **200 cm**.
 * Anyone touching the robot (or a disable) also scores 200 cm.
 
-Use the [measuring steps](14_AUTON.md#how-to-measure) from the auton
+Use the [measuring steps](02_AUTON.md#how-to-measure) from the auton
 chapter: tape marks, tape measure, no eyeballing.
 
 ### Two kinds of miss
@@ -127,10 +127,10 @@ For every run, also write down where the robot **thinks** it ended
 
 | What you see | What's wrong |
 | --- | --- |
-| The robot **thinks** it's on the X, but it isn't | **Localization:** it doesn't know where it is. Check the wheel size and track width ([Where am I?](13_LOCALIZATION.md#experiment-4-one-meter-for-real)) |
+| The robot **thinks** it's on the X, but it isn't | **Localization:** it doesn't know where it is. Check the wheel size and track width ([Where am I?](01_LOCALIZATION.md#experiment-4-one-meter-for-real)) |
 | The robot **knows** it missed the X | **Tracking:** it knows where it is, but didn't drive there well. Check the path and the controller |
 
-This is the same split as in [Work out the error](14_AUTON.md#work-out-the-error).
+This is the same split as in [Work out the error](02_AUTON.md#work-out-the-error).
 
 Post your score, a video, and that table for each run to
 **`#rookie_training`**.
@@ -146,7 +146,7 @@ Post your score, a video, and that table for each run to
 <summary>⭐ Stretch: park and shoot</summary>
 
 Put a bucket in front of the X, like in the
-[Shooter Challenge](../part2/12_DEMO_BOT.md#-the-shooter-challenge).
+[Shooter Challenge](../part2/03_DEMO_BOT.md#-the-shooter-challenge).
 Park on the X, then shoot 5 balls into it, all in auton.
 **Score = balls in ÷ seconds** for the whole run, same as the Shooter
 Challenge.
@@ -155,4 +155,4 @@ Challenge.
 > **Check yourself:** keep your score. In Part 4 you'll run this exact
 > challenge again on the SystemCore. Will it be better or worse? Why?
 
-Next: [Part 4: Switch to the SystemCore](../part4/16_SYSTEMCORE.md)
+Next: [Part 4: Switch to the SystemCore](../part4/01_SYSTEMCORE.md)

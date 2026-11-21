@@ -1,10 +1,10 @@
 # 🏆 Park on the X, from anywhere
 
-In [Park on the X](../part3/15_PARK_ON_THE_X.md) the robot always
+In [Park on the X](../part3/03_PARK_ON_THE_X.md) the robot always
 started on a taped spot, so it knew where it began. Real matches aren't
 that tidy: robots get bumped, wheels slip, and drivers line up a little
 wrong. Odometry can't fix any of that by itself
-([remember the kidnapped robot?](../part3/13_LOCALIZATION.md#experiment-3-the-kidnapped-robot)).
+([remember the kidnapped robot?](../part3/01_LOCALIZATION.md#experiment-3-the-kidnapped-robot)).
 
 Now the robot has a camera. In this challenge it starts **somewhere
 random** and has to find itself by looking at an **AprilTag**, then
@@ -12,7 +12,7 @@ drive to the X.
 
 Use the demo bot on the **SystemCore**, with the `2027` branch, like
 the rest of Part 5. Start from your
-[SystemCore Park on the X code](../part4/20_PARK_ON_THE_X_SYSTEMCORE.md).
+[SystemCore Park on the X code](../part4/05_PARK_ON_THE_X_SYSTEMCORE.md).
 
 > **TODO (mentors):** the demo bot needs a **forward camera (Pi + USB
 > camera)** feeding localization, plus the tag family and size we print.
@@ -25,7 +25,7 @@ the rest of Part 5. Start from your
 
 ## How vision fixes the pose
 
-From [How our vision works](23_VISION.md): when a camera sees an
+From [How our vision works](03_VISION.md): when a camera sees an
 AprilTag, and the robot knows where that tag is on the field, it can
 work out where the robot must be. That doesn't drift, but it's
 **jumpy** (every picture is a little different), **late** (about a
@@ -50,7 +50,7 @@ Read the README; the math is optional.
 > 1. Why not just use vision, and skip odometry?
 > 2. A camera sees a tag 8 m away. Should that change the robot's pose a
 >    lot or a little? Why?
-> 3. Which of your [localization experiments](../part3/13_LOCALIZATION.md)
+> 3. Which of your [localization experiments](../part3/01_LOCALIZATION.md)
 >    would vision have fixed?
 
 **Try it:** with the robot still, watch its pose in Glass while you
@@ -111,14 +111,14 @@ and then turn to the final heading.
 
 ## Scoring
 
-Same as [Park on the X](../part3/15_PARK_ON_THE_X.md#scoring): total cm
+Same as [Park on the X](../part3/03_PARK_ON_THE_X.md#scoring): total cm
 error over **3 different random starts**, lower is better, 15 seconds
 per run, and a touch or a disable scores 200 cm.
 
 Fill in the
-[two kinds of miss](../part3/15_PARK_ON_THE_X.md#two-kinds-of-miss)
+[two kinds of miss](../part3/03_PARK_ON_THE_X.md#two-kinds-of-miss)
 table for every run. A localization miss now means: check the camera
-([Set up a new camera](24_NEW_CAMERA.md)).
+([Set up a new camera](04_NEW_CAMERA.md)).
 
 Post your score, a video, and the table to **`#rookie_training`**.
 
@@ -131,7 +131,7 @@ Post your score, a video, and the table to **`#rookie_training`**.
 <details>
 <summary>⭐ Stretch: park and shoot</summary>
 
-Put the [bucket](26_VISION_SHOOTER_CHALLENGE.md) in front of the X,
+Put the [bucket](06_VISION_SHOOTER_CHALLENGE.md) in front of the X,
 with its tag. Park on the X from a random start, then shoot 5 balls into
 it, all in auton. **Score = balls in ÷ seconds** for the whole run.
 </details>
@@ -139,4 +139,4 @@ it, all in auton. **Score = balls in ÷ seconds** for the whole run.
 > **Check yourself:** compare with your taped-start score. Is "from
 > anywhere" worse? Is it worse because of localization, or tracking?
 
-Next: [Part 6: Spot the balls](../part6/28_OBJECT_DETECTION.md)
+Next: [Part 6: Spot the balls](../part6/01_OBJECT_DETECTION.md)

@@ -19,7 +19,7 @@ You need:
   Vortex, NEO 550, or Minion) on a **SPARK MAX** or **SPARK Flex**
   controller. For REV, you find the CAN ID with the **REV Hardware
   Client** instead of Tuner X (see the
-  [shooter bot appendix](../part2/12_DEMO_BOT.md#appendix-find-the-can-ids-yourself)).
+  [shooter bot appendix](../part2/03_DEMO_BOT.md#appendix-find-the-can-ids-yourself)).
 
 Every step works for **both kinds**. Where they differ, the step says
 so.
@@ -427,7 +427,7 @@ to about 1 m/s, in place of Step 7's duty cycle.
 measured **velocity**. Push the stick: velocity follows the setpoint.
 
 Now the comparison. Hold the stick still, and press **gently** on the
-shaft with a rag ([rag test](../part2/10_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
+shaft with a rag ([rag test](../part2/01_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
 rules). Then do the same with your Step 7 duty-cycle code.
 
 > **Check yourself:** with duty cycle, what happens to the speed when
@@ -487,7 +487,7 @@ that uses it. The last argument of `make` is a tolerance in m/s;
 `0.05` is fine.
 </details>
 
-> In [the Discus](../part2/11_DISCUS.md#step-7-hold-a-speed-by-itself-feedback)
+> In [the Discus](../part2/02_DISCUS.md#step-7-hold-a-speed-by-itself-feedback)
 > you'll build this feedback yourself, to see what's going on inside.
 
 ## Step 9: Where is the shaft?
@@ -784,6 +784,11 @@ Keep one field for the target. A sets it to CLOSED, B sets it to OPEN.
 Every cycle, send that target to both motors with the method from
 Step 11.
 </details>
+
+> **Later:** the team's robot code doesn't use `if()`s for buttons; it
+> uses **commands**. In the optional
+> [2.4: Commands vs. `if()`](../part2/04_COMMANDS.md) you rebuild this
+> grabber that way, and see why.
 
 > **Make it better:** add a third position, **HALF**, on another
 > button. Or print `GRABBED!` when the arms stopped short of CLOSED and

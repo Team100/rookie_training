@@ -80,13 +80,13 @@ Good to know:
 * While you're on it, your laptop has no internet.
 
 The step-by-step for the demo bot, including deploying, is in
-[Connect to the demo bot](../part2/12_DEMO_BOT.md#b-wi-fi-100_gamma).
+[Connect to the demo bot](../part2/03_DEMO_BOT.md#b-wi-fi-100_gamma).
 
 > **TODO (mentors):** which robot or radio is `100_Gamma`, and whether
 > the other robots' radios have 2.4 GHz turned on.
 
 **No radios at all?** Plug a USB-C cable from the laptop into the
-SystemCore (see [Deploy to a SystemCore](16_SYSTEMCORE.md#3-deploy-to-a-systemcore)). That's enough to deploy
+SystemCore (see [Deploy to a SystemCore](01_SYSTEMCORE.md#3-deploy-to-a-systemcore)). That's enough to deploy
 and drive, as long as the robot is on blocks or tethered.
 
 ## Laptop network settings
@@ -239,7 +239,7 @@ on it. So:
    * Say **"Enabling!"** loudly before you enable.
 1. **Check the basics** before you blame your code: Driver Station lights
    green, battery above about 12.5 V, correct auton selected, no errors
-   scrolling in the console. See [SSH into the SystemCore](16_SYSTEMCORE.md#6-ssh-into-the-systemcore).
+   scrolling in the console. See [SSH into the SystemCore](01_SYSTEMCORE.md#6-ssh-into-the-systemcore).
 1. **Put it back.** When you're done, redeploy the team's code from the
    `2027` branch (or whatever was on it before), unless the mentor says
    otherwise. (Later, in Part 5, the same goes for the Pi cameras if
@@ -267,7 +267,7 @@ Work from the laptop outward:
 1. **`robot.local` doesn't resolve, but `10.1.0.2` works:** that's a
    name-lookup problem on the laptop, not the robot. Just use the IP.
 1. **Nothing works:** go back to a USB-C cable straight to the SystemCore
-   ([SSH](16_SYSTEMCORE.md#6-ssh-into-the-systemcore)).
+   ([SSH](01_SYSTEMCORE.md#6-ssh-into-the-systemcore)).
 
 ## Good to know
 
@@ -282,4 +282,4 @@ Work from the laptop outward:
 * Useful SystemCore ports: 22 (ssh), 80 (web dashboard), 5810
   (NetworkTables).
 
-Next: [Robot identity](18_IDENTITY.md)
+Next: [Robot identity](03_IDENTITY.md)

@@ -26,7 +26,7 @@ Pick one of these:
 
   ![](../img/team_100_logo.png)
 
-* **Over ssh** ([how](16_SYSTEMCORE.md#6-ssh-into-the-systemcore)):
+* **Over ssh** ([how](01_SYSTEMCORE.md#6-ssh-into-the-systemcore)):
   ```
   cat /sys/firmware/devicetree/base/serial-number; echo
   ```
@@ -51,6 +51,6 @@ Pick one of these:
 > change so it gets the right motors?
 
 Raspberry Pis have their own identity list for the same reason; you'll
-meet it in [Part 5](../part5/22_PI_CHANGES.md#2-make-your-change).
+meet it in [Part 5](../part5/02_PI_CHANGES.md#2-make-your-change).
 
-Next: [Put it together on the demo bot](19_DEMO_BOT_SYSTEMCORE.md)
+Next: [Put it together on the demo bot](04_DEMO_BOT_SYSTEMCORE.md)

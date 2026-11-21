@@ -28,7 +28,7 @@ checkpoint, and hints if you're stuck, just like
 > **Connecting:** plug a **USB-B cable** straight from your laptop into
 > the robot's RoboRIO, just like the test board in
 > [Deploy](../part1/04_DEPLOY.md). No radios needed: those come in
-> [Part 4](../part4/17_ROBOT_NETWORK.md), on the real robot.
+> [Part 4](../part4/02_ROBOT_NETWORK.md), on the real robot.
 
 ## Step 1: Find the motor
 
@@ -90,7 +90,7 @@ folder, in the `ctre` part.
 
 ## Step 4: Measure it
 
-**Goal:** you can see, in [Glass](10_GLASS_POWER.md#make-a-graph), a graph
+**Goal:** you can see, in [Glass](01_GLASS_POWER.md#make-a-graph), a graph
 of the disc's **speed**, **stator current**, and **supply current**
 while you drive it with the stick.
 
@@ -118,7 +118,7 @@ get the disc's speed.
 
 ## Step 5: The mystery graph
 
-Now use what you learned in the [rag test](10_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
+Now use what you learned in the [rag test](01_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)
 on a real mechanism. One of you makes things happen to the Discus; the
 other has to work out **what happened, and when, just by looking at
 the graph**.
@@ -277,7 +277,7 @@ each one. What's different about how the disc gets to the target?
 
 Now the fun part. While your code holds the speed, **push on the disc
 with a rag** (gently at first; same safety as the
-[rag test](10_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)).
+[rag test](01_GLASS_POWER.md#your-first-power-draw-test-the-rag-test)).
 Your code doesn't know you're there. Can it keep the speed anyway?
 
 1. Make Glass graph these four things, stacked like the template below.
@@ -451,4 +451,4 @@ request.
 Commit your study, push, and open a PR with your graphs and your
 answers to the check-yourself questions.
 
-Next: [Hard mode: the shooter bot](12_DEMO_BOT.md)
+Next: [Hard mode: the shooter bot](03_DEMO_BOT.md)

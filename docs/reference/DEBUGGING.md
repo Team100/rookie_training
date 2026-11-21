@@ -23,7 +23,7 @@ only while you're debugging, and take it out afterwards.
 ## 3. Log and graph
 
 Our loggers (`LoggerFactory`) send values to NetworkTables. Look at them
-live in **Glass** ([how to connect](../part2/10_GLASS_POWER.md#open-glass-and-connect))
+live in **Glass** ([how to connect](../part2/01_GLASS_POWER.md#open-glass-and-connect))
 or **AdvantageScope**, and graph them over time. A
 graph of "what I asked for" next to "what happened" answers most
 questions about motors and controllers.
@@ -64,5 +64,5 @@ without a robot or the simulator. Look in `lib/src/test` for examples.
 * **Cut the problem in half.** Does it work in sim? With a simpler study?
   With one motor?
 * **Check the hardware too:** CAN ID, wiring, battery, enabled? See
-  [SSH into the SystemCore](../part4/16_SYSTEMCORE.md#6-ssh-into-the-systemcore)
-  or [the Pis](../part5/21_SSH_AND_CHECKS.md).
+  [SSH into the SystemCore](../part4/01_SYSTEMCORE.md#6-ssh-into-the-systemcore)
+  or [the Pis](../part5/01_SSH_AND_CHECKS.md).

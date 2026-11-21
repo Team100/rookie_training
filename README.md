@@ -68,18 +68,18 @@ Learn the basics on a RoboRIO test board. Parts 1 to 3 use the
 
 ### Getting started
 
-1. **[Set up your laptop and your fork](docs/part1/01_SETUP.md)**: GitHub, Git, WPILib, first build
-1. **[Day-to-day workflow with your fork](docs/part1/02_FORK_WORKFLOW.md)**: sync, branch, commit, push, pull request
-1. **[Work from home on your own laptop](docs/part1/03_HOME_LAPTOP.md)**: Slack, GitHub, VS Code, Claude
-1. **[Deploy to the RoboRIO](docs/part1/04_DEPLOY.md)**: put code on a real controller
+* **1.1** **[Set up your laptop and your fork](docs/part1/01_SETUP.md)**: GitHub, Git, WPILib, first build
+* **1.2** **[Day-to-day workflow with your fork](docs/part1/02_FORK_WORKFLOW.md)**: sync, branch, commit, push, pull request
+* **1.3** **[Work from home on your own laptop](docs/part1/03_HOME_LAPTOP.md)**: Slack, GitHub, VS Code, Claude
+* **1.4** **[Deploy to the RoboRIO](docs/part1/04_DEPLOY.md)**: put code on a real controller
 
 ### Motors
 
-5. **[Your first motor](docs/part1/05_FIRST_MOTOR.md)**: wiring a Kraken, CAN IDs, spinning it with no code
-1. **[How motors work](docs/part1/06_HOW_MOTORS_WORK.md)**: electricity, magnets, stator vs. supply current; take apart a Kraken
-1. **[Your first study](docs/part1/07_STUDY.md)**: your own small project that uses `lib`
-1. **[Control a motor from code](docs/part1/08_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller, velocity control (direct vs. profiled), turning to an angle; build a two-motor grabber
-1. **[Use the simulator](docs/part1/09_SIMULATOR.md)**: test without a robot
+* **1.5** **[Your first motor](docs/part1/05_FIRST_MOTOR.md)**: wiring a Kraken, CAN IDs, spinning it with no code
+* **1.6** **[How motors work](docs/part1/06_HOW_MOTORS_WORK.md)**: electricity, magnets, stator vs. supply current; take apart a Kraken
+* **1.7** **[Your first study](docs/part1/07_STUDY.md)**: your own small project that uses `lib`
+* **1.8** **[Control a motor from code](docs/part1/08_MOTOR_CODE.md)**: duty cycle, reading speed, Xbox controller, velocity control (direct vs. profiled), turning to an angle; build a two-motor grabber
+* **1.9** **[Use the simulator](docs/part1/09_SIMULATOR.md)**: test without a robot
 
 ### 🎉 Finished Part 1?
 
@@ -98,15 +98,16 @@ guide.
 Real mechanisms, tethered to your laptop with a cable. Start with
 **easy mode**, then try **hard mode**.
 
-10. **[Glass and power-draw tests](docs/part2/10_GLASS_POWER.md)**: graph live values; the rag test
-1. **Easy mode: [the Discus](docs/part2/11_DISCUS.md)**: spin a heavy disc, measure it, make it hold a speed; 🏆 Discus Challenge
-1. **Hard mode: [the shooter bot](docs/part2/12_DEMO_BOT.md)**: spin up the shooter and feed balls, safely; 🏆 Shooter Challenge
+* **2.1** **[Glass and power-draw tests](docs/part2/01_GLASS_POWER.md)**: graph live values; the rag test
+* **2.2** **Easy mode: [the Discus](docs/part2/02_DISCUS.md)**: spin a heavy disc, measure it, make it hold a speed; 🏆 Discus Challenge
+* **2.3** **Hard mode: [the shooter bot](docs/part2/03_DEMO_BOT.md)**: spin up the shooter and feed balls, safely; 🏆 Shooter Challenge
+* **2.4** **[Optional] [Commands vs. `if()`: the gripper bot](docs/part2/04_COMMANDS.md)**: rebuild two-motor OPEN/CLOSED control the way the team's robot code does it
 
 ## Part 3: Localization and auton
 
-13. **[Where am I?](docs/part3/13_LOCALIZATION.md)**: how the wheels tell the robot where it is, and how wrong they get; hands-on experiments with graphs
-1. **[Work on auton](docs/part3/14_AUTON.md)**: simulate a circle, change the speed, run mechanisms during auton, then measure real error
-1. **🏆 [Park on the X](docs/part3/15_PARK_ON_THE_X.md)**: from a taped start, the demo bot drives itself to a spot, using only its wheels
+* **3.1** **[Where am I?](docs/part3/01_LOCALIZATION.md)**: how the wheels tell the robot where it is, and how wrong they get; hands-on experiments with graphs
+* **3.2** **[Work on auton](docs/part3/02_AUTON.md)**: simulate a circle, change the speed, run mechanisms during auton, then measure real error
+* **3.3** **🏆 [Park on the X](docs/part3/03_PARK_ON_THE_X.md)**: from a taped start, the demo bot drives itself to a spot, using only its wheels
 
 ## Part 4: SystemCore, all together, on the real robot
 
@@ -114,30 +115,30 @@ The competition robot runs on the new
 [SystemCore](https://docs.wpilib.org/en/2027/). Parts 4 to 7 use the
 **`2027`** branch of `Team100/all26` and **2027 WPILib**.
 
-16. **[Switch to the SystemCore](docs/part4/16_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, SSH
-1. **[Connect to the robot (radios)](docs/part4/17_ROBOT_NETWORK.md)**: radios, laptop network, robot etiquette
-1. **[Robot identity](docs/part4/18_IDENTITY.md)**: how the code knows which robot it's on
-1. **[Put it together on the demo bot](docs/part4/19_DEMO_BOT_SYSTEMCORE.md)**: move your shooter study to the SystemCore and bring up the whole robot
-1. **🏆 [Park on the X, again](docs/part4/20_PARK_ON_THE_X_SYSTEMCORE.md)**: the Part 3 challenge on the new stack; did it get better?
+* **4.1** **[Switch to the SystemCore](docs/part4/01_SYSTEMCORE.md)**: what's different, the `2027` branch, deploy, CAN ports, SSH
+* **4.2** **[Connect to the robot (radios)](docs/part4/02_ROBOT_NETWORK.md)**: radios, laptop network, robot etiquette
+* **4.3** **[Robot identity](docs/part4/03_IDENTITY.md)**: how the code knows which robot it's on
+* **4.4** **[Put it together on the demo bot](docs/part4/04_DEMO_BOT_SYSTEMCORE.md)**: move your shooter study to the SystemCore and bring up the whole robot
+* **4.5** **🏆 [Park on the X, again](docs/part4/05_PARK_ON_THE_X_SYSTEMCORE.md)**: the Part 3 challenge on the new stack; did it get better?
 
 ## Part 5: Raspberry Pis and vision
 
-21. **[SSH into the Pis](docs/part5/21_SSH_AND_CHECKS.md)**: log in and check that things are healthy
-1. **[Change the Raspberry Pi code](docs/part5/22_PI_CHANGES.md)**: edit, test, deploy, PR
-1. **[How our vision works](docs/part5/23_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
-1. **[Set up a new camera](docs/part5/24_NEW_CAMERA.md)**: measure it, calibrate it, and measure again: before vs. after
-1. **[Break the cameras (on purpose)](docs/part5/25_BREAK_THE_CAMERAS.md)**: the breaker vs. finder game, and measuring detection limits
+* **5.1** **[SSH into the Pis](docs/part5/01_SSH_AND_CHECKS.md)**: log in and check that things are healthy
+* **5.2** **[Change the Raspberry Pi code](docs/part5/02_PI_CHANGES.md)**: edit, test, deploy, PR
+* **5.3** **[How our vision works](docs/part5/03_VISION.md)**: cameras, AprilTags, and why vision answers are always a little late
+* **5.4** **[Set up a new camera](docs/part5/04_NEW_CAMERA.md)**: measure it, calibrate it, and measure again: before vs. after
+* **5.5** **[Break the cameras (on purpose)](docs/part5/05_BREAK_THE_CAMERAS.md)**: the breaker vs. finder game, and measuring detection limits
    * [Breaker cards](docs/part5/BREAKER_CARDS.md) (finders: don't peek!) · [Finder's guide](docs/part5/FINDER_GUIDE.md)
-1. **🏆 [The Vision Shooter Challenge](docs/part5/26_VISION_SHOOTER_CHALLENGE.md)**: the camera finds the bucket (8–12 m), and the shooter adjusts by itself
-1. **🏆 [Park on the X, from anywhere](docs/part5/27_PARK_FROM_ANYWHERE.md)**: from a random start, the demo bot looks at an AprilTag, finds itself, and parks
+* **5.6** **🏆 [The Vision Shooter Challenge](docs/part5/06_VISION_SHOOTER_CHALLENGE.md)**: the camera finds the bucket (8–12 m), and the shooter adjusts by itself
+* **5.7** **🏆 [Park on the X, from anywhere](docs/part5/07_PARK_FROM_ANYWHERE.md)**: from a random start, the demo bot looks at an AprilTag, finds itself, and parks
 
 ## Part 6: Spot the balls 🚧
 
-28. **[Object detection](docs/part6/28_OBJECT_DETECTION.md)**: see what our YOLO model finds, break it, retrain it; 🏆 Ball Spotter Challenge
+* **6.1** **[Object detection](docs/part6/01_OBJECT_DETECTION.md)**: see what our YOLO model finds, break it, retrain it; 🏆 Ball Spotter Challenge
 
 ## Part 7: Put it all together 🚧
 
-29. **🏆 [Fetch and shoot](docs/part7/29_FETCH_AND_SHOOT.md)**: the demo bot finds the yellow balls, picks them up, drives to the X, and shoots them into the hopper, all by itself
+* **7.1** **🏆 [Fetch and shoot](docs/part7/01_FETCH_AND_SHOOT.md)**: the demo bot finds the yellow balls, picks them up, drives to the X, and shoots them into the hopper, all by itself
 
 ## Advanced (mentor approval required)
 
@@ -146,7 +147,7 @@ The competition robot runs on the new
 
 ## Whenever you need them
 
-* [RoboRIO → SystemCore cheat sheet](docs/part4/16_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
+* [RoboRIO → SystemCore cheat sheet](docs/part4/01_SYSTEMCORE.md#roborio--systemcore-cheat-sheet)
 * **[Build errors FAQ](docs/reference/BUILD_ERRORS.md)**: not compiling? Seeing errors? Start here
 * [Debugging](docs/reference/DEBUGGING.md): errors, prints, logs, the debugger
 * [Troubleshooting](docs/reference/TROUBLESHOOTING.md): Git, build, deploy, and robot problems
