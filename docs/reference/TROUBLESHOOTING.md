@@ -96,6 +96,46 @@ image versions: 2025_v2.\*"**
   > **TODO:** check these status light colors against the
   > [Talon FX status light guide](https://v6.docs.ctr-electronics.com/en/stable/docs/hardware-reference/talonfx/index.html).
 
+**Console floods with "CAN frame not received/too-stale" and "Device
+firmware could not be retrieved"**
+: Your code is asking for a motor that isn't answering. It prints the
+  same two errors every cycle, so hundreds of lines are really **one
+  problem**. Scroll to the end and find a line like this:
+
+  ```
+  from: talon fx 2 ("") Status Signal Position
+  ```
+
+  That tells you which motor: a **Talon FX** (a Kraken) at **CAN ID
+  2**, on bus `""`, which means the RoboRIO's own CAN port. Any other
+  motors may be fine. Now work out why that one is silent, checking the
+  most likely causes first:
+
+  1. **The IDs don't match.** Open Tuner X and look at the Kraken's CAN
+     ID. Is it really **2**? New Krakens come set to **0**. Either change
+     the ID in Tuner X, or change the `new CanId(...)` in your code to
+     match. See [Find the CAN ID](../part1/05_FIRST_MOTOR.md#find-the-can-id).
+  1. **Tuner X can't see it either.** Then it isn't a code problem. Go
+     to [Tuner X: the PDP shows up, but not the Kraken](#tuner-x-the-pdp-shows-up-but-not-the-kraken)
+     (power, breaker, CAN chain).
+  1. **Tuner X sees it, the IDs match, and it still fails.** Check its
+     firmware in Tuner X. Our code uses Phoenix **6**, so the Kraken
+     needs v6 firmware for the right year. If Tuner X offers a firmware
+     update, ask a mentor before you install it.
+  1. **Two devices share an ID.** Two Krakens set to the same number
+     confuse each other. Tuner X usually flags this; give each one its
+     own ID.
+
+  Fixed it? Redeploy (or restart robot code) and check that the errors
+  stop.
+
+  On a **SystemCore** the bus isn't `""`: it's one of the five CAN
+  ports, and your code has to name the right one. See
+  [CAN on the SystemCore](../part4/16_SYSTEMCORE.md#4-can-on-the-systemcore).
+  > **TODO:** what this line looks like on a SystemCore, and check the
+  > advice above against CTRE's
+  > [Phoenix 6 docs](https://v6.docs.ctr-electronics.com/en/stable/).
+
 **Driver Station says "Emergency Stopped" and won't enable**
 : The robot is **e-stopped** (emergency stopped). Unlike a normal
   disable, it stays stopped until the robot code restarts. Either:
